@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="00643c90-3147-4123-b892-b293470e0ed0" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/cms/app.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cms/bin/www" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cms/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cms/public/stylesheets/style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cms/routes/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cms/routes/users.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cms/views/error.jade" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cms/views/index.jade" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cms/views/layout.jade" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/bin/www" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/client/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/routes/api1001.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/routes/api1001_BATCH.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/server/app.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/server/config/_config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/server/config/secreat.env" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/server/lib/_accesskey.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/server/lib/_api_lib.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/server/lib/_clientAccess.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/server/lib/_dateUtils.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/server/lib/_excelUtil.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/server/lib/_kakaoAlim.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/server/lib/_util.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/server/lib/kakao_lib.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/server/lib/sql_util.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/server/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/server/test/enc.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/server/test/test.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/server/test/uuid.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/views/error.jade" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/views/index.jade" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dev/views/layout.jade" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pord/app.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pord/bin/www" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pord/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pord/public/stylesheets/style.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pord/routes/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pord/routes/users.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pord/views/error.jade" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pord/views/index.jade" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pord/views/layout.jade" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
+  <component name="ProjectId" id="2XvKZO36TaL3eyQszI5TxTGAF2R" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "true",
+    "WebServerToolWindowPanel.toolwindow.highlight.mappings": "true",
+    "WebServerToolWindowPanel.toolwindow.highlight.symlinks": "true",
+    "WebServerToolWindowPanel.toolwindow.show.date": "false",
+    "WebServerToolWindowPanel.toolwindow.show.permissions": "false",
+    "WebServerToolWindowPanel.toolwindow.show.size": "false",
+    "git-widget-placeholder": "jh",
+    "last_opened_file_path": "/Users/simg/Desktop/git/simg-insurance-business/dev/server/lib",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/dev/server/lib" />
+      <recent name="$PROJECT_DIR$/dev/server/config" />
+      <recent name="$PROJECT_DIR$/dev/server" />
+      <recent name="$PROJECT_DIR$/dev/client" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/insu-collect-information" />
+      <recent name="$PROJECT_DIR$/simg-insu-" />
+      <recent name="$PROJECT_DIR$/dev/server/config" />
+      <recent name="$PROJECT_DIR$/dev/server" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="00643c90-3147-4123-b892-b293470e0ed0" name="Changes" comment="" />
+      <created>1699504167180</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1699504167180</updated>
+      <workItem from="1699504168248" duration="3523000" />
+      <workItem from="1699521711222" duration="588000" />
+      <workItem from="1699949289142" duration="7762000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
