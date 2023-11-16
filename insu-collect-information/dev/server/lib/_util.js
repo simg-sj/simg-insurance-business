@@ -27,8 +27,8 @@ let fs = require('fs');
 var MCrypt = require('mcrypt').MCrypt;
 var Accesskey = require('./_accesskey');
 var Access = new Accesskey();
-// var accArray = Access.acc_test;
-var accArray = Access.acc_prod;
+var accArray = Access.acc_test;
+// var accArray = Access.acc_prod;
 
 module.exports = {
 
@@ -136,15 +136,15 @@ module.exports = {
         return returnValue
 
     },
-    promiBpkCheck: function (key){
+    platformBpkCheck: function (key){
 
         let returnValue = 0;
         accArray.forEach(function (element) {
-            // console.log("APIKEY", element.apikey);
-            // console.log("PLATFORM", key);
+            console.log("APIKEY : ", element.apikey);
+            console.log("PLATFORM : ", key);
 
             if(element.apikey == key) {
-                // console.log(element)
+                console.log(element)
                 returnValue = element.bpk;
             }
 
@@ -927,7 +927,7 @@ module.exports = {
 
         return returnValue
     },
-    shareBikeApiKeyCheck: function (key){
+    checkKey: function (key){
 
         let returnValue = false;
         accArray.forEach(function (element) {
