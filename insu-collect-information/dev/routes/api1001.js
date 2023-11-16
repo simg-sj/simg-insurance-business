@@ -36,23 +36,38 @@ router.post("/dev"+"/api1001", function(req, res){
     // console.log('/api/v1/flex/planagree');
 
 
+    /* 데이터 적합성 확인 함수 */
+    function fieldValidCheck(field, errorCode, errorMessage) {
+        if (field === "" || field === undefined || field === false) {
+            let return_data = {
+                "code": errorCode,
+                "message": errorMessage
+            };
+            res.status(300).json(return_data);
+            return true;
+        }
+        return false;
+    }
+
+    /* apiKey 적합성 확인 함수 */
+    function apiKeyCheck(apiKey, errorCode, errorMessage, checkKey){
+        if (apiKey === "" || apiKey === undefined || apiKey === false) {
+            let return_data = {
+                "code": errorCode,
+                "message": errorMessage
+            };
+            res.status(400).json(return_data);
+            return true;
+        }
+        return false;
+    }
     /* apiKey 유효성 */
     let check_key = _util.checkKey(apiKey);
     let apiKeyError = apiKeyCheck(apiKey, "400", "APIKEY가 거절되었습니다.", check_key);
     if(apiKeyError){return;}
-    /*
-    if(apiKey==="" || apiKey===undefined || check_key == false) {
-        return_data = {
-            "code":"400",
-            "message" : "APIKEY가 거절되었습니다."
-        };
-        res.status(400).json(return_data);
-        return;
-    }
-    */
 
     /* REQUEST DATA 유효성 */
-    if(request_data==="" || request_data===undefined || request_data == {} || request_data ==false) {
+    if(request_data==="" || request_data===undefined || Object.keys(request_data).length === 0) {
         return_data = {
             "code":"300",
             "message" : "전달 받은 데이터가 없습니다."
@@ -61,6 +76,7 @@ router.post("/dev"+"/api1001", function(req, res){
         return;
     }
 
+    // 로그쌓는 부분~
     let log_request_data ="";
     if(typeof request_data==='object')
     {
@@ -154,29 +170,7 @@ router.post("/dev"+"/api1001", function(req, res){
     console.log('rightsYN is : ', rightsYN);
     console.log('requestDay is : ', requestDay);
 
-    function fieldValidCheck(field, errorCode, errorMessage) {
-        if (field === "" || field === undefined || field === false) {
-            let return_data = {
-                "code": errorCode,
-                "message": errorMessage
-            };
-            res.status(300).json(return_data);
-            return true;
-        }
-        return false;
-    }
-
-    function apiKeyCheck(field, errorCode, errorMessage, checkKey){
-        if (field === "" || field === undefined || checkKey === false) {
-            let return_data = {
-                "code": errorCode,
-                "message": errorMessage
-            };
-            res.status(400).json(return_data);
-            return true;
-        }
-        return false;
-    }
+    // 받는 준비는 DB설계되어 확정되면~
 
 res.json('ok');// test
 
