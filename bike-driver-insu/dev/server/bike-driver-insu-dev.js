@@ -5,6 +5,7 @@ var path = require('path');
 // var cookieParser = require('cookie-parser');
 var bodyParser  = require("body-parser");
 var logger = require('morgan');
+var joinCheckMsg = require('../routes/sendMsg'); // 인증번호 router
 
 
 var app = express();
@@ -44,7 +45,8 @@ var allowCORS = function (req, res, next) {
 };
 app.use(allowCORS); // localhost 에서 개발할 때 이걸 열어주지 않으면 들어올 수 없다
 
-
+app.use('/api/v1', joinCheckMsg);
+app.use('/', router);
 
 var port = 20202;
 app.listen(port, function() {

@@ -45,7 +45,7 @@ router.post("/dev"+"/api1001_b", function(req, res) {
 
     /* apiKey 적합성 확인 함수 */
     function apiKeyCheck(apiKey, errorCode, errorMessage, checkKey){
-        if (apiKey === "" || apiKey === undefined || apiKey === false) {
+        if (apiKey === "" || apiKey === undefined || apiKey === false || checkKey === false) {
             let return_data = {
                 "code": errorCode,
                 "message": errorMessage
