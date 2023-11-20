@@ -5,47 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="00643c90-3147-4123-b892-b293470e0ed0" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/cms/app.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cms/bin/www" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cms/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cms/public/stylesheets/style.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cms/routes/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cms/routes/users.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cms/views/error.jade" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cms/views/index.jade" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cms/views/layout.jade" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/bin/www" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/client/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/routes/api1001.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/routes/api1001_BATCH.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/server/app.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/server/config/_config.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/server/config/secreat.env" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/server/lib/_accesskey.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/server/lib/_api_lib.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/server/lib/_clientAccess.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/server/lib/_dateUtils.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/server/lib/_excelUtil.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/server/lib/_kakaoAlim.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/server/lib/_util.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/server/lib/kakao_lib.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/server/lib/sql_util.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/server/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/server/test/enc.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/server/test/test.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/server/test/uuid.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/views/error.jade" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/views/index.jade" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/dev/views/layout.jade" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pord/app.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pord/bin/www" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pord/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pord/public/stylesheets/style.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pord/routes/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pord/routes/users.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pord/views/error.jade" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pord/views/index.jade" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pord/views/layout.jade" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/insu-collect-information/dev/routes/api1001.js" beforeDir="false" afterPath="$PROJECT_DIR$/insu-collect-information/dev/routes/api1001.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/insu-collect-information/dev/routes/api1001_BATCH.js" beforeDir="false" afterPath="$PROJECT_DIR$/insu-collect-information/dev/routes/api1001_BATCH.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,26 +34,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "true",
-    "WebServerToolWindowPanel.toolwindow.highlight.mappings": "true",
-    "WebServerToolWindowPanel.toolwindow.highlight.symlinks": "true",
-    "WebServerToolWindowPanel.toolwindow.show.date": "false",
-    "WebServerToolWindowPanel.toolwindow.show.permissions": "false",
-    "WebServerToolWindowPanel.toolwindow.show.size": "false",
-    "git-widget-placeholder": "jh",
-    "last_opened_file_path": "/Users/simg/Desktop/git/simg-insurance-business/dev/server/lib",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowPanel.toolwindow.highlight.mappings&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowPanel.toolwindow.highlight.symlinks&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowPanel.toolwindow.show.date&quot;: &quot;false&quot;,
+    &quot;WebServerToolWindowPanel.toolwindow.show.permissions&quot;: &quot;false&quot;,
+    &quot;WebServerToolWindowPanel.toolwindow.show.size&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;jh&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/simg/Desktop/git/simg-insurance-business/dev/server/lib&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/dev/server/lib" />
@@ -118,6 +79,7 @@
       <workItem from="1699504168248" duration="3523000" />
       <workItem from="1699521711222" duration="588000" />
       <workItem from="1699949289142" duration="7762000" />
+      <workItem from="1700124303541" duration="1519000" />
     </task>
     <servers />
   </component>
