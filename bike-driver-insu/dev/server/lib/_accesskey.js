@@ -4,43 +4,61 @@ function access_confing() {
     var return_val = {
         "acc_test" : [
             {
-                apikey      : "6AAE28A0-82C9-11EE-9FA0-AB83F22BCE84",
-                enckey      : "8C165E493A4F3E028EF66CB7D3BA1B94",
-                iv          : "b6a8603a46e76d24",
-                bpk         : 1,
-                plfName     : "벨류맵",
-                dbKey       : "",
-                url     : "https://insurance-open-api-dev.simg.kr/"
+                apikey      : "3A3672E0-877E-11EE-B95A-37EA279471BC",
+                enckey      : "8DDD6E2C3E98A37EC34968B4729F9F85",
+                iv          : "883ebad34db5eadf",
+                bpk         : 3,
+                plfName     : "온나플러스",
+                dbKey       : "client_dev_db_config",
+                joinUrl     : "https://bike-driver-insu-dev.simg.kr/"
             },
             {
-                apikey      : "6F9013A0-7C5D-11EE-A02B-FFB0FF9E9C81",
-                enckey      : "4D642908641E1BF379EE836A4880D135",
-                iv          : "4bef31f208e93910",
-                bpk         :2,
-                plfName     : "마이체크업",
-                dbKey       : "",
-                url     : "https://insurance-open-api-dev.simg.kr/"
+                apikey      : "564B9289-ECB6-4AA9-94D2-0CC9C8DA7EFB",
+                enckey      : "4BBE94B08925641471C7365FA42C2570",
+                iv          : "e414d3dedb956b1a",
+                bpk         :4,
+                plfName     : "이누리",
+                dbKey       : "client_dev_db_config",
+                joinUrl     : "https://bike-driver-insu-dev.simg.kr/"
+            },
+            {
+                apikey      : "3C5449D0-877E-11EE-A10C-5BD01AD53E52",
+                enckey      : "A65A7086F4ABF81686C67AF1EC8375D7",
+                iv          : "aba1c6e16f603182",
+                bpk         :5,
+                plfName     : "바리코퍼레이션",
+                dbKey       : "client_dev_db_config",
+                joinUrl     : "https://bike-driver-insu-dev.simg.kr/"
             },
 
         ],
         "acc_prod" : [
             {
                 apikey     : "3C4FDCEA-0715-4D45-B548-BCDB8F1A7750",
-                enckey     : "B0E195E013C99D59E09B7817B0E7C2CB",
-                iv     : "72994385f5d9b9c5",
-                bpk     : 1,
-                plfName : "벨류맵",
-                dbKey : "",
-                url : "https://insurance-open-api-dev.simg.kr/"
+                enckey     : "1EA85197CE6D6E096DD813A018399CC5",
+                iv     : "3c9bed1e668d7fec",
+                bpk     : 3,
+                plfName : "온나플러스",
+                dbKey : "client_prod_db_config",
+                joinUrl     : "https://bike-driver-insu.simg.kr/"
             },
             {
                 apikey      : "B9452A8B-C7A4-4712-A823-77EB5BC647F2",
-                enckey      : "1E2211CC3BC0091936790E98F7DBAE52",
-                iv          : "e9f87f9e2f97b2a0",
-                bpk         : 2,
-                plfName     : "마이체크업",
-                dbKey       : "",
-                url     : "https://insurance-open-api-dev.simg.kr/"
+                enckey      : "C6EC58342223B555FF560719A326CE1F",
+                iv          : "eebfa75565a09b2a",
+                bpk         : 4,
+                plfName     : "이누리",
+                dbKey       : "client_prod_db_config",
+                joinUrl     : "https://bike-driver-insu.simg.kr/"
+            },
+            {
+                apikey      : "B9452A8B-C7A4-4712-A823-77EB5BC647F2",
+                enckey      : "017CD432DD0414E579EBF117D1F96086",
+                iv          : "958a0e30e8be5ff9",
+                bpk         : 5,
+                plfName     : "바리코퍼레이션",
+                dbKey       : "client_prod_db_config",
+                joinUrl     : "https://bike-driver-insu.simg.kr/"
             },
         ]
     }

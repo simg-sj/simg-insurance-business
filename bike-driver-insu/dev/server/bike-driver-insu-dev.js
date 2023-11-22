@@ -6,6 +6,7 @@ var path = require('path');
 var bodyParser  = require("body-parser");
 var logger = require('morgan');
 var joinCheckMsg = require('../routes/sendMsg'); // 인증번호 router
+var join = require('../routes/join');
 
 
 var app = express();
@@ -32,7 +33,16 @@ app.use(logger('dev'));
 app.use(bodyParser({limit: '50mb'}));  // pdf body 용량문제 해결
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, '../client'))); // service
+app.use(express.static(path.join(__dirname, '../client/build'))); // service
+
+app.get("/", (req, res) => {
+  res.set({
+    "Cache-Control": "no-cache, no-store, must-revalidate",
+    Pragma: "no-cache",
+    Date: Date.now()
+  });
+  res.sendFile(path.join(__dirname, "../client/build", "/index.html"));
+});
 
 var allowCORS = function (req, res, next) {
   res.header('Access-Control-Allow-Origin', '*'); //*,
@@ -46,7 +56,8 @@ var allowCORS = function (req, res, next) {
 app.use(allowCORS); // localhost 에서 개발할 때 이걸 열어주지 않으면 들어올 수 없다
 
 app.use('/api/v1', joinCheckMsg);
-app.use('/', router);
+app.use('/api/v1', join);
+// app.use('/', router);
 
 var port = 20202;
 app.listen(port, function() {

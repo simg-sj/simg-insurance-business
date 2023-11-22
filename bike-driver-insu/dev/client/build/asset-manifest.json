@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/static/css/main.12382625.css",
+    "main.js": "/static/js/main.e758257b.js",
+    "static/media/simg_logo.png": "/static/media/simg_logo.6c0b08a72fa0d2b4508b.png",
+    "static/media/btn_back.svg": "/static/media/btn_back.e24ac0e78ddadc9190d4c12483bd07f5.svg",
+    "static/media/btn_close_24px.svg": "/static/media/btn_close_24px.0ea5de27ec83028429c91cd721eb4375.svg",
+    "static/media/icon_checkbox_16px_on.svg": "/static/media/icon_checkbox_16px_on.2cbe5c25149ebb1dcd6b17bc5e177e03.svg",
+    "index.html": "/index.html",
+    "static/media/icon_info.svg": "/static/media/icon_info.c5c532c11290d2596566c62831c6fc5a.svg",
+    "static/media/icon_checkbox_14px_off.svg": "/static/media/icon_checkbox_14px_off.04cc8968a022448cea14a188ca3841d5.svg",
+    "static/media/icon_checkbox_14px_on.svg": "/static/media/icon_checkbox_14px_on.bf393c155b82f448a5da832b0bcf5a0c.svg",
+    "static/media/icon_checkbox_16px_off.svg": "/static/media/icon_checkbox_16px_off.b103b7d05edc2fbff1e65b3d210f80eb.svg",
+    "static/media/icon_more.svg": "/static/media/icon_more.09d95f5f37c08f44157af64454e2ff93.svg",
+    "main.12382625.css.map": "/static/css/main.12382625.css.map",
+    "main.e758257b.js.map": "/static/js/main.e758257b.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.12382625.css",
+    "static/js/main.e758257b.js"
+  ]
+}

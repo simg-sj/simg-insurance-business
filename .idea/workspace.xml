@@ -5,8 +5,96 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="00643c90-3147-4123-b892-b293470e0ed0" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/insu-collect-information/dev/routes/api1001.js" beforeDir="false" afterPath="$PROJECT_DIR$/insu-collect-information/dev/routes/api1001.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/insu-collect-information/dev/routes/api1001_BATCH.js" beforeDir="false" afterPath="$PROJECT_DIR$/insu-collect-information/dev/routes/api1001_BATCH.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bike-driver-insu/dev/routes/join.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/img/avataaars.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/img/favicon/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/img/simg/accepted.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/img/simg/basic.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/img/simg/car_logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/img/simg/check-1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/img/simg/checked.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/img/simg/db_BI.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/img/simg/default.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/img/simg/error.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/img/simg/gubun_bar.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/img/simg/gubun_bar_green.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/img/simg/meritz_BI.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/img/simg/person.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/img/simg/red-car.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/img/simg/rejected.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/img/simg/simg_BI.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/img/simg/simg_logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/img/simg/simg_logo_wide.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/img/simg/unchecked.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/img/simg/yellow-car.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/js.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/js/contact_me.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/js/contact_me.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/js/freelancer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/js/freelancer.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/js/jqBootstrapValidation.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/js/jqBootstrapValidation.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/js/nav.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/js/nav.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/js/record.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/js/record.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/js/submit.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/js/submit.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/js/ui.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/js/ui.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/js/underwriting.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/js/underwriting.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/simg.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/vendor/bootstrap/js/bootstrap.bundle.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/vendor/bootstrap/js/bootstrap.bundle.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/vendor/bootstrap/js/bootstrap.bundle.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/vendor/bootstrap/js/bootstrap.bundle.min.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/vendor/bootstrap/js/bootstrap.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/vendor/bootstrap/js/bootstrap.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/vendor/bootstrap/js/bootstrap.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/vendor/bootstrap/js/bootstrap.min.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/vendor/fontawesome-free/css/all.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/vendor/fontawesome-free/css/all.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/vendor/fontawesome-free/css/brands.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/vendor/fontawesome-free/css/brands.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/vendor/fontawesome-free/css/fontawesome.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/vendor/fontawesome-free/css/fontawesome.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/vendor/fontawesome-free/css/regular.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/vendor/fontawesome-free/css/regular.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/vendor/fontawesome-free/css/solid.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/vendor/fontawesome-free/css/solid.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/vendor/fontawesome-free/css/svg-with-js.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/vendor/fontawesome-free/css/svg-with-js.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/vendor/fontawesome-free/css/v4-shims.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/vendor/fontawesome-free/css/v4-shims.min.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/vendor/fontawesome-free/webfonts/fa-brands-400.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/vendor/fontawesome-free/webfonts/fa-brands-400.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/vendor/fontawesome-free/webfonts/fa-brands-400.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/vendor/fontawesome-free/webfonts/fa-brands-400.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/vendor/fontawesome-free/webfonts/fa-brands-400.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/vendor/fontawesome-free/webfonts/fa-regular-400.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/vendor/fontawesome-free/webfonts/fa-regular-400.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/vendor/fontawesome-free/webfonts/fa-regular-400.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/vendor/fontawesome-free/webfonts/fa-regular-400.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/vendor/fontawesome-free/webfonts/fa-regular-400.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/vendor/fontawesome-free/webfonts/fa-solid-900.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/vendor/fontawesome-free/webfonts/fa-solid-900.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/vendor/fontawesome-free/webfonts/fa-solid-900.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/vendor/fontawesome-free/webfonts/fa-solid-900.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/vendor/fontawesome-free/webfonts/fa-solid-900.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/vendor/jquery-easing/jquery.easing.compatibility.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/vendor/jquery-easing/jquery.easing.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/vendor/jquery-easing/jquery.easing.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/vendor/jquery/jquery.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/vendor/jquery/jquery.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/vendor/jquery/jquery.min.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/vendor/jquery/jquery.slim.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/vendor/jquery/jquery.slim.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/client/vendor/jquery/jquery.slim.min.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/server/bike-driver-insu-dev.js" beforeDir="false" afterPath="$PROJECT_DIR$/bike-driver-insu/dev/server/bike-driver-insu-dev.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bike-driver-insu/dev/server/lib/_accesskey.js" beforeDir="false" afterPath="$PROJECT_DIR$/bike-driver-insu/dev/server/lib/_accesskey.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,7 +133,7 @@
     &quot;WebServerToolWindowPanel.toolwindow.show.permissions&quot;: &quot;false&quot;,
     &quot;WebServerToolWindowPanel.toolwindow.show.size&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;jh&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/simg/Desktop/git/simg-insurance-business/dev/server/lib&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/simg/Desktop/git/simg-insurance-business/bike-driver-insu/dev/client&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -56,10 +144,11 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/bike-driver-insu/dev/client" />
+      <recent name="$PROJECT_DIR$/bike-driver-insu/dev/server" />
       <recent name="$PROJECT_DIR$/dev/server/lib" />
       <recent name="$PROJECT_DIR$/dev/server/config" />
       <recent name="$PROJECT_DIR$/dev/server" />
-      <recent name="$PROJECT_DIR$/dev/client" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/insu-collect-information" />
@@ -80,6 +169,10 @@
       <workItem from="1699521711222" duration="588000" />
       <workItem from="1699949289142" duration="7762000" />
       <workItem from="1700124303541" duration="1519000" />
+      <workItem from="1700439644871" duration="4416000" />
+      <workItem from="1700540530574" duration="10000" />
+      <workItem from="1700549449859" duration="3394000" />
+      <workItem from="1700554843361" duration="3330000" />
     </task>
     <servers />
   </component>
