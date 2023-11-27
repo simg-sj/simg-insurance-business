@@ -53,32 +53,60 @@ router.post('/join', function(req,res){
     /**
      * 전문 예시
      * {
-     *        bpk: 'onna',
-     *        cName: '김기덕',
-     *        cCell: '01092673178',
-     *        cJumin: '9502201222222',
-     *        cMail: 'asf@naver.com',
-     *        cPost: '13829',
-     *        cAddr1: '경기 과천시 광명로 58',
-     *        cAddr2: '1222호',
-     *        cJob: '백수',
-     *        carNm: '112버9414',
-     *        carUse: '개인'
+     * bpk: 'onna',
+     * cName: '오정현',
+     * cCell: '01082077529',
+     * cJumin: '9502251149721',
+     * cMail: 'ohh592@naver.com',
+     * cPost: '08759',
+     * cAddr1: '서울 관악구 남부순환로 1593-7',
+     * cAddr2: 'ORT21, 701호',
+     * cJobN: 'SIMG',
+     * cCarCc: '124',
+     * cUseN: '2년',
+     * cJobLocal: '서울 선능',
+     * cMoney: '3000000',
+     * cDrink: 'Y',
+     * cWeekD: '3회',
+     * cOneD: '2잔',
+     * cSmoke: 'Y',
+     * cWeekS: '10개피',
+     * cOneS: '10년',
+     * cHeight: '170',
+     * cWeight: '58',
+     * cBank: '산업은행',
+     * cAccount: '01023407529860',
+     * cPayDt: '25'
      * }
      */
     let bpk = _util.platformBpkCheck(apiKey);
     console.log('platformBpkCheck is : ', bpk);
     /* 변수 담아 */
-    let cName = request_data.cName;
-    let cCell = request_data.cCell;
-    let cJumin = request_data.cJumin;
-    let cJob = request_data.cJob;
-    let cMail = request_data.cMail;
-    let cPost = request_data.cPost;
-    let cAddr1 = request_data.cAddr1;
-    let cAddr2 = request_data.cAddr2;
-    let carNum = request_data.carNm;
-    let carUse = request_data.carUse;
+    let cName = request_data.cName; // 이름
+    let cCell = request_data.cCell; // 전화번호
+    let cJumin = request_data.cJumin; // 주민등록번호
+    let cJobN = request_data.cJobN; // 직장명
+    let cJob = request_data.cJob; // 직업
+    let cJobLocal = request_data.cJobLocal; // 근무지역
+    let cMoney = request_data.cMoney; // 월소득
+    let cMail = request_data.cMail; // 이메일
+    let cPost = request_data.cPost; // 우편번호
+    let cAddr1 = request_data.cAddr1; // 주소
+    let cAddr2 = request_data.cAddr2; // 상세주소
+    let carNum = request_data.carNm; // 차량번호
+    let carUse = request_data.carUse; // 차량유형
+    let cDrink = request_data.cDrink; // 음주여부
+    let cWeekD = request_data.cWeekD; // 주당 음주 횟수
+    let cOneD = request_data.cOneD; // 1회 음주시 주량
+    let cSmoke = request_data.cSmoke; // 흡연여부
+    let cWeekS = request_data. cWeekS; // 1일당 흡연량
+    let cOneS = request_data.cOneS; // 흡연기간
+    let cBank = request_data.cBank; // 은행명
+    let cAccount = request_data.cAccount; // 계좌번호
+    let cPayDt = request_data.cPayDt; // 매 달 납부일
+    let cHeight = request_data.cHeight;
+    let cWeight = request_data.cWeight;
+
     /* 데이터 확인 */
     console.log(
         'cName is : ', cName, '\n',
@@ -145,14 +173,28 @@ router.post('/join', function(req,res){
         "'" + cName + "'," +
         "'" + cCell + "'," +
         "'" + cJumin + "'," +
+        "'" + cJobN + "'," +
         "'" + cJob + "'," +
+        "'" + cJobLocal + "'," +
+        "'" + cMoney + "'," +
         "'" + cMail + "'," +
         "'" + carNum + "'," +
         "'" + '' + "'," +
         "'" + carUse + "'," +
+        "'" + cDrink + "'," +
+        "'" + cWeekD + "'," +
+        "'" + cOneD + "'," +
+        "'" + cSmoke + "'," +
+        "'" + cWeekS + "'," +
+        "'" + cOneS + "'," +
+        "'" + cBank + "'," +
+        "'" + cAccount + "'," +
+        "'" + cPayDt + "'," +
         "'" + cPost + "'," +
         "'" + cAddr1 + "'," +
         "'" + cAddr2 + "'," +
+        "'" + cHeight + "'," +
+        "'" + cWeight + "'," +
         "'" + ci + "'" +
         ");";
 
@@ -160,20 +202,22 @@ router.post('/join', function(req,res){
     mysqlUtil.mysql_proc_exec(joinQuery, apiKey).then(function(result){
 
         // console.log('mysql result is : ', result);
-        console.log('mysql result[0][0] is : ', result[0][0]);
+        console.log('mysql result[0][0] is : ', result[0]);
 
-        let d = result[0][0];
-        console.log('d.code is : ', d.code);
-        if(d.code === '200'){
-            res.json('ok');
-        }else{
-            res.status(100);
-        }
+        let d = result[0];
+        console.log('d is : ', d);
+        res.json(d);
+        // console.log('d.code is : ', d.code);
+        // if(d.code === '200'){
+        //     res.json('ok');
+        // }else{
+        //     res.status(100);
+        // }
 
     });
 
     //에러일때
-    // res.status(100);
+    // res.json('error');
     // res.status(200);
     //정상일때
 
