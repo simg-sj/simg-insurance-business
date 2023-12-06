@@ -7,6 +7,7 @@ var bodyParser  = require("body-parser");
 var logger = require('morgan');
 var joinCheckMsg = require('../routes/sendMsg'); // 인증번호 router
 var join = require('../routes/join');
+var contractExcel = require('../routes/contractExcel');
 
 
 var app = express();
@@ -57,6 +58,7 @@ app.use(allowCORS); // localhost 에서 개발할 때 이걸 열어주지 않으
 
 app.use('/api/v1', joinCheckMsg);
 app.use('/api/v1', join);
+app.use('/api/v1', contractExcel);
 // app.use('/', router);
 
 var port = 20201;

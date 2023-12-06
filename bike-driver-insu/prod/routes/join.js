@@ -9,7 +9,7 @@ const _kakaoAlim = require('../server/lib/_kakaoAlim');
 
 
 router.get('/join', function(req,res){
-    res.send('SIMG INSU API JOIN DEV ROUTER');
+    res.send('SIMG INSU API JOIN PROD ROUTER');
 });
 
 router.post('/join', function(req,res){
