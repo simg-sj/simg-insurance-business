@@ -27,7 +27,7 @@ let fs = require('fs');
 // var MCrypt = require('mcrypt').MCrypt;
 var Accesskey = require('./_accesskey');
 var Access = new Accesskey();
-var accArray = Access.acc_test;
+var accArray = Access.acc_prod;
 // var accArray = Access.acc_prod;
 
 module.exports = {
