@@ -4,6 +4,15 @@ function access_confing() {
     var return_val = {
         "acc_test" : [
             {
+                apikey      : "491B32C8-7AAA-4F1A-928F-1B97671990F2",
+                enckey      : "",
+                iv          : "",
+                bpk         : 0,
+                plfName     : "",
+                dbKey       : "client_dev_db_config",
+                joinUrl     : "https://bike-driver-insu-dev.simg.kr/"
+            },
+            {
                 apikey      : "3A3672E0-877E-11EE-B95A-37EA279471BC",
                 enckey      : "8DDD6E2C3E98A37EC34968B4729F9F85",
                 iv          : "883ebad34db5eadf",
@@ -34,6 +43,15 @@ function access_confing() {
         ],
         "acc_prod" : [
             {
+                apikey      : "491B32C8-7AAA-4F1A-928F-1B97671990F2",
+                enckey      : "",
+                iv          : "",
+                bpk         : 0,
+                plfName     : "",
+                dbKey       : "client_dev_db_config",
+                joinUrl     : "https://bike-driver-insu-dev.simg.kr/"
+            },
+            {
                 apikey     : "3C4FDCEA-0715-4D45-B548-BCDB8F1A7750",
                 enckey     : "1EA85197CE6D6E096DD813A018399CC5",
                 iv     : "3c9bed1e668d7fec",
@@ -52,7 +70,7 @@ function access_confing() {
                 joinUrl     : "https://bike-driver-insu.simg.kr/"
             },
             {
-                apikey      : "B9452A8B-C7A4-4712-A823-77EB5BC647F2",
+                apikey      : "B8155760-98AB-11EE-B91C-F5E6D3038D0E",
                 enckey      : "017CD432DD0414E579EBF117D1F96086",
                 iv          : "958a0e30e8be5ff9",
                 bpk         : 5,

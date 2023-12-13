@@ -335,6 +335,26 @@ router.post('/join', function(req,res){
 
             });
 
+            let sendJuminData = cJumin.replace(/(\d{6})(\d).*/, '$1-$2');
+            let slackBotData = {};
+            let msg = "";
+            msg += "바이크보험가입자 안내" + "\n";
+            msg += "이름 : " + cName + "\n";
+            msg += "고객정보 : " + sendJuminData + "\n";
+            msg += "전화번호 : " + cCell + "\n";
+            msg += "소속플랫폼 : " + platformName + "\n";
+
+            slackBotData = {
+                "channel" : "#이륜차-운전자보험-접수",
+                "username" : "바이크보험가입알림봇",
+                "text" : msg,
+                // "icon_emoji": ":ghost:"
+            };
+
+            apiUtil.simgSlackBot(slackBotData).then(function(result){
+                console.log('slack server response is : ', result);
+            });
+
         }
 
 
