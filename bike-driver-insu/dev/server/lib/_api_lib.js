@@ -104,6 +104,34 @@ module.exports = {
                 });
         });
     },
+    simgSlackBot: function(data){
+        let _this = this;
+
+        return new Promise(function (resolve, reject) {
+
+            let endpoint = "https://center-api.simg.kr/v1/api/simg/slackbot";
+            console.log(endpoint);
+
+            unirest.post(endpoint)
+                .headers(
+                    {
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    })
+                .type('json')
+                .json(data)
+                .end(function (response) {
+
+                    console.log('send ', data);
+                    console.log('from simg server slackBot response: ', response.body);
+
+                    let d = {
+                        'receive':response.body,
+
+                    }
+                    resolve(d);
+                });
+        });
+    },
 
     getBaeminGps: function(data){
         let _this = this;

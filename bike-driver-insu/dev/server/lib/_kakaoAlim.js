@@ -15,7 +15,7 @@ module.exports = {
         return result = {
             "ALIGO_API_KEY":"xme5by3owdpvjw22tr57qzc2dwh7ch8f",
             "ALIGO_USER_ID":"yoojjtt",
-            "ALIGO_SENDER_KEY":"91ab107659437be7236428d01f25912eaae9519b",
+            "ALIGO_SENDER_KEY":"0e8832a8a0a7e4573c7453c387480484e6c012fd",
             "token":"",
             "templateCode":"tpl_code=TQ_2887",
             "sender":"sender=18773006",
