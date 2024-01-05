@@ -9,7 +9,7 @@ function access_confing() {
                 iv          : "b6a8603a46e76d24",
                 bpk         : 1,
                 plfName     : "벨류맵",
-                dbKey       : "",
+                dbKey       : "client_dev_db_config",
                 url     : "https://insurance-open-api-dev.simg.kr/"
             },
             {
@@ -18,7 +18,7 @@ function access_confing() {
                 iv          : "4bef31f208e93910",
                 bpk         :2,
                 plfName     : "마이체크업",
-                dbKey       : "",
+                dbKey       : "client_dev_db_config",
                 url     : "https://insurance-open-api-dev.simg.kr/"
             },
 
@@ -30,7 +30,7 @@ function access_confing() {
                 iv     : "72994385f5d9b9c5",
                 bpk     : 1,
                 plfName : "벨류맵",
-                dbKey : "",
+                dbKey : "client_prod_db_config",
                 url : "https://insurance-open-api-dev.simg.kr/"
             },
             {
@@ -39,7 +39,7 @@ function access_confing() {
                 iv          : "e9f87f9e2f97b2a0",
                 bpk         : 2,
                 plfName     : "마이체크업",
-                dbKey       : "",
+                dbKey       : "client_prod_db_config",
                 url     : "https://insurance-open-api-dev.simg.kr/"
             },
         ]
