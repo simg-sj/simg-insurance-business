@@ -158,6 +158,7 @@ router.post("/dev"+"/api1001", function(req, res){
 
     let requestDayError = fieldValidCheck(requestDay, "310", "requestDay 가 없습니다.");
     if (requestDayError) {return;}
+    /* 확인용 */
     console.log('requesterName is : ', requesterName);
     console.log('requesterCell is : ', requesterCell);
     console.log('requesterJumin is : ', requesterJumin);
@@ -169,10 +170,35 @@ router.post("/dev"+"/api1001", function(req, res){
     console.log('sharingYN is : ', sharingYN);
     console.log('rightsYN is : ', rightsYN);
     console.log('requestDay is : ', requestDay);
-
+    let job = 'S';
     // 받는 준비는 DB설계되어 확정되면~
+    var joinQuery = "CALL bizJoin(" +
+        "'" + job + "'," +
+        "'" + bpk + "'," +
+        "'" + 1 + "'," +        // 아직 보험사가 정해지지 않았으니~
+        "'" + '0' + "'," +
+        "'" + requesterName + "'," +
+        "'" + requesterCell + "'," +
+        "'" + requesterJumin + "'," +
+        "'" + requesterCi + "'," +
+        "'" + rightsYN + "'," +
+        "'" + collectionYN + "'," +
+        "'" + provisionYN + "'," +
+        "'" + inquiryYN + "'," +
+        "'" + sharingYN + "'," +
+        "'" + marketingYN + "'," +
+        "'" + requestDay + "'" +
+        ");";
 
-res.json('ok');// test
+    _mysqlUtil.mysql_proc_exec(joinQuery, apiKey).then(function(result){
+    //     // console.log('mysql result is : ', result);
+        console.log('mysql result[0][0] is : ', result[0][0]);
+        let d = result[0][0];
+        console.log('d is : ', d);
+
+        res.json(d);
+
+    });
 
 });
 
