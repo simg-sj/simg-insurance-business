@@ -2,14 +2,16 @@ const _util = require('../server/lib/_util');
 const apiUtil = require('../server/lib/_api_lib');
 const express = require('express');
 const router = express.Router();
+const fs = require('fs');
 /* DB CONFIG */
 const Config = require('../server/config/_config');
 const Con = new Config();
 /* mysql util*/
 const _mysqlUtil = require('../server/lib/sql_util');
-const crypto = require('crypto');
-
-
+/*const crypto = require('crypto');*/
+const { addTextAndImageToPDF } = require('../server/lib/pdf');
+const multer = require('multer');
+const path = require('path');
 
 router.get("/dev"+"/api1001", function(req, res){
     res.send('SIMG OPEN API 1001 DEV ROUTER');
@@ -201,6 +203,51 @@ router.post("/dev"+"/api1001", function(req, res){
     });
 
 });
+let today = _util.getTimeyymmddhhmmss('days').replaceAll('-','').substring(0,6);
+let dirName = 'mycheckup'+_util.getTimeyymmddhhmmss('days').replaceAll('-','').substring(0,6);
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, path.join(__dirname,'../temp',dirName));
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname);
+    }
+});
 
+const upload = multer({ storage: storage });
+
+router.post("/dev"+"/createPdf", upload.array('images', 99), (req, res)=> {
+    try {
+        // 이미지 파일은 req.file에서, 텍스트 값은 req.body에서 얻을 수 있습니다.
+        if (!req.files || req.files.length === 0) {
+            return res.status(400).json({ error: 'No images uploaded.' });
+        }
+        const imagePaths = req.files.map((file) => file.path);
+        const param = req.body;
+
+        addTextAndImageToPDF(param);
+
+        // 추가적인 로직 구현 가능
+
+        res.json({ success: true });
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
+router.post("/dev"+"/sign", upload.single('sign', 1), (req, res)=> {
+    try {
+        // 이미지 파일은 req.file에서, 텍스트 값은 req.body에서 얻을 수 있습니다.
+        if (!req.file) {
+            return res.status(400).json({ error: 'No image uploaded.' });
+        }
+
+        const imagePath = req.file.path;
+        res.json({ signName :  imagePath});
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ error: 'Internal Server Error' });
+    }
+});
 
 module.exports = router;

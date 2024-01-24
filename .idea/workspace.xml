@@ -4,11 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="00643c90-3147-4123-b892-b293470e0ed0" name="Changes" comment="" />
+    <list default="true" id="00643c90-3147-4123-b892-b293470e0ed0" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/insu-collect-information/dev/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/insu-collect-information/dev/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/insu-collect-information/dev/routes/api1001.js" beforeDir="false" afterPath="$PROJECT_DIR$/insu-collect-information/dev/routes/api1001.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/insu-collect-information/dev/server/collect-information-dev.js" beforeDir="false" afterPath="$PROJECT_DIR$/insu-collect-information/dev/server/collect-information-dev.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/insu-collect-information/dev/server/lib/_util.js" beforeDir="false" afterPath="$PROJECT_DIR$/insu-collect-information/dev/server/lib/_util.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -31,33 +41,34 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowPanel.toolwindow.highlight.mappings&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowPanel.toolwindow.highlight.symlinks&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowPanel.toolwindow.show.date&quot;: &quot;false&quot;,
-    &quot;WebServerToolWindowPanel.toolwindow.show.permissions&quot;: &quot;false&quot;,
-    &quot;WebServerToolWindowPanel.toolwindow.show.size&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;jh&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/simg/Desktop/git/simg-insurance-business/bike-driver-insu/dev/server&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "true",
+    "WebServerToolWindowPanel.toolwindow.highlight.mappings": "true",
+    "WebServerToolWindowPanel.toolwindow.highlight.symlinks": "true",
+    "WebServerToolWindowPanel.toolwindow.show.date": "false",
+    "WebServerToolWindowPanel.toolwindow.show.permissions": "false",
+    "WebServerToolWindowPanel.toolwindow.show.size": "false",
+    "git-widget-placeholder": "kkd",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/project/CONNECT-BIKE-BAEMIN",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\IdeaProjects\simg-insurance-business\insu-collect-information\dev\server\template\images" />
+      <recent name="D:\IdeaProjects\simg-insurance-business\insu-collect-information\dev\server\template\fonts" />
+      <recent name="D:\IdeaProjects\simg-insurance-business\insu-collect-information\dev\server\template" />
       <recent name="$PROJECT_DIR$/bike-driver-insu/dev/server" />
       <recent name="$PROJECT_DIR$/bike-driver-insu/dev/client" />
-      <recent name="$PROJECT_DIR$/dev/server/lib" />
-      <recent name="$PROJECT_DIR$/dev/server/config" />
-      <recent name="$PROJECT_DIR$/dev/server" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/insu-collect-information" />
@@ -84,6 +95,7 @@
       <workItem from="1700554843361" duration="3330000" />
       <workItem from="1700631616244" duration="11610000" />
       <workItem from="1701016803125" duration="3414000" />
+      <workItem from="1706054727102" duration="3246000" />
     </task>
     <servers />
   </component>
