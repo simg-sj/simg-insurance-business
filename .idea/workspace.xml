@@ -5,12 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="00643c90-3147-4123-b892-b293470e0ed0" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/insu-collect-information/dev/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/insu-collect-information/dev/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/insu-collect-information/dev/routes/api1001.js" beforeDir="false" afterPath="$PROJECT_DIR$/insu-collect-information/dev/routes/api1001.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/insu-collect-information/dev/server/collect-information-dev.js" beforeDir="false" afterPath="$PROJECT_DIR$/insu-collect-information/dev/server/collect-information-dev.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/insu-collect-information/dev/server/lib/_util.js" beforeDir="false" afterPath="$PROJECT_DIR$/insu-collect-information/dev/server/lib/_util.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/insu-collect-information/dev/server/mycheckup-insu-request.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +46,7 @@
     "WebServerToolWindowPanel.toolwindow.show.date": "false",
     "WebServerToolWindowPanel.toolwindow.show.permissions": "false",
     "WebServerToolWindowPanel.toolwindow.show.size": "false",
-    "git-widget-placeholder": "kkd",
+    "git-widget-placeholder": "jh",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "D:/project/CONNECT-BIKE-BAEMIN",
     "node.js.detected.package.eslint": "true",
@@ -96,6 +91,7 @@
       <workItem from="1700631616244" duration="11610000" />
       <workItem from="1701016803125" duration="3414000" />
       <workItem from="1706054727102" duration="3246000" />
+      <workItem from="1706062422133" duration="76000" />
     </task>
     <servers />
   </component>
