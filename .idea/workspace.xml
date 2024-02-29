@@ -10,6 +10,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/insu-collect-information/dev/routes/api1001.js" beforeDir="false" afterPath="$PROJECT_DIR$/insu-collect-information/dev/routes/api1001.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/insu-collect-information/dev/server/lib/pdf.js" beforeDir="false" afterPath="$PROJECT_DIR$/insu-collect-information/dev/server/lib/pdf.js" afterDir="false" />
+
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,7 +51,7 @@
     "WebServerToolWindowPanel.toolwindow.show.date": "false",
     "WebServerToolWindowPanel.toolwindow.show.permissions": "false",
     "WebServerToolWindowPanel.toolwindow.show.size": "false",
-    "git-widget-placeholder": "kkd",
+    "git-widget-placeholder": "jh",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "D:/IdeaProjects/simg-insurance-business/insu-collect-information/prod/server",
     "node.js.detected.package.eslint": "true",

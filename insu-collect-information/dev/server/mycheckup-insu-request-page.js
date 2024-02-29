@@ -13,7 +13,9 @@ app.use(bodyParser({limit: '50mb'}));  // pdf body 용량문제 해결
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+
 app.use(express.static(path.join(__dirname, '../client/insuRequest/build'))); // service
+
 
 app.get("/", (req, res) => {
     res.set({
@@ -21,8 +23,10 @@ app.get("/", (req, res) => {
         Pragma: "no-cache",
         Date: Date.now()
     });
+
     console.log(__dirname);
     res.sendFile(path.join(__dirname, "../client/insuRequest/build", "/index.html"));
+
 });
 
 var allowCORS = function (req, res, next) {
@@ -46,4 +50,6 @@ var port = 20103
 app.listen(port, function() {
     console.log('connection for Server' + port);
 
+
 });
+
