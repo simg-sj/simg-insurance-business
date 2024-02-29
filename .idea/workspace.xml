@@ -5,7 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="00643c90-3147-4123-b892-b293470e0ed0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/insu-collect-information/dev/server/mycheckup-insu-request.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/sshConfigs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sshConfigs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/webServers.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/webServers.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/insu-collect-information/dev/routes/api1001.js" beforeDir="false" afterPath="$PROJECT_DIR$/insu-collect-information/dev/routes/api1001.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/insu-collect-information/dev/server/lib/pdf.js" beforeDir="false" afterPath="$PROJECT_DIR$/insu-collect-information/dev/server/lib/pdf.js" afterDir="false" />
+
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,7 +53,7 @@
     "WebServerToolWindowPanel.toolwindow.show.size": "false",
     "git-widget-placeholder": "jh",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/project/CONNECT-BIKE-BAEMIN",
+    "last_opened_file_path": "D:/IdeaProjects/simg-insurance-business/insu-collect-information/prod/server",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -59,11 +64,11 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\IdeaProjects\simg-insurance-business\insu-collect-information\prod\server" />
+      <recent name="D:\IdeaProjects\simg-insurance-business\insu-collect-information" />
       <recent name="D:\IdeaProjects\simg-insurance-business\insu-collect-information\dev\server\template\images" />
       <recent name="D:\IdeaProjects\simg-insurance-business\insu-collect-information\dev\server\template\fonts" />
       <recent name="D:\IdeaProjects\simg-insurance-business\insu-collect-information\dev\server\template" />
-      <recent name="$PROJECT_DIR$/bike-driver-insu/dev/server" />
-      <recent name="$PROJECT_DIR$/bike-driver-insu/dev/client" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/insu-collect-information" />
@@ -71,6 +76,21 @@
       <recent name="$PROJECT_DIR$/dev/server/config" />
       <recent name="$PROJECT_DIR$/dev/server" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="simg-insurance-business" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="simg-insurance-business" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -90,8 +110,18 @@
       <workItem from="1700554843361" duration="3330000" />
       <workItem from="1700631616244" duration="11610000" />
       <workItem from="1701016803125" duration="3414000" />
-      <workItem from="1706054727102" duration="3246000" />
-      <workItem from="1706062422133" duration="76000" />
+      <workItem from="1706054727102" duration="5471000" />
+      <workItem from="1706487427283" duration="552000" />
+      <workItem from="1706488305036" duration="5391000" />
+      <workItem from="1707896061821" duration="3317000" />
+      <workItem from="1707962283140" duration="1272000" />
+      <workItem from="1708042929334" duration="4667000" />
+      <workItem from="1708585299784" duration="776000" />
+      <workItem from="1708646089559" duration="9691000" />
+      <workItem from="1708906970372" duration="608000" />
+      <workItem from="1708992254155" duration="3229000" />
+      <workItem from="1709101867269" duration="807000" />
+      <workItem from="1709168848058" duration="1006000" />
     </task>
     <servers />
   </component>
