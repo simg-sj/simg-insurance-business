@@ -114,9 +114,9 @@ router.post("/dev"+"/api1001", function(req, res){
     //key, iv, encrypted
     // let key = "B0E195E013C99D59E09B7817B0E7C2CB";
     // let iv = "72994385f5d9b9c5";
-    requesterJumin = _util.promiDecModule(encKeykey, ivKey, requesterJumin);
+    requesterJumin = _util.promiDecModule(encKey, ivKey, requesterJumin);
     console.log("requesterJumin : ", requesterJumin);
-    requesterCell = _util.promiDecModule(encKeykey, ivKey, requesterCell);
+    requesterCell = _util.promiDecModule(encKey, ivKey, requesterCell);
     console.log("requesterCell : ", requesterCell);
     let requesterCi = req_data.requesterCi;
     let collectionYN = req_data.collectionYN;
