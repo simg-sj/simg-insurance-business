@@ -37,6 +37,9 @@ router.post("/dev"+"/api1001", function(req, res){
     // console.log("CONTENT-TYPE : ", req.get('content-type'));
     // console.log('/api/v1/flex/planagree');
 
+    let keyInfo = _util.encInfo(apiKey);
+    let encKey = keyInfo.encKey;
+    let ivKey = keyInfo.iv;
 
     /* 데이터 적합성 확인 함수 */
     function fieldValidCheck(field, errorCode, errorMessage) {
@@ -108,6 +111,13 @@ router.post("/dev"+"/api1001", function(req, res){
 
     let requesterCell = req_data.requesterCell;
     let requesterJumin = req_data.requesterJumin;
+    //key, iv, encrypted
+    // let key = "B0E195E013C99D59E09B7817B0E7C2CB";
+    // let iv = "72994385f5d9b9c5";
+    requesterJumin = _util.promiDecModule(encKeykey, ivKey, requesterJumin);
+    console.log("requesterJumin : ", requesterJumin);
+    requesterCell = _util.promiDecModule(encKeykey, ivKey, requesterCell);
+    console.log("requesterCell : ", requesterCell);
     let requesterCi = req_data.requesterCi;
     let collectionYN = req_data.collectionYN;
     let provisionYN = req_data.provisionYN;

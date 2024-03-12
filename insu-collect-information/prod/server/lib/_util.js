@@ -27,8 +27,8 @@ let fs = require('fs');
 /*var MCrypt = require('mcrypt').MCrypt;*/
 var Accesskey = require('./_accesskey');
 var Access = new Accesskey();
-var accArray = Access.acc_test;
-// var accArray = Access.acc_prod;
+// var accArray = Access.acc_test;
+var accArray = Access.acc_prod;
 
 module.exports = {
 
@@ -438,6 +438,7 @@ module.exports = {
 
     },
     promiDecModule: function(key, iv, encrypted){
+        console.log(key, iv, encrypted);
         let decipher = crypto.createDecipheriv('aes-256-cbc', key, iv);
         // cipher.setAutoPadding(false);
         let decrypted = decipher.update(encrypted, 'base64', 'utf-8');
