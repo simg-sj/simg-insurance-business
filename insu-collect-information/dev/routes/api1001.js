@@ -203,6 +203,10 @@ router.post("/dev"+"/api1001", function(req, res){
     });
 
 });
+
+
+
+
 let today = _util.getTimeyymmddhhmmss('day').substring(0,6);
 let dirName = 'mycheckup'+_util.getTimeyymmddhhmmss('day').substring(0,6);
 const storage = multer.diskStorage({
