@@ -21,6 +21,8 @@
 
 var unirest = require('unirest');
 const crypto = require('crypto');
+const { PDFDocument, StandardFonts, rgb } = require('pdf-lib');
+const fontkit = require('@pdf-lib/fontkit');
 var pkcs7 = require('pkcs7-padding');
 var beautify = require("json-beautify");
 let fs = require('fs');
@@ -945,6 +947,47 @@ module.exports = {
         return returnValue
 
     },
+    pdfSet: async function(inputFilePath, outputFilePath, clientName, insurGap){
+        const inputBytes = fs.readFileSync(inputFilePath);
+        const pdfDoc = await PDFDocument.load(inputBytes);
+
+        // 폰트 설정
+        const fontBytes = fs.readFileSync('pdfFonts/KakaoBild.ttf');
+        const customFont = await pdfDoc.embedFont(fontBytes);
+
+        /* 이름 위치 설정*/
+        const nameX = 200;
+        const nameY = 462;
+
+        /* 보험기간 위치 설정 */
+        const insurGapX = 200;
+        const insurGapY = 407;
+
+        const page1 = pdfDoc.getPages()[0]; // 첫 페이지
+
+        // 피보험자 이름
+        page1.drawText( clientName, {
+            x: nameX,
+            y: nameY,
+            font: customFont,
+            size: 12,
+            color: rgb(0, 0, 0), // 텍스트 색상 (검은색)
+        });
+
+        // 피보험자 보험기간
+        page1.drawText( insurGap, {
+            x: insurGapX,
+            y: insurGapY,
+            font: customFont,
+            size: 12,
+            color: rgb(0, 0, 0), // 텍스트 색상 (검은색)
+        });
+
+        const modifiedBytes = await pdfDoc.save();
+        fs.writeFileSync(outputFilePath, modifiedBytes);
+
+
+    }
 
 }
 

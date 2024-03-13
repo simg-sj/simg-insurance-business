@@ -68,6 +68,11 @@ app.use('/api/v1', api1001);
 app.use('/api/v1', api1001_BATCH);
 app.use('/', router);
 
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/build/index.html'));
+});
+
+
 
 var port = 20102
 app.listen(port, function() {

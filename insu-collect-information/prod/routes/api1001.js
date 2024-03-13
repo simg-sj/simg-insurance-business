@@ -12,12 +12,15 @@ const _mysqlUtil = require('../server/lib/sql_util');
 const { addTextAndImageToPDF } = require('../server/lib/pdf');
 const multer = require('multer');
 const path = require('path');
+const mybatisMapper = require('mybatis-mapper');
+mybatisMapper.createMapper(['../xml/userInfo.xml']);
 
-router.get("/dev"+"/api1001", function(req, res){
-    res.send('SIMG OPEN API 1001 DEV ROUTER');
+
+router.get("/prod"+"/api1001", function(req, res){
+    res.send('SIMG OPEN API 1001 PROD ROUTER');
 });
 
-router.post("/dev"+"/api1001", function(req, res){
+router.post("/prod"+"/api1001", function(req, res){
 
     var apiKey =  req.get('X-API-SECRET');
     var request_data = req.body;
@@ -38,7 +41,7 @@ router.post("/dev"+"/api1001", function(req, res){
     // console.log('/api/v1/flex/planagree');
 
     let keyInfo = _util.encInfo(apiKey);
-    let encKey = keyInfo.encKey;
+    let encKey = keyInfo.enckey;
     let ivKey = keyInfo.iv;
 
     /* 데이터 적합성 확인 함수 */
@@ -114,9 +117,9 @@ router.post("/dev"+"/api1001", function(req, res){
     //key, iv, encrypted
     // let key = "B0E195E013C99D59E09B7817B0E7C2CB";
     // let iv = "72994385f5d9b9c5";
-    requesterJumin = _util.promiDecModule(encKeykey, ivKey, requesterJumin);
+    requesterJumin = _util.promiDecModule(encKey, ivKey, requesterJumin);
     console.log("requesterJumin : ", requesterJumin);
-    requesterCell = _util.promiDecModule(encKeykey, ivKey, requesterCell);
+    requesterCell = _util.promiDecModule(encKey, ivKey, requesterCell);
     console.log("requesterCell : ", requesterCell);
     let requesterCi = req_data.requesterCi;
     let collectionYN = req_data.collectionYN;
@@ -202,22 +205,163 @@ router.post("/dev"+"/api1001", function(req, res){
         "'" + requestDay + "'" +
         ");";
 
+    console.log("joinQuery : ", joinQuery);
+
     _mysqlUtil.mysql_proc_exec(joinQuery, apiKey).then(function(result){
     //     // console.log('mysql result is : ', result);
         console.log('mysql result[0][0] is : ', result[0][0]);
         let d = result[0][0];
         console.log('d is : ', d);
+        console.log('code : ', d.code);
 
         res.json(d);
+
+        /* 밸류맵 가입증명서 발급 및 알림톡 발송*/
+        /* 가입 증명서 저장 */
+        if ( bpk == '1' && d.code === '200' ) {
+            let cmpk = d.cmpk;
+
+            console.log("d.cmpk : ", cmpk);
+            let uploadPath = "../upload/valuemap_policy"; // 밸류맵 가입증명서 저장 경로
+            let clientPath = "/" + cmpk; //
+            let q = "select concat(date_format(date_add(createdYMD, interval 1 day), '%Y-%m-%d'), ' 00:00:00 ~ ', date_format(date_add(date_add(createdYMD, interval 1 year), interval -1 day), '%Y-%m-%d'), ' 24:00:00') as insurGap, a.* from clientMaster a where useYNull = 'Y' and bpk = '" + bpk + "' and cmpk = " + cmpk + ";"
+            _mysqlUtil.mysql_proc_exec(q, apiKey).then(function(result){
+                console.log('result is : ',result[0].cName);
+                console.log('result is : ',result[0].insurGap);
+            });
+        }
 
     });
 
 });
+
+router.get("/prod"+"/getData", function(req, res){
+    let bpk = req.query.bpk;
+    let apiKey =  req.get('X-API-SECRET');
+    let today = _util.getTimeyymmddhhmmss('day').substring(0,8);
+
+    console.log(today);
+    /* apiKey 적합성 확인 함수 */
+    function apiKeyCheck(apiKey, errorCode, errorMessage, checkKey){
+        if (apiKey === "" || apiKey === undefined || apiKey === false || checkKey === false) {
+            let return_data = {
+                "code": errorCode,
+                "message": errorMessage
+            };
+            res.status(400).json(return_data);
+            return true;
+        }
+        return false;
+    }
+    /* apiKey 유효성 */
+    let check_key = _util.checkKey(apiKey);
+    let apiKeyError = apiKeyCheck(apiKey, "400", "APIKEY가 거절되었습니다.", check_key);
+    if(apiKeyError){return;}
+
+
+    let query = `select * from clientMaster where bpk = ${bpk} AND useYNull = 'Y' AND DATE_FORMAT(createdYMD, '%Y%m%d') = '${today}'`;
+
+    console.log("query is ::::::: " + query);
+
+    _mysqlUtil.mysql_proc_exec(query, apiKey).then(function(result){
+        let d = result;
+        res.json(d);
+
+    });
+});
+
+router.get("/prod"+"/getToday", function(req, res){
+    let today = req.query.today;
+    let apiKey =  req.get('X-API-SECRET');
+    let job = 'day';
+    /* apiKey 적합성 확인 함수 */
+    function apiKeyCheck(apiKey, errorCode, errorMessage, checkKey){
+        if (apiKey === "" || apiKey === undefined || apiKey === false || checkKey === false) {
+            let return_data = {
+                "code": errorCode,
+                "message": errorMessage
+            };
+            res.status(400).json(return_data);
+            return true;
+        }
+        return false;
+    }
+    /* apiKey 유효성 */
+    let check_key = _util.checkKey(apiKey);
+    let apiKeyError = apiKeyCheck(apiKey, "400", "APIKEY가 거절되었습니다.", check_key);
+    if(apiKeyError){return;}
+
+
+    let query = `CALL getData('${job}', ${today})`;
+
+    console.log("query is ::::::: " + query);
+
+    _mysqlUtil.mysql_proc_exec(query, apiKey).then(function(result){
+        console.log('mysql result is : ', result);
+        let d = result;
+        console.log('d is : ', d);
+        res.json(d);
+
+    });
+});
+
+router.post("/prod"+"/searchData", function(req, res){
+    let bpk = req.body.bpk;
+    let cmpk = req.body.cmpk;
+    let cCell = req.body.cCell;
+    let cName = req.body.cName;
+    let params = req.body;
+    let apiKey =  req.get('X-API-SECRET');
+    let today = _util.getTimeyymmddhhmmss('day').substring(0,8);
+
+    console.log(today);
+    /* apiKey 적합성 확인 함수 */
+    function apiKeyCheck(apiKey, errorCode, errorMessage, checkKey){
+        if (apiKey === "" || apiKey === undefined || apiKey === false || checkKey === false) {
+            let return_data = {
+                "code": errorCode,
+                "message": errorMessage
+            };
+            res.status(400).json(return_data);
+            return true;
+        }
+        return false;
+    }
+    /* apiKey 유효성 */
+    let check_key = _util.checkKey(apiKey);
+    let apiKeyError = apiKeyCheck(apiKey, "400", "APIKEY가 거절되었습니다.", check_key);
+    if(apiKeyError){return;}
+
+    let query = mybatisMapper.getStatement('search', 'searchUser', params, {language: 'sql', indent: '  '});
+
+    console.log("query is ::::::: " + query);
+
+    _mysqlUtil.mysql_proc_exec(query, apiKey).then(function(result){
+        console.log('mysql result is : ', result);
+        let d = result;
+        console.log('d is : ', d);
+        res.json(d);
+
+    });
+});
+
 let today = _util.getTimeyymmddhhmmss('day').substring(0,6);
 let dirName = 'mycheckup'+_util.getTimeyymmddhhmmss('day').substring(0,6);
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, path.join(__dirname,'../temp',dirName));
+        // 요청이 올 때마다 고유한 디렉토리 경로 생성
+        const uploadDirectory = path.join(__dirname, '../uploads/', dirName); // 파일 이름을 사용하여 디렉토리 경로 생성
+
+        // 디렉토리 존재 유무 확인
+        fs.access(uploadDirectory, fs.constants.F_OK, (err) => {
+            if (err) {
+                fs.mkdirSync(uploadDirectory, { recursive: true });
+            }
+            console.log('디렉토리가 존재합니다.');
+        });
+
+        // 생성된 디렉토리로 파일 저장
+        cb(null, uploadDirectory);
     },
     filename: function (req, file, cb) {
         cb(null, file.originalname);
@@ -226,7 +370,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-router.post("/dev"+"/createPdf", upload.array('images', 99), (req, res)=> {
+router.post("/prod"+"/createPdf", upload.array('images', 99), (req, res)=> {
     try {
         // 이미지 파일은 req.file에서, 텍스트 값은 req.body에서 얻을 수 있습니다.
         if (!req.files || req.files.length === 0) {
@@ -246,7 +390,9 @@ router.post("/dev"+"/createPdf", upload.array('images', 99), (req, res)=> {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
-router.post("/dev"+"/sign", upload.single('sign', 1), (req, res)=> {
+
+
+router.post("/prod"+"/sign", upload.single('sign', 1), (req, res)=> {
     try {
         // 이미지 파일은 req.file에서, 텍스트 값은 req.body에서 얻을 수 있습니다.
         if (!req.file) {

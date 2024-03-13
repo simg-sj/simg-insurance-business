@@ -1,4 +1,3 @@
-
 /**
  * 작성자 : 유종태
  * 작성일 :2020.06.04
@@ -24,8 +23,11 @@ const crypto = require('crypto');
 var pkcs7 = require('pkcs7-padding');
 var beautify = require("json-beautify");
 let fs = require('fs');
+const { PDFDocument, StandardFonts, rgb } = require('pdf-lib');
+const fontkit = require('@pdf-lib/fontkit');
 /*var MCrypt = require('mcrypt').MCrypt;*/
 var Accesskey = require('./_accesskey');
+const path = require("path");
 var Access = new Accesskey();
 var accArray = Access.acc_test;
 // var accArray = Access.acc_prod;
@@ -428,7 +430,8 @@ module.exports = {
         return plaintext.toString();
     },
     promiEncModule: function(key, iv, secret_message){
-        secret_message = pkcs7.pad(secret_message, 16); //Use 32 = 256 bits block sizes
+        console.log(key, iv, secret_message);
+        secret_message = pkcs7.pad(Buffer.from(secret_message), 16); //Use 32 = 256 bits block sizes
 
         let cipher = crypto.createCipheriv('aes-256-cbc', key, iv);
         cipher.setAutoPadding(false);  // pkcs7 default
@@ -944,6 +947,121 @@ module.exports = {
         return returnValue
 
     },
+    pdfSet: async function(cmpk, clientName, insurGap, bpk){
+        console.log('pdfSetCheck : ', cmpk, clientName, insurGap, bpk);
+
+        let basicPath = '../uploads/';
+        let infoPath = '';
+        let inputFilePath = '';
+        let saveDay = this.getTimeyymmddhhmmss('day');
+
+        /* 이름 위치 설정*/
+        let nameX = 0;
+        let nameY = 0;
+
+        /* 보험기간 위치 설정 */
+        let insurGapX = 0;
+        let insurGapY = 0;
+
+        if (bpk == '1'){
+            infoPath = 'mycheckupInfo';
+            inputFilePath = "../uploads/mycheckupInfo/mycheckupPolicyInfo.pdf"; // 마이체크업 가입증명서 저장 경로
+            nameX = 220;
+            nameY = 528;
+
+            insurGapX = 220;
+            insurGapY = 472;
+        }
+
+        if (bpk == '2'){
+            infoPath = 'valuemapInfo';
+            inputFilePath = "../uploads/valuemapInfo/valuemapPolicyInfo.pdf"; // 밸류맵 가입증명서 저장 경로
+            nameX = 200;
+            nameY = 462;
+
+            insurGapX = 200;
+            insurGapY = 407;
+        }
+
+        console.log('XY_check', nameX, nameY, insurGapX, insurGapY);
+
+
+
+
+
+        let ourputFileFullPath = basicPath+infoPath+'/'+cmpk+'/'+cmpk+'_joinInfo_'+saveDay+'.pdf';
+        console.log('파일 생성 경로 : ', ourputFileFullPath);
+        /* 디렉토리 생성 */
+        //  /uploads/[Info]  디렉토리가 없다면~ 생성
+        if(!fs.existsSync(basicPath+infoPath)){
+            fs.mkdirSync(basicPath+infoPath, {recursive:true}, (error)=>{
+                if(error){
+                    console.error('an error occurred : ', error);
+                }else{
+                    console.log('Directory is made : ', log);
+                }
+            })
+
+        }
+
+
+        // /uploads/valuemapInfo/[cmpk] 디렉토리가 없다면 ~ 생성
+        if(!fs.existsSync(basicPath+infoPath + '/' + cmpk)){
+            fs.mkdirSync(basicPath+infoPath + '/' + cmpk, {recursive:true}, (error)=>{
+                if(error){
+                    console.error('an error occurred : ', error);
+                }else{
+                    console.log('Directory is made : ', log);
+                }
+            })
+        }
+
+
+
+        const inputBytes = fs.readFileSync(inputFilePath);
+        const pdfDoc = await PDFDocument.load(inputBytes);
+        pdfDoc.registerFontkit(fontkit);
+
+        // 폰트 설정
+        // const fontBytes = fs.readFileSync(__dirname, './pdfFonts/KakaoBold.ttf');
+        // const customFont = await pdfDoc.embedFont(fontBytes);
+
+        const fontPath = path.join(__dirname, 'pdfFonts', 'KakaoBold.ttf');
+        const fontBytes = fs.readFileSync(fontPath);
+        const customFont = await pdfDoc.embedFont(fontBytes);
+
+
+
+        const page1 = pdfDoc.getPages()[0]; // 첫 페이지
+
+        // 피보험자 이름
+        page1.drawText( clientName, {
+            x: nameX,
+            y: nameY,
+            font: customFont,
+            size: 12,
+            color: rgb(0, 0, 0), // 텍스트 색상 (검은색)
+        });
+
+        // 피보험자 보험기간
+        page1.drawText( insurGap, {
+            x: insurGapX,
+            y: insurGapY,
+            font: customFont,
+            size: 12,
+            color: rgb(0, 0, 0), // 텍스트 색상 (검은색)
+        });
+
+        const modifiedBytes = await pdfDoc.save();
+        fs.writeFileSync(ourputFileFullPath, modifiedBytes);
+
+        // 파일 생성 후에 파일이 존재하는지 확인하여 성공 메시지 출력
+        if (fs.existsSync(ourputFileFullPath)) {
+            console.log('PDF 파일이 성공적으로 생성되었습니다.');
+        } else {
+            console.error('PDF 파일 생성에 실패했습니다.');
+        }
+    }
 
 }
 
