@@ -225,7 +225,7 @@ router.post("/dev"+"/api1001", function(req, res){
             let cmpkString = String(cmpk);
             let cmpkEncString = _util.promiEncModule(encKey, ivKey, cmpkString); // cmpk 암호화
             let cNameEncString = _util.promiEncModule(encKey, ivKey, requesterName); // 고객이름 암호화
-            let clientSavePageURL = infoPageURL + "?client='" + cmpkEncString + "'&cName='" + cNameEncString + "'&key='" + apiKey + "'"; // 파라미터로 고객키 / 이름 / APIKEY(어떤 업체인지 구분하기 위함)
+            let clientSavePageURL = infoPageURL + "?client='" + cmpkEncString + "'&cName='" + cNameEncString + "'"; // 파라미터로 고객키 / 이름
             console.log(clientSavePageURL);
             console.log("d.cmpk : ", cmpk);
 
