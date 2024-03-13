@@ -21,7 +21,7 @@ function access_confing() {
                 plfName     : "마이체크업",
                 dbKey       : "client_dev_db_config",
                 url     : "https://insurance-open-api-dev.simg.kr/",
-                infoPage : "https://insurance-info-test.simg.kr/"
+                infoPage : "https://test-mycheckup-insu.simg.kr/"
             },
 
         ],
@@ -44,7 +44,7 @@ function access_confing() {
                 plfName     : "마이체크업",
                 dbKey       : "client_prod_db_config",
                 url     : "https://insurance-open-api-dev.simg.kr/",
-                infoPage : "https://insurance-info.simg.kr/"
+                infoPage : "https://mycheckup-insu.simg.kr/"
             },
         ]
     }
