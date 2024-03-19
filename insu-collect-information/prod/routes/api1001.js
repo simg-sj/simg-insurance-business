@@ -14,6 +14,7 @@ const multer = require('multer');
 const path = require('path');
 const mybatisMapper = require('mybatis-mapper');
 mybatisMapper.createMapper(['../xml/userInfo.xml']);
+const kakaAlim = require('../server/lib/_kakaoAlim');
 
 
 router.get("/prod"+"/api1001", function(req, res){
@@ -24,7 +25,7 @@ router.post("/prod"+"/api1001", function(req, res){
 
     var apiKey =  req.get('X-API-SECRET');
     var request_data = req.body;
-    let routerName = "/dev/api1001";
+    let routerName = "/prod/api1001";
     console.log("============================================================");
     console.log('request_data_json is : ',request_data);
     console.log("============================================================");
@@ -208,7 +209,7 @@ router.post("/prod"+"/api1001", function(req, res){
     console.log("joinQuery : ", joinQuery);
 
     _mysqlUtil.mysql_proc_exec(joinQuery, apiKey).then(function(result){
-    //     // console.log('mysql result is : ', result);
+        //     // console.log('mysql result is : ', result);
         console.log('mysql result[0][0] is : ', result[0][0]);
         let d = result[0][0];
         console.log('d is : ', d);
@@ -217,23 +218,167 @@ router.post("/prod"+"/api1001", function(req, res){
         res.json(d);
 
         /* 밸류맵 가입증명서 발급 및 알림톡 발송*/
+        // 가입증명서 확인 페이지 : insurance-info.simg.kr / insurance-info-test.simg.kr
         /* 가입 증명서 저장 */
-        if ( bpk == '1' && d.code === '200' ) {
+        // 마이체크업 1번 / 밸류맵 2번
+        if ( bpk == '1' && d.code === '200' || bpk == '2' && d.code === '200' ) {
+
             let cmpk = d.cmpk;
+            /* 고객페이지 설정 */
+            let infoPageURL = keyInfo.infoPage;
+            let cmpkString = String(cmpk);
+            let cmpkEncString = _util.promiEncModule(encKey, ivKey, cmpkString); // cmpk 암호화
+            cmpkEncString = encodeURIComponent(cmpkEncString);
+            let cNameEncString = _util.promiEncModule(encKey, ivKey, requesterName); // 고객이름 암호화
+            cNameEncString = encodeURIComponent(cNameEncString);
+            let clientSavePageURL = "";
 
             console.log("d.cmpk : ", cmpk);
-            let uploadPath = "../upload/valuemap_policy"; // 밸류맵 가입증명서 저장 경로
+
+
             let clientPath = "/" + cmpk; //
-            let q = "select concat(date_format(date_add(createdYMD, interval 1 day), '%Y-%m-%d'), ' 00:00:00 ~ ', date_format(date_add(date_add(createdYMD, interval 1 year), interval -1 day), '%Y-%m-%d'), ' 24:00:00') as insurGap, a.* from clientMaster a where useYNull = 'Y' and bpk = '" + bpk + "' and cmpk = " + cmpk + ";"
+            // 생성된 고객 정보 가져오기
+            let q = "select date_format(createdYMD, '%Y%m') as insertDay ,concat(date_format(date_add(createdYMD, interval 1 day), '%Y-%m-%d'), ' 00:00:00 ~ ', date_format(date_add(date_add(createdYMD, interval 1 year), interval -1 day), '%Y-%m-%d'), ' 24:00:00') as insurGap, a.* from clientMaster a where useYNull = 'Y' and bpk = '" + bpk + "' and cmpk = " + cmpk + ";"
             _mysqlUtil.mysql_proc_exec(q, apiKey).then(function(result){
                 console.log('result is : ',result[0].cName);
                 console.log('result is : ',result[0].insurGap);
+                let insertDay = result[0].insertDay;
+
+                // pdf 생성, //cmpk, clientName, insurGap, bpk
+                _util.pdfSet(cmpk, result[0].cName, result[0].insurGap, bpk);
+
+
+                /* 알림톡 발송 */
+                clientSavePageURL = infoPageURL + "?client='" + cmpkEncString + "'&join='" + insertDay + "'&cName='" + cNameEncString + "'"; // 파라미터로 고객키 / 이름
+                clientSavePageURL = encodeURIComponent(clientSavePageURL);
+                console.log(clientSavePageURL);
+
+                let kakaoObject = {
+                    cName : requesterName,
+                    cell : requesterCell,
+                    infoUrl : clientSavePageURL
+                }
+                console.log('kakaoObject', kakaoObject);
+                let join_alirm_msg = {};
+                if ( bpk == '1'){
+                    join_alirm_msg = kakaAlim.mycheckup_join_info(kakaoObject);
+                }
+
+                if ( bpk == '2' ){
+                    join_alirm_msg = kakaAlim.valueupmap_join_info(kakaoObject);
+                }
+
+
+
+                apiUtil.sendAligoKakao(join_alirm_msg).then(function(result){
+                    let d = result.receive;
+                    let d2 = result.sendD;
+
+                    let re = d2.receiver.split('=');
+                    let recev = re[1];
+
+                    let me = d2.message.split('=');
+                    let messa = me[1];
+
+                    let job = 'S';
+                    let spk = '0';
+                    let result_code = d.code;
+                    let message = d.message;
+                    let msgId = d.info.mid;
+                    let successCnt = d.info.scnt;
+                    let errorCnt = '';
+                    let msgType = 'kakaoAlim';
+                    let receiver = recev;
+                    let msg = messa;
+                    let testmode_yn =  'Y';
+                    let page = '1';
+                    let npp = '9999';
+                    let fromDay = '';
+                    let toDay = '';
+                    let searchGbn = '';
+                    let searchVal = '';
+
+                    msg = msg.replace(/'/g, "["); // 작은따음표 치환
+                    let msgSaveQuery = "CALL sendCtrl(" +
+                        "'" + job + "'" +
+                        ", '" + spk + "'" +
+                        ", '" + result_code + "'" +
+                        ", '" + message + "'" +
+                        ", '" + msgId + "'" +
+                        ", '" + successCnt + "'" +
+                        ", '" + errorCnt + "'" +
+                        ", '" + msgType + "'" +
+                        ", '" + receiver + "'" +
+                        ", '" + msg + "'" +
+                        ", '" + testmode_yn + "'" +
+                        ", '" + page + "'" +
+                        ", '" + npp + "'" +
+                        ", '" + fromDay + "'" +
+                        ", '" + toDay + "'" +
+                        ", '" + searchGbn + "'" +
+                        ", '" + searchVal + "'" +
+                        ", '" + "joinInfo" + "'" +
+                        ");";
+                    console.log("msgSaveQuery : ", msgSaveQuery);
+
+                    _mysqlUtil.mysql_proc_exec(msgSaveQuery, apiKey).then(function(result){
+                        console.log('msgSaveResult : ',result)
+
+
+                    });
+
+                });
+
             });
+
+
+
+
         }
 
     });
 
 });
+
+
+router.post("/prod"+"/reservation", function(req, res){
+    let apiKey =  req.get('X-API-SECRET');
+    let routerName = "/prod/api1001";
+    console.log(req.body);
+
+    /* apiKey 적합성 확인 함수 */
+    function apiKeyCheck(apiKey, errorCode, errorMessage, checkKey){
+        if (apiKey === "" || apiKey === undefined || apiKey === false || checkKey === false) {
+            let return_data = {
+                "code": errorCode,
+                "message": errorMessage
+            };
+            res.status(400).json(return_data);
+            return true;
+        }
+        return false;
+    }
+    /* apiKey 유효성 */
+    let check_key = _util.checkKey(apiKey);
+    let apiKeyError = apiKeyCheck(apiKey, "400", "APIKEY가 거절되었습니다.", check_key);
+    if(apiKeyError){return;}
+    let toDay = req.body.toDay;
+    let fromDay = req.body.fromDay;
+    let access = req.body.access;
+    let cmpk = req.body.cmpk;
+
+    let query = `UPDATE salesInsur SET appointDT1st = '${toDay}', appointDT2nd='${fromDay}', saleStatus =${11}, creatID='${access}', updateDt=CURRENT_DATE WHERE cmpk = 1000000093`;
+
+
+    _mysqlUtil.mysql_proc_exec(query, apiKey).then(function(result){
+         if(result.affectedRows > 0){
+             res.json({code : 'Ok'});
+         }else {
+             res.json({code : 'No'});
+         }
+     });
+});
+
 
 router.get("/prod"+"/getData", function(req, res){
     let bpk = req.query.bpk;
@@ -265,8 +410,7 @@ router.get("/prod"+"/getData", function(req, res){
 
     _mysqlUtil.mysql_proc_exec(query, apiKey).then(function(result){
         let d = result;
-        res.json(d);
-
+        console.log(result);
     });
 });
 
@@ -303,6 +447,44 @@ router.get("/prod"+"/getToday", function(req, res){
         res.json(d);
 
     });
+});
+
+router.post("/prod"+"/userInfo", function(req, res){
+    let apiKey =  req.get('X-API-SECRET');
+    /* apiKey 적합성 확인 함수 */
+    function apiKeyCheck(apiKey, errorCode, errorMessage, checkKey){
+        if (apiKey === "" || apiKey === undefined || apiKey === false || checkKey === false) {
+            let return_data = {
+                "code": errorCode,
+                "message": errorMessage
+            };
+            res.status(400).json(return_data);
+            return true;
+        }
+        return false;
+    }
+    /* apiKey 유효성 */
+    let check_key = _util.checkKey(apiKey);
+    let apiKeyError = apiKeyCheck(apiKey, "400", "APIKEY가 거절되었습니다.", check_key);
+    if(apiKeyError){return;}
+
+
+    let keyInfo = _util.encInfo(apiKey);
+    let encKey = keyInfo.enckey;
+    let ivKey = keyInfo.iv;
+
+    let client = req.body.client;
+    let cName =  req.body.cName;
+
+    client = _util.promiDecModule(encKey, ivKey, client);
+    cName = _util.promiDecModule(encKey, ivKey, cName);
+
+    data = {
+        cmpk : client,
+        name : cName
+    };
+
+    res.json(data);
 });
 
 router.post("/prod"+"/searchData", function(req, res){
