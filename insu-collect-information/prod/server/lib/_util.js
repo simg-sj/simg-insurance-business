@@ -1,4 +1,3 @@
-
 /**
  * 작성자 : 유종태
  * 작성일 :2020.06.04
@@ -28,9 +27,11 @@ var beautify = require("json-beautify");
 let fs = require('fs');
 /*var MCrypt = require('mcrypt').MCrypt;*/
 var Accesskey = require('./_accesskey');
+const path = require("path");
 var Access = new Accesskey();
 // var accArray = Access.acc_test;
 var accArray = Access.acc_prod;
+var dayjs = require('dayjs');
 
 module.exports = {
 
@@ -75,6 +76,9 @@ module.exports = {
         }
         if(format=='day'){
             currentTime = String(year)+String(month)+String(day);
+        }
+        if(format=='YYYYmm'){
+            currentTime = String(year)+String(month);
         }
 
         // console.log('DATE TIME CALL : ', currentTime);
@@ -430,7 +434,7 @@ module.exports = {
         return plaintext.toString();
     },
     promiEncModule: function(key, iv, secret_message){
-        secret_message = pkcs7.pad(secret_message, 16); //Use 32 = 256 bits block sizes
+        secret_message = pkcs7.pad(Buffer.from(secret_message), 16); //Use 32 = 256 bits block sizes
 
         let cipher = crypto.createCipheriv('aes-256-cbc', key, iv);
         cipher.setAutoPadding(false);  // pkcs7 default
@@ -455,6 +459,39 @@ module.exports = {
     promiShaDec128: function(secret_message){
         return crypto.createHash('sha256').update(secret_message).digest('hex');
 
+    },
+    calculateInsAge : function(birth) {
+        if(Number(birth.substring(0,1)) >= 1){
+            birth = "19"+birth;
+        }else {
+            birth = '20'+birth;
+        }
+        const year = birth.substring(0, 4);
+        const mth = birth.substring(4, 6);
+        const dt = birth.substring(6, 8);
+        let today = new Date();
+
+        // 보험나이는 생일에 +1일 -6개월을 하고 계산한 만나이와 동일함
+        let birthday = new Date(`${year}-${mth}-${dt}`);
+        let insBirthday = birthday;
+        insBirthday.setDate(birthday.getDate()+1)
+        insBirthday.setMonth(birthday.getMonth()-6);
+        const insYr = insBirthday.getFullYear();
+        const insMth = insBirthday.getMonth()+1;
+        const insDt = insBirthday.getDate();
+
+        let insAge = today.getFullYear() - insYr;
+
+        // 월 비교
+        if(insMth > (today.getMonth() + 2)){
+            insAge--;
+        }
+        // 일 비교
+        else if(insMth === (today.getMonth() + 1) && insDt > today.getDate()){
+            insAge--;
+        }
+
+        return insAge.toString();
     },
     timeFilter: function(timetxt){
         // 2020-06-25 10:37:51
@@ -947,21 +984,94 @@ module.exports = {
         return returnValue
 
     },
-    pdfSet: async function(inputFilePath, outputFilePath, clientName, insurGap){
-        const inputBytes = fs.readFileSync(inputFilePath);
-        const pdfDoc = await PDFDocument.load(inputBytes);
+    pdfSet: async function(cmpk, clientName, insurGap, bpk){
+        console.log('pdfSetCheck : ', cmpk, clientName, insurGap, bpk);
+        /* 저장 경로 : ../uploads/YYYYmm/cmpk/YYYYmm_cmpk.pdf*/
 
-        // 폰트 설정
-        const fontBytes = fs.readFileSync('pdfFonts/KakaoBild.ttf');
-        const customFont = await pdfDoc.embedFont(fontBytes);
+        let basicPath = '../uploads/';
+        let infoPath = '';
+        let inputFilePath = '';
+        let saveDay = this.getTimeyymmddhhmmss('day');
+        let pathDay = this.getTimeyymmddhhmmss('YYYYmm');
 
         /* 이름 위치 설정*/
-        const nameX = 200;
-        const nameY = 462;
+        let nameX = 0;
+        let nameY = 0;
 
         /* 보험기간 위치 설정 */
-        const insurGapX = 200;
-        const insurGapY = 407;
+        let insurGapX = 0;
+        let insurGapY = 0;
+
+        if (bpk == '1'){
+            // infoPath = 'mycheckupInfo';
+            inputFilePath = "../uploads/mycheckupInfo/mycheckupPolicyInfo.pdf"; // 마이체크업 가입증명서 저장 경로
+            nameX = 220;
+            nameY = 472;
+
+            insurGapX = 220;
+            insurGapY = 528;
+
+        }
+
+        if (bpk == '2'){
+            // infoPath = 'valuemapInfo';
+            inputFilePath = "../uploads/valuemapInfo/valuemapPolicyInfo.pdf"; // 밸류맵 가입증명서 저장 경로
+            nameX = 200;
+            nameY = 407;
+
+            insurGapX = 200;
+            insurGapY = 462;
+        }
+
+        console.log('XY_check', nameX, nameY, insurGapX, insurGapY);
+
+
+
+
+
+        // let ourputFileFullPath = basicPath+infoPath+'/'+cmpk+'/'+cmpk+'_joinInfo_'+saveDay+'.pdf';
+        let ourputFileFullPath = basicPath+pathDay+"/"+cmpk+"/"+pathDay+"_"+cmpk+".pdf";
+        console.log('파일 생성 경로 : ', ourputFileFullPath);
+        /* 디렉토리 생성 */
+        //  /uploads/[Info]  디렉토리가 없다면~ 생성
+        if(!fs.existsSync(basicPath+pathDay)){
+            fs.mkdirSync(basicPath+pathDay, {recursive:true}, (error)=>{
+                if(error){
+                    console.error('an error occurred : ', error);
+                }else{
+                    console.log('Directory is made : ', log);
+                }
+            })
+
+        }
+
+
+        // /uploads/valuemapInfo/[cmpk] 디렉토리가 없다면 ~ 생성
+        if(!fs.existsSync(basicPath+pathDay + '/' + cmpk)){
+            fs.mkdirSync(basicPath+pathDay + '/' + cmpk, {recursive:true}, (error)=>{
+                if(error){
+                    console.error('an error occurred : ', error);
+                }else{
+                    console.log('Directory is made : ', log);
+                }
+            })
+        }
+
+
+
+        const inputBytes = fs.readFileSync(inputFilePath);
+        const pdfDoc = await PDFDocument.load(inputBytes);
+        pdfDoc.registerFontkit(fontkit);
+
+        // 폰트 설정
+        // const fontBytes = fs.readFileSync(__dirname, './pdfFonts/KakaoBold.ttf');
+        // const customFont = await pdfDoc.embedFont(fontBytes);
+
+        const fontPath = path.join(__dirname, 'pdfFonts', 'KakaoBold.ttf');
+        const fontBytes = fs.readFileSync(fontPath);
+        const customFont = await pdfDoc.embedFont(fontBytes);
+
+
 
         const page1 = pdfDoc.getPages()[0]; // 첫 페이지
 
@@ -984,9 +1094,14 @@ module.exports = {
         });
 
         const modifiedBytes = await pdfDoc.save();
-        fs.writeFileSync(outputFilePath, modifiedBytes);
+        fs.writeFileSync(ourputFileFullPath, modifiedBytes);
 
-
+        // 파일 생성 후에 파일이 존재하는지 확인하여 성공 메시지 출력
+        if (fs.existsSync(ourputFileFullPath)) {
+            console.log('PDF 파일이 성공적으로 생성되었습니다.');
+        } else {
+            console.error('PDF 파일 생성에 실패했습니다.');
+        }
     }
 
 }

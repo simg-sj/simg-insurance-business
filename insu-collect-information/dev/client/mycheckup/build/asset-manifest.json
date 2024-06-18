@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/static/css/main.9e7b536a.css",
+    "main.js": "/static/js/main.f6197904.js",
+    "static/js/453.8d4dfa0c.chunk.js": "/static/js/453.8d4dfa0c.chunk.js",
+    "static/media/보험금청구절차.png": "/static/media/보험금청구절차.422767d033ef9557a1a6.png",
+    "static/media/process.png": "/static/media/process.1ad6d736a7333e40fd01.png",
+    "static/media/logo.svg": "/static/media/logo.2b84f3ede41d1f48eca4561835f5cf59.svg",
+    "static/media/footer-logo.svg": "/static/media/footer-logo.ad8c132a5030244d1ad04ba4826079b3.svg",
+    "index.html": "/index.html",
+    "main.9e7b536a.css.map": "/static/css/main.9e7b536a.css.map",
+    "main.f6197904.js.map": "/static/js/main.f6197904.js.map",
+    "453.8d4dfa0c.chunk.js.map": "/static/js/453.8d4dfa0c.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9e7b536a.css",
+    "static/js/main.f6197904.js"
+  ]
+}

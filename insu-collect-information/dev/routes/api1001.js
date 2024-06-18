@@ -12,6 +12,7 @@ const _mysqlUtil = require('../server/lib/sql_util');
 const { addTextAndImageToPDF } = require('../server/lib/pdf');
 const multer = require('multer');
 const path = require('path');
+const kakaAlim = require('../server/lib/_kakaoAlim');
 
 router.get("/dev"+"/api1001", function(req, res){
     res.send('SIMG OPEN API 1001 DEV ROUTER');
@@ -224,23 +225,112 @@ router.post("/dev"+"/api1001", function(req, res){
             let infoPageURL = keyInfo.infoPage;
             let cmpkString = String(cmpk);
             let cmpkEncString = _util.promiEncModule(encKey, ivKey, cmpkString); // cmpk 암호화
+            cmpkEncString = encodeURIComponent(cmpkEncString);
             let cNameEncString = _util.promiEncModule(encKey, ivKey, requesterName); // 고객이름 암호화
-            let clientSavePageURL = infoPageURL + "?client='" + cmpkEncString + "'&cName='" + cNameEncString + "'&key='" + apiKey + "'"; // 파라미터로 고객키 / 이름 / APIKEY(어떤 업체인지 구분하기 위함)
-            console.log(clientSavePageURL);
+            cNameEncString = encodeURIComponent(cNameEncString);
+            let clientSavePageURL = "";
+
             console.log("d.cmpk : ", cmpk);
 
 
             let clientPath = "/" + cmpk; //
             // 생성된 고객 정보 가져오기
-            let q = "select concat(date_format(date_add(createdYMD, interval 1 day), '%Y-%m-%d'), ' 00:00:00 ~ ', date_format(date_add(date_add(createdYMD, interval 1 year), interval -1 day), '%Y-%m-%d'), ' 24:00:00') as insurGap, a.* from clientMaster a where useYNull = 'Y' and bpk = '" + bpk + "' and cmpk = " + cmpk + ";"
+            let q = "select date_format(createdYMD, '%Y%m') as insertDay ,concat(date_format(date_add(createdYMD, interval 1 day), '%Y-%m-%d'), ' 00:00:00 ~ ', date_format(date_add(date_add(createdYMD, interval 1 year), interval -1 day), '%Y-%m-%d'), ' 24:00:00') as insurGap, a.* from clientMaster a where useYNull = 'Y' and bpk = '" + bpk + "' and cmpk = " + cmpk + ";"
             _mysqlUtil.mysql_proc_exec(q, apiKey).then(function(result){
                 console.log('result is : ',result[0].cName);
                 console.log('result is : ',result[0].insurGap);
-                //cmpk, clientName, insurGap
-                // pdf 생성
+                let insertDay = result[0].insertDay;
+
+                // pdf 생성, //cmpk, clientName, insurGap, bpk
                 _util.pdfSet(cmpk, result[0].cName, result[0].insurGap, bpk);
 
+
+                /* 알림톡 발송 */
+                clientSavePageURL = infoPageURL + "?client='" + cmpkEncString + "'&join='" + insertDay + "'&cName='" + cNameEncString + "'"; // 파라미터로 고객키 / 이름
+                clientSavePageURL = encodeURIComponent(clientSavePageURL);
+                console.log(clientSavePageURL);
+
+                let kakaoObject = {
+                    cName : requesterName,
+                    cell : requesterCell,
+                    infoUrl : clientSavePageURL
+                }
+                console.log('kakaoObject', kakaoObject);
+                let join_alirm_msg = {};
+                if ( bpk == '1'){
+                    join_alirm_msg = kakaAlim.mycheckup_join_info(kakaoObject);
+                }
+
+                if ( bpk == '2' ){
+                    join_alirm_msg = kakaAlim.valueupmap_join_info(kakaoObject);
+                }
+
+
+
+                apiUtil.sendAligoKakao(join_alirm_msg).then(function(result){
+                    let d = result.receive;
+                    let d2 = result.sendD;
+
+                    let re = d2.receiver.split('=');
+                    let recev = re[1];
+
+                    let me = d2.message.split('=');
+                    let messa = me[1];
+
+                    let job = 'S';
+                    let spk = '0';
+                    let result_code = d.code;
+                    let message = d.message;
+                    let msgId = d.info.mid;
+                    let successCnt = d.info.scnt;
+                    let errorCnt = '';
+                    let msgType = 'kakaoAlim';
+                    let receiver = recev;
+                    let msg = messa;
+                    let testmode_yn =  'Y';
+                    let page = '1';
+                    let npp = '9999';
+                    let fromDay = '';
+                    let toDay = '';
+                    let searchGbn = '';
+                    let searchVal = '';
+
+                    msg = msg.replace(/'/g, "["); // 작은따음표 치환
+                    let msgSaveQuery = "CALL sendCtrl(" +
+                        "'" + job + "'" +
+                        ", '" + spk + "'" +
+                        ", '" + result_code + "'" +
+                        ", '" + message + "'" +
+                        ", '" + msgId + "'" +
+                        ", '" + successCnt + "'" +
+                        ", '" + errorCnt + "'" +
+                        ", '" + msgType + "'" +
+                        ", '" + receiver + "'" +
+                        ", '" + msg + "'" +
+                        ", '" + testmode_yn + "'" +
+                        ", '" + page + "'" +
+                        ", '" + npp + "'" +
+                        ", '" + fromDay + "'" +
+                        ", '" + toDay + "'" +
+                        ", '" + searchGbn + "'" +
+                        ", '" + searchVal + "'" +
+                        ", '" + "joinInfo" + "'" +
+                        ");";
+                    console.log("msgSaveQuery : ", msgSaveQuery);
+
+                    _mysqlUtil.mysql_proc_exec(msgSaveQuery, apiKey).then(function(result){
+                        console.log('msgSaveResult : ',result)
+
+
+                    });
+
+                });
+
             });
+
+
+
+
         }
 
     });
@@ -317,6 +407,44 @@ router.get("/dev"+"/getToday", function(req, res){
     });
 });
 
+router.post("/dev"+"/userInfo", function(req, res){
+    let apiKey =  req.get('X-API-SECRET');
+    /* apiKey 적합성 확인 함수 */
+    function apiKeyCheck(apiKey, errorCode, errorMessage, checkKey){
+        if (apiKey === "" || apiKey === undefined || apiKey === false || checkKey === false) {
+            let return_data = {
+                "code": errorCode,
+                "message": errorMessage
+            };
+            res.status(400).json(return_data);
+            return true;
+        }
+        return false;
+    }
+    /* apiKey 유효성 */
+    let check_key = _util.checkKey(apiKey);
+    let apiKeyError = apiKeyCheck(apiKey, "400", "APIKEY가 거절되었습니다.", check_key);
+    if(apiKeyError){return;}
+
+
+    let keyInfo = _util.encInfo(apiKey);
+    let encKey = keyInfo.enckey;
+    let ivKey = keyInfo.iv;
+
+    let client = req.body.client;
+    let cName =  req.body.cName;
+
+    client = _util.promiDecModule(encKey, ivKey, client);
+    cName = _util.promiDecModule(encKey, ivKey, cName);
+
+    data = {
+        cmpk : client,
+        name : cName
+    };
+
+    res.json(data);
+});
+
 router.post("/dev"+"/searchData", function(req, res){
     let bpk = req.body.bpk;
     let cmpk = req.body.cmpk;
@@ -355,6 +483,40 @@ router.post("/dev"+"/searchData", function(req, res){
         res.json(d);
 
     });
+});
+
+
+router.post("/dev"+"/reservation", function(req, res){
+    console.log(req.body);
+
+    /* apiKey 적합성 확인 함수 */
+    function apiKeyCheck(apiKey, errorCode, errorMessage, checkKey){
+        if (apiKey === "" || apiKey === undefined || apiKey === false || checkKey === false) {
+            let return_data = {
+                "code": errorCode,
+                "message": errorMessage
+            };
+            res.status(400).json(return_data);
+            return true;
+        }
+        return false;
+    }
+    /* apiKey 유효성 */
+    let check_key = _util.checkKey(apiKey);
+    let apiKeyError = apiKeyCheck(apiKey, "400", "APIKEY가 거절되었습니다.", check_key);
+    if(apiKeyError){return;}
+
+    let query = mybatisMapper.getStatement('search', 'searchUser', params, {language: 'sql', indent: '  '});
+
+    console.log("query is ::::::: " + query);
+
+   /* _mysqlUtil.mysql_proc_exec(query, apiKey).then(function(result){
+        console.log('mysql result is : ', result);
+        let d = result;
+        console.log('d is : ', d);
+        res.json(d);
+
+    });*/
 });
 
 let today = _util.getTimeyymmddhhmmss('day').substring(0,6);

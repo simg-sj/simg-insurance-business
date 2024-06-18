@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="search">
+    <select id="searchUser">
+        SELECT *
+        FROM
+        (SELECT
+        A.cmpk,
+        B.cName,
+        CAST(aes_decrypt(unhex(B.cJumin),'jumin23456@#$%^') as char) as cJumin,
+        CAST(aes_decrypt(unhex(B.cCell),'cell23456@#$%^') as char) as cCell,
+        B.age,
+        B.bpk,
+        B.createdYMD,
+        B.useYNull,
+        IFNULL(A.appointDT1st,'미정') as appointDT1st,
+        IFNULL(A.appointDT2nd,'미정') as appointDT2nd,
+        CASE A.saleStatus
+        WHEN '10' THEN '접수'
+        WHEN '11' THEN '상담예약'
+        WHEN '20' THEN '상담완료'
+        WHEN '21' THEN '연락두절'
+        WHEN '22' THEN '예약변경'
+        WHEN '33' THEN '청약'
+        WHEN '40' THEN '계약'
+        ELSE '오류'
+        END
+        AS 'saleStatus'
+        FROM salesInsur A, clientMaster B
+        WHERE A.cmpk = B.cmpk) C
+        WHERE	1 = 1
+        AND C.useYNull = 'Y'
+        AND C.bpk = ${bpk}
+        AND DATE_FORMAT(C.createdYMD,'%Y-%m-%d') BETWEEN '${toDate}' AND '${fromDate}'
+        <if test="cmpk != null and cmpk !=''">
+            AND C.cmpk like '%${cmpk}%'
+        </if>
+        <if test="cCell != null and cCell !=''">
+            AND C.cCell like '%${cCell}%'
+        </if>
+        <if test="cJumin != null and cJumin !=''">
+            AND C.cJumin like '%${cJumin}%'
+        </if>
+        <if test="cName != null and cName !=''">
+            AND C.cName like '%${cName}%'
+        </if>
+        ;
+    </select>
+
+
+
+</mapper>

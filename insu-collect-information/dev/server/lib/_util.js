@@ -76,6 +76,9 @@ module.exports = {
         if(format=='day'){
             currentTime = String(year)+String(month)+String(day);
         }
+        if(format=='YYYYmm'){
+            currentTime = String(year)+String(month);
+        }
 
         // console.log('DATE TIME CALL : ', currentTime);
 
@@ -428,6 +431,17 @@ module.exports = {
         desEcb.open(_key);
         var plaintext = desEcb.decrypt(new Buffer(_data, 'base64'));
         return plaintext.toString();
+    },
+    dec : function(encryptData) {
+        let key = '4D642908641E1BF379EE836A4880D135';
+        let iv = '4bef31f208e93910';
+        const decipher = crypto.AES.decrypt(encryptData, crypto.enc.Utf8.parse(key), {
+            iv: crypto.enc.Utf8.parse(iv),
+            padding: crypto.pad.Pkcs7,
+            mode: crypto.mode.CBC,
+        });
+
+        return decipher.toString(crypto.enc.Utf8);
     },
     promiEncModule: function(key, iv, secret_message){
         console.log(key, iv, secret_message);
@@ -949,11 +963,13 @@ module.exports = {
     },
     pdfSet: async function(cmpk, clientName, insurGap, bpk){
         console.log('pdfSetCheck : ', cmpk, clientName, insurGap, bpk);
+        /* 저장 경로 : ../uploads/YYYYmm/cmpk/YYYYmm_cmpk.pdf*/
 
         let basicPath = '../uploads/';
         let infoPath = '';
         let inputFilePath = '';
         let saveDay = this.getTimeyymmddhhmmss('day');
+        let pathDay = this.getTimeyymmddhhmmss('YYYYmm');
 
         /* 이름 위치 설정*/
         let nameX = 0;
@@ -964,7 +980,7 @@ module.exports = {
         let insurGapY = 0;
 
         if (bpk == '1'){
-            infoPath = 'mycheckupInfo';
+            // infoPath = 'mycheckupInfo';
             inputFilePath = "../uploads/mycheckupInfo/mycheckupPolicyInfo.pdf"; // 마이체크업 가입증명서 저장 경로
             nameX = 220;
             nameY = 528;
@@ -974,7 +990,7 @@ module.exports = {
         }
 
         if (bpk == '2'){
-            infoPath = 'valuemapInfo';
+            // infoPath = 'valuemapInfo';
             inputFilePath = "../uploads/valuemapInfo/valuemapPolicyInfo.pdf"; // 밸류맵 가입증명서 저장 경로
             nameX = 200;
             nameY = 462;
@@ -989,12 +1005,13 @@ module.exports = {
 
 
 
-        let ourputFileFullPath = basicPath+infoPath+'/'+cmpk+'/'+cmpk+'_joinInfo_'+saveDay+'.pdf';
+        // let ourputFileFullPath = basicPath+infoPath+'/'+cmpk+'/'+cmpk+'_joinInfo_'+saveDay+'.pdf';
+        let ourputFileFullPath = basicPath+pathDay+"/"+cmpk+"/"+pathDay+"_"+cmpk+".pdf";
         console.log('파일 생성 경로 : ', ourputFileFullPath);
         /* 디렉토리 생성 */
         //  /uploads/[Info]  디렉토리가 없다면~ 생성
-        if(!fs.existsSync(basicPath+infoPath)){
-            fs.mkdirSync(basicPath+infoPath, {recursive:true}, (error)=>{
+        if(!fs.existsSync(basicPath+pathDay)){
+            fs.mkdirSync(basicPath+pathDay, {recursive:true}, (error)=>{
                 if(error){
                     console.error('an error occurred : ', error);
                 }else{
@@ -1006,8 +1023,8 @@ module.exports = {
 
 
         // /uploads/valuemapInfo/[cmpk] 디렉토리가 없다면 ~ 생성
-        if(!fs.existsSync(basicPath+infoPath + '/' + cmpk)){
-            fs.mkdirSync(basicPath+infoPath + '/' + cmpk, {recursive:true}, (error)=>{
+        if(!fs.existsSync(basicPath+pathDay + '/' + cmpk)){
+            fs.mkdirSync(basicPath+pathDay + '/' + cmpk, {recursive:true}, (error)=>{
                 if(error){
                     console.error('an error occurred : ', error);
                 }else{
