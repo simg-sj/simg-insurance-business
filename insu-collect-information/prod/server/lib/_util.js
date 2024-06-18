@@ -31,6 +31,7 @@ const path = require("path");
 var Access = new Accesskey();
 // var accArray = Access.acc_test;
 var accArray = Access.acc_prod;
+var dayjs = require('dayjs');
 
 module.exports = {
 
@@ -458,6 +459,39 @@ module.exports = {
     promiShaDec128: function(secret_message){
         return crypto.createHash('sha256').update(secret_message).digest('hex');
 
+    },
+    calculateInsAge : function(birth) {
+        if(Number(birth.substring(0,1)) >= 1){
+            birth = "19"+birth;
+        }else {
+            birth = '20'+birth;
+        }
+        const year = birth.substring(0, 4);
+        const mth = birth.substring(4, 6);
+        const dt = birth.substring(6, 8);
+        let today = new Date();
+
+        // 보험나이는 생일에 +1일 -6개월을 하고 계산한 만나이와 동일함
+        let birthday = new Date(`${year}-${mth}-${dt}`);
+        let insBirthday = birthday;
+        insBirthday.setDate(birthday.getDate()+1)
+        insBirthday.setMonth(birthday.getMonth()-6);
+        const insYr = insBirthday.getFullYear();
+        const insMth = insBirthday.getMonth()+1;
+        const insDt = insBirthday.getDate();
+
+        let insAge = today.getFullYear() - insYr;
+
+        // 월 비교
+        if(insMth > (today.getMonth() + 2)){
+            insAge--;
+        }
+        // 일 비교
+        else if(insMth === (today.getMonth() + 1) && insDt > today.getDate()){
+            insAge--;
+        }
+
+        return insAge.toString();
     },
     timeFilter: function(timetxt){
         // 2020-06-25 10:37:51
@@ -972,20 +1006,21 @@ module.exports = {
             // infoPath = 'mycheckupInfo';
             inputFilePath = "../uploads/mycheckupInfo/mycheckupPolicyInfo.pdf"; // 마이체크업 가입증명서 저장 경로
             nameX = 220;
-            nameY = 528;
+            nameY = 472;
 
             insurGapX = 220;
-            insurGapY = 472;
+            insurGapY = 528;
+
         }
 
         if (bpk == '2'){
             // infoPath = 'valuemapInfo';
             inputFilePath = "../uploads/valuemapInfo/valuemapPolicyInfo.pdf"; // 밸류맵 가입증명서 저장 경로
             nameX = 200;
-            nameY = 462;
+            nameY = 407;
 
             insurGapX = 200;
-            insurGapY = 407;
+            insurGapY = 462;
         }
 
         console.log('XY_check', nameX, nameY, insurGapX, insurGapY);

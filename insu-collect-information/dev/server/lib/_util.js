@@ -432,6 +432,17 @@ module.exports = {
         var plaintext = desEcb.decrypt(new Buffer(_data, 'base64'));
         return plaintext.toString();
     },
+    dec : function(encryptData) {
+        let key = '4D642908641E1BF379EE836A4880D135';
+        let iv = '4bef31f208e93910';
+        const decipher = crypto.AES.decrypt(encryptData, crypto.enc.Utf8.parse(key), {
+            iv: crypto.enc.Utf8.parse(iv),
+            padding: crypto.pad.Pkcs7,
+            mode: crypto.mode.CBC,
+        });
+
+        return decipher.toString(crypto.enc.Utf8);
+    },
     promiEncModule: function(key, iv, secret_message){
         console.log(key, iv, secret_message);
         secret_message = pkcs7.pad(Buffer.from(secret_message), 16); //Use 32 = 256 bits block sizes

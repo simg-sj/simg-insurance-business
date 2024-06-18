@@ -46,6 +46,16 @@ function access_confing() {
                 url     : "https://insurance-open-api-dev.simg.kr/",
                 infoPage : "https://mycheckup-insu.simg.kr/"
             },
+            {
+                apikey      : "A721EAC4-289D-4E2E-B24E-00B16C885C8C",
+                enckey      : "B0E195E013C99D59E09B7817B0E7C2CB",
+                iv          : "72994385f5d9b9c5",
+                bpk         : 11,
+                plfName     : "쏘카",
+                dbKey       : "simgCms",
+                url     : "https://insurance-open-api-dev.simg.kr/",
+                infoPage : "https://socar-accident.simgbiz.net/"
+            },
         ]
     }
     return return_val;

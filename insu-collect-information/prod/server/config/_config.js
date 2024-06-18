@@ -26,6 +26,18 @@ function db_config() {
             },
             multipleStatements: true
         },
+        "simgCms" : {
+            host     : 'baemin-prod.c73he84duiho.ap-northeast-2.rds.amazonaws.com',
+            port     : 3306,
+            user     : 'root',
+            password : 'simg1234',
+            database : 'simgCms',
+            options: {
+                connectTimeout  : 1000 * 480,
+                requestTimeout  : 1000 * 480
+            },
+            multipleStatements: true
+        },
     }
 
     return return_val;
