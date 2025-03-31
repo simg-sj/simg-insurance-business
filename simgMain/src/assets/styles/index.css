@@ -1,0 +1,409 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ---------------------------------------
+    카드 스크롤 디자인
+   ---------------------------------------
+*/
+
+.cardgroup::-webkit-scrollbar {
+    height: 9px;
+}
+
+.cardgroup::-webkit-scrollbar-thumb {
+    background-color: #d9d9d9;
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 2px solid transparent;
+}
+
+.cardgroup::-webkit-scrollbar-track {
+    background-color: #f5f5f5;
+    border-radius: 10px;
+}
+
+/*카드 hover시 그림자 생성*/
+.card {
+    will-change: filter;
+    transition: filter 300ms;
+}
+.card:hover {
+    filter: drop-shadow(0 0 8px rgba(176, 176, 176, 0.67));
+}
+
+
+/* ---------------------------------------
+    카드 스크롤 디자인
+   ---------------------------------------
+*/
+.speech-bubble {
+    padding: 18px 50px;
+    position: relative;
+    border-radius: 50px;
+    box-shadow: 1px 1px 8px rgb(0 0 0 / 0.1);
+    width: fit-content;
+    width: 520px;
+}
+
+.bubble-box-arrow-border {
+    border-color: #c1c1c142 transparent transparent transparent;
+    border-style: solid;
+    border-width: 10px;
+    position: absolute;
+    bottom: -22px;
+}
+
+.bubble-box-arrow {
+    border-color: #fff transparent transparent transparent;
+    border-style: solid;
+    border-width: 10px;
+    height: 0;
+    width: 0;
+    position: absolute;
+    bottom: -20px;
+}
+
+
+/* ---------------------------------------
+    팝업 애니메이션
+   ---------------------------------------
+*/
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translate3d(0, 100%, 0);
+    }
+    to {
+        opacity: 1;
+        transform: translateZ(0);
+
+    }
+}
+
+.popup {
+    animation: fadeInUp 0.5s;
+}
+
+/* ---------------------------------------
+    반응형 CSS
+   ---------------------------------------
+*/
+@media (max-width: 1300px) {
+    /*전체레이아웃*/
+    .max-w-7xl{
+        margin-left: 100px!important;
+        margin-right: 100px!important;
+    }
+    /*메인페이지*/
+    .mainSlide{
+        max-width: 550px!important;
+    }
+}
+/*테블릿*/
+@media (max-width: 1000px) {
+    /*전체레이아웃*/
+    .max-w-7xl{
+        margin-left: 40px!important;
+        margin-right: 40px!important;
+    }
+    .leading-10{
+        line-height: 2.2rem!important;
+    }
+    /*텍스트크기*/
+    .text-4xl {
+        font-size: 2rem!important;
+    }
+    .text-3xl {
+        font-size: 1.5rem!important;
+    }
+    .text-2xl {
+        font-size: 1.3rem!important;
+        line-height: 1.5rem!important;
+    }
+    .text-xl{
+        font-size: 1.15rem!important;
+        line-height: 1.5rem!important;
+    }
+    .text-sm{
+        font-size: 0.9rem!important;
+        line-height: 1.15rem!important;
+    }
+    .text-base{
+        font-size: 0.95rem!important;
+        line-height: 1.45rem!important;
+    }
+    /*메인페이지*/
+    .mainSlide{
+        display: none;
+    }
+    .tabWidth, .tabButton{
+        width: 100%!important;
+    }
+    .tabButtonGroup > Button{
+        width: 50% !important;
+        margin-top: 10px;
+    }
+    .layoutMin1{
+        min-width: 200px!important;
+    }
+    .layoutMin2{
+        margin-left: 0!important;
+    }
+    .mainFlexCol{
+        flex-direction: column;
+        margin-left: 20px;
+    }
+    .mainFlexCol > div{
+        margin-left: 0px;
+        margin-top: 20px;
+    }
+    .layoutMargin{
+        margin-left: 20px;
+    }
+    /*회사소개*/
+    .aboutI{
+        width: 360px;
+        height: 172.5px;
+    }
+    .mtM{
+        margin-top: 10px!important;
+    }
+    /*회사문화*/
+    .cultureBox{
+        padding: 30px!important;
+        width: 350px!important;
+        height: 280px!important;
+    }
+    /*인재풀등록*/
+    .fileButton{
+        width: 70px!important;
+    }
+    .flexCol{
+        flex-direction: column!important;
+        gap: 1rem!important;
+    }
+    .flexCol > div{
+        width: 100% !important;
+    }
+    .flexCol > div:last-child{
+        border-top: none!important;
+    }
+    .fixed.popup{
+        padding: 15px 25px;
+    }
+    .popup .hire-form .absolute{
+        top: 25px;
+    }
+    /*자주묻는질문*/
+    .tabwrap {
+        gap: 1.1rem!important;
+    }
+    .tabwrap > div {
+        margin-bottom: 20px;
+    }
+}
+/*모바일*/
+@media (max-width: 800px) {
+    .flexCol3{
+        flex-direction: column;
+    }
+    .flexCol3 > div{
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-between;
+    }
+    .flexCol3 > div > div:nth-child(2) {
+        margin-top: 40px!important;
+        margin-left: 20px;
+    }
+    .flexCol3 > div > div:nth-child(1) > div:nth-child(2) {
+        min-width: 300px;
+    }
+    .flexCol3 > div > div:nth-child(2){
+        max-width: 400px!important;
+        text-align: right;
+    }
+}
+@media (max-width: 750px) {
+    .flexCol4, .flexCol5{
+        flex-direction: column;
+    }
+    .flexCol4 > div{
+       margin-top: 30px;
+        margin-left: 150px;
+    }
+    .flexCol4 > div > div:not(:first-child) > div {
+       max-width: 100% !important;
+    }
+    .flexCol5 > div {
+        margin-bottom: 20px;
+    }
+
+}
+@media (max-width: 600px) {
+    /*전체레이아웃*/
+    .max-w-7xl{
+        margin-left: 0px!important;
+        margin-right: 0px!important;
+    }
+    .hiddenImage{
+        display: none!important;
+    }
+    footer{
+        padding: 30px 1.25rem!important;
+    }
+    .accordion {
+        padding: 0!important;
+    }
+    main {
+        margin-top: 90px!important;
+    }
+    /*텍스트크기*/
+    .text-4xl {
+        font-size: 1.5rem!important;
+    }
+    .text-3xl {
+        font-size: 1.3rem!important;
+    }
+    .text-2xl {
+        font-size: 1rem!important;
+        line-height: 1.3rem!important;
+    }
+    .text-xl, .text-lg{
+        font-size: 1rem!important;
+        line-height: 1.3rem!important;
+    }
+    /*회사소개*/
+    .flexCol3 > div{
+        flex-direction: column;
+    }
+    .flexCol3 > div > div:nth-child(2){
+        max-width: 100%!important;
+        margin-top: 35px!important;
+        margin-bottom: 40px!important;
+    }
+    .timeline-prev, .timeline-next {
+        font-size: 1.6rem;
+    }
+    .timeLine{
+        flex-direction: column!important;
+        align-items: start!important;
+    }
+    .timeLine > div:last-child{
+        margin-top: 10px;
+        justify-content: end;
+        width: 100%;
+    }
+    /*회사문화*/
+    .cultureBox{
+        padding: 25px!important;
+        width: 300px!important;
+        height: 260px!important;
+    }
+    .flexCol6{
+        flex-direction: column;
+    }
+    /*서비스*/
+    .serviceCard{
+        width: 260px!important;
+        height: 310px!important;
+        padding: 20px!important;
+        margin: 10px!important;
+    }
+    .serviceCard > div {
+        font-size: 14px!important;
+    }
+    .serviceCard > div > div > .text-xl {
+        font-size: 18px!important;
+    }
+    .flexCol4 > div{
+        margin-top: 20px;
+        margin-left: 0px;
+    }
+    /*인재풀등록*/
+    .flexCol2{
+        flex-direction: column;
+        align-items: start!important;
+    }
+    .flexCol2 > div {
+        margin-bottom: 5px;
+    }
+    .etc{
+        display: none;
+    }
+    /*탭 tab*/
+    .tabwrap {
+        gap: 0.8rem!important;
+        margin-top: 20px!important;
+    }
+    .tabM > div{
+        width: 120px!important;
+    }
+    .tabM > select, .tabM > input{
+        width: calc(100% - 120px)!important;
+    }
+    /*메인페이지*/
+    .flexColM1{
+        flex-direction: column-reverse;
+        align-items: start!important;
+        margin: 10px 0!important;
+    }
+    .flexColM2{
+        flex-direction: column;
+    }
+    .my-m{
+        margin: 50px 0!important;
+    }
+    .mt-m{
+        margin-top: 20px;
+    }
+    .ml-none{
+        margin-left: 0!important;
+    }
+    .fullImage{
+        width: 100vw;
+        height: auto;
+        border-radius: 0px!important;
+    }
+    .fullMainImage{
+        width: 100vw;
+        height: 500px;
+        border-radius: 0px!important;
+        object-fit: cover;
+    }
+    .ojr{
+        object-position: right;
+    }
+    .ojl{
+        object-position: left;
+    }
+    .mainText{
+        color: white;
+        position: absolute;
+        margin-top: 40px;
+        font-size: 35px!important;
+        opacity : 0.9;
+    }
+    .myNone{
+        margin-top: 0!important;
+        margin-bottom: 70px!important;
+    }
+    .mp5 {
+        padding: 0 1.25rem!important;
+    }
+    .pNone {
+        padding: 0!important;
+    }
+    .myM{
+        margin: 70px 0!important;
+    }
+    .modal > div {
+        padding-left: 15px!important;
+        padding-right: 15px!important;
+    }
+    .modal > div > div > div {
+        padding: 0!important;
+    }
+}
