@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="search">
+    <select id="searchUser">
+        SELECT *
+        FROM
+        (SELECT
+        A.cmpk,
+        B.cName,
+        B.birth,
+        CASE B.productType
+            WHEN 'car' THEN '자동차'
+            WHEN 'saf' THEN '풍수해'
+                END
+                AS 'productType',
+        CAST(aes_decrypt(unhex(B.cJumin),'jumin23456@#$%^') as char) as cJumin,
+        CAST(aes_decrypt(unhex(B.cCell),'cell23456@#$%^') as char) as cCell,
+        B.age,
+        B.cMail,
+        B.carNum,
+        B.carType,
+        CASE B.carUse
+        WHEN '01' THEN '택시'
+        WHEN '02' THEN '화물'
+        ELSE ''
+        END
+        AS 'carUse',
+        CASE B.businessType
+        WHEN '01' THEN '개인'
+        WHEN '02' THEN '법인'
+        ELSE ''
+        END
+        AS 'businessType',
+        B.bpk,
+        B.createdYMD,
+        B.useYNull,
+        IFNULL(A.appointDT1st,'미정') as appointDT1st,
+        IFNULL(A.appointDT2nd,'미정') as appointDT2nd,
+        A.saleStatus,
+        B.marketingYN,
+        (SELECT COUNT(*) FROM board WHERE relativeKey = A.cmpk) as memoCount,
+        (SELECT location from file where cmpk = A.cmpk and type = 'contract' ORDER BY filePk desc limit 1) as location
+        FROM salesInsur A, clientMaster B
+        WHERE A.cmpk = B.cmpk) C
+        WHERE	1 = 1
+        AND C.useYNull = 'Y'
+        AND C.bpk = ${bpk}
+        <if test="dateGbn != '02' and dateGbn !=''">
+            AND DATE_FORMAT(C.createdYMD,'%Y-%m-%d') BETWEEN '${toDate}' AND '${fromDate}'
+        </if>
+        <if test="dateGbn != '01' and dateGbn !=''">
+            AND DATE_FORMAT(C.appointDT1st,'%Y-%m-%d') BETWEEN '${toDate}' AND '${fromDate}'
+        </if>
+        <if test="status != '' and status !=''">
+            AND C.saleStatus = '${status}'
+        </if>
+        <if test="cCell != null and cCell !=''">
+            AND C.cCell like '%${cCell}%'
+        </if>
+        <if test="cJumin != null and cJumin !=''">
+            AND C.cJumin like '%${cJumin}%'
+        </if>
+        <if test="cName != null and cName !=''">
+            AND C.cName like '%${cName}%'
+        </if>
+        ORDER BY  createdYMD desc
+        ;
+    </select>
+
+
+
+</mapper>

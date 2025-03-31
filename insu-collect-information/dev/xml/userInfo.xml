@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="search">
+    <select id="searchUser">
+        SELECT
+            cmpk
+             ,cName
+             ,cJumin
+             ,cCell
+             ,age
+        FROM clientMaster
+        WHERE	1 = 1
+        AND bpk = ${bpk}
+        AND DATE_FORMAT(createdYMD,'%Y-%m-%d') = '${date}'
+        <if test="cmpk != null and cmpk !=''">
+            AND cmpk like '%${cmpk}%'
+        </if>
+        <if test="cCell != null and cCell !=''">
+            AND cCell like '%${cCell}%'
+        </if>
+        <if test="cJumin != null and cJumin !=''">
+            AND cJumin like '%${cJumin}%'
+        </if>
+        <if test="cJumin != null and cJumin !=''">
+            AND cJumin like '%${cJumin}%'
+        </if>
+        <if test="cName != null and cName !=''">
+            AND cName like '%${cName}%'
+        </if>
+        ;
+    </select>
+
+
+
+</mapper>

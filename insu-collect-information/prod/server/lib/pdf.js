@@ -1,11 +1,19 @@
+
+// 입력할 문자열과 이미지의 위치와 내용을 설정합니다.
+// Check Mark 이미지 위치
+// PDF 파일 경로와 출력 파일 경로를 지정하여 함수를 호출합니다.
+const path = require('path');
 const { PDFDocument, StandardFonts, rgb } = require('pdf-lib');
 const fs = require('fs');
 const fontkit = require('@pdf-lib/fontkit');
-const path = require('path');
 const _util = require('./_util');
+
+
+
+const inputFilePath = path.join(__dirname,'../template/보험금청구서_DB.pdf');
+const checkMark = path.join(__dirname,'../template/images/check-mark.png');
 // 입력할 문자열과 이미지의 위치와 내용을 설정합니다.
 // Check Mark 이미지 위치
-const checkMark = path.join(__dirname,'../template/images/check-mark.png');
 const cmW = 10;  //  이미지 사이즈 정의
 const cmH = 10;  //  이미지 사이즈 정의
 // 피보험자 성명
@@ -40,7 +48,7 @@ const anNaeX = 168;
 const anNaeY = 622;
 // 전화 연락처
 const cellNo = '010-1234-5678';
-const cnX = 150;
+const cnX = 148;
 const cnY = 600;
 // 이메일 연락처
 const eMail = 'test@simg.kr';
@@ -101,7 +109,7 @@ const rnX = 420;
 const rnY = 118;
 
 // 청구권자 서명 이미지 위치
-const reqSign = '/Volumes/topmgr/Proj/JS/Test/sign.png';
+const reqSign = '';
 const rsW = 50;  //  이미지 사이즈 정의
 const rsH = 20;  //  이미지 사이즈 정의
 const rsX = 480;
@@ -167,18 +175,14 @@ const agreeSingY = 100;
 
 async function addTextAndImageToPDF(data) {
     // 입력 파일 로드
-    let today = _util.getTimeyymmddhhmmss('day');
-    const inputFilePath = path.join(__dirname, '../template/보험금청구서_DB.pdf');
-    let dirName = 'mycheckup'+_util.getTimeyymmddhhmmss('day').substring(0,6);
-    let outName = data.name+'_보험금청구서_DB_'+today+'.pdf';
-    const outputFilePath = path.join(__dirname, '../../temp/',dirName,outName);
     const inputBytes = fs.readFileSync(inputFilePath);
     const pdfDoc = await PDFDocument.load(inputBytes);
+    let today = _util.getTimeyymmddhhmmss('day');
     pdfDoc.registerFontkit(fontkit);
 
     // 표준 폰트 로드
     // const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
-    const fontBytes = fs.readFileSync(path.join(__dirname, '../template/fonts/PretendardVariable.ttf'));
+    const fontBytes = fs.readFileSync(path.join(__dirname,'../template/fonts/PretendardVariable.ttf'));
     const customFont = await pdfDoc.embedFont(fontBytes);
 
     // Check Mark 이미지 로드
@@ -198,7 +202,7 @@ async function addTextAndImageToPDF(data) {
         y: nameY,
         font: customFont,
         size: 12,
-        color : rgb(0,0,0), // 텍스트 색상 (검은색)
+        color: rgb(0, 0, 0), // 텍스트 색상 (검은색)
     });
 
     // 피보험자 주민번호
@@ -207,7 +211,7 @@ async function addTextAndImageToPDF(data) {
         y: juminY,
         font: customFont,
         size: 12,
-        color : rgb(0,0,0), // 텍스트 색상 (검은색)
+        color: rgb(0, 0, 0), // 텍스트 색상 (검은색)
     });
 
     //  의료수급권자 Check Mark 이미지 그리기
@@ -226,7 +230,7 @@ async function addTextAndImageToPDF(data) {
         y: corpY,
         font: customFont,
         size: 12,
-        color : rgb(0,0,0), // 텍스트 색상 (검은색)
+        color: rgb(0, 0, 0), // 텍스트 색상 (검은색)
     });
 
     // 피보험자 회사 부서명
@@ -235,7 +239,7 @@ async function addTextAndImageToPDF(data) {
         y: bsY,
         font: customFont,
         size: 12,
-        color : rgb(0,0,0), // 텍스트 색상 (검은색)
+        color: rgb(0, 0, 0), // 텍스트 색상 (검은색)
     });
 
     // 피보험자 회사에서 하는일
@@ -244,16 +248,16 @@ async function addTextAndImageToPDF(data) {
         y: jnY,
         font: customFont,
         size: 12,
-        color : rgb(0,0,0), // 텍스트 색상 (검은색)
+        color: rgb(0, 0, 0), // 텍스트 색상 (검은색)
     });
 
     // 피보험자 주소명
-    page1.drawText( insurAddr, {
+    page1.drawText( data.address, {
         x: iaX,
         y: iaY,
         font: customFont,
         size: 12,
-        color : rgb(0,0,0), // 텍스트 색상 (검은색)
+        color: rgb(0, 0, 0), // 텍스트 색상 (검은색)
     });
 
     // 보상 안내받으실 분 피보험자 체크 위치
@@ -270,7 +274,7 @@ async function addTextAndImageToPDF(data) {
         y: cnY,
         font: customFont,
         size: 12,
-        color : rgb(0,0,0), // 텍스트 색상 (검은색)
+        color: rgb(0, 0, 0), // 텍스트 색상 (검은색)
     });
 
     // 이메일 연락처
@@ -279,7 +283,7 @@ async function addTextAndImageToPDF(data) {
         y: emailY,
         font: customFont,
         size: 12,
-        color : rgb(0,0,0), // 텍스트 색상 (검은색)
+        color: rgb(0, 0, 0), // 텍스트 색상 (검은색)
     });
 
     // 다른 보험회사 가입사항 체크 위치
@@ -304,7 +308,7 @@ async function addTextAndImageToPDF(data) {
         y: sgY,
         font: customFont,
         size: 12,
-        color : rgb(0,0,0), // 텍스트 색상 (검은색)
+        color: rgb(0, 0, 0), // 텍스트 색상 (검은색)
     });
 
     // 진단명(병명/증상)
@@ -313,7 +317,7 @@ async function addTextAndImageToPDF(data) {
         y: diaNY,
         font: customFont,
         size: 12,
-        color : rgb(0,0,0), // 텍스트 색상 (검은색)
+        color: rgb(0, 0, 0), // 텍스트 색상 (검은색)
     });
 
     // 사고장소
@@ -322,7 +326,7 @@ async function addTextAndImageToPDF(data) {
         y: sglY,
         font: customFont,
         size: 12,
-        color : rgb(0,0,0), // 텍스트 색상 (검은색)
+        color: rgb(0, 0, 0), // 텍스트 색상 (검은색)
     });
 
     // 치료병원
@@ -331,7 +335,7 @@ async function addTextAndImageToPDF(data) {
         y: hnY,
         font: customFont,
         size: 12,
-        color : rgb(0,0,0), // 텍스트 색상 (검은색)
+        color: rgb(0, 0, 0), // 텍스트 색상 (검은색)
     });
 
     // 사고경위, 아픈부위
@@ -340,7 +344,7 @@ async function addTextAndImageToPDF(data) {
         y: sghY,
         font: customFont,
         size: 12,
-        color : rgb(0,0,0), // 텍스트 색상 (검은색)
+        color: rgb(0, 0, 0), // 텍스트 색상 (검은색)
     });
 
     // 청구 담보 체크 위치
@@ -357,7 +361,7 @@ async function addTextAndImageToPDF(data) {
         y: accnY,
         font: customFont,
         size: 12,
-        color : rgb(0,0,0), // 텍스트 색상 (검은색)
+        color: rgb(0, 0, 0), // 텍스트 색상 (검은색)
     });
 
     // 은행명
@@ -366,16 +370,16 @@ async function addTextAndImageToPDF(data) {
         y: bankY,
         font: customFont,
         size: 12,
-        color : rgb(0,0,0), // 텍스트 색상 (검은색)
+        color: rgb(0, 0, 0), // 텍스트 색상 (검은색)
     });
 
     // 예금주
-    page1.drawText( accountHolder, {
+    page1.drawText( data.name, {
         x: acchX,
         y: acchY,
         font: customFont,
         size: 12,
-        color : rgb(0,0,0), // 텍스트 색상 (검은색)
+        color: rgb(0, 0, 0), // 텍스트 색상 (검은색)
     });
 
     // 채권양도 체크 위치
@@ -392,7 +396,7 @@ async function addTextAndImageToPDF(data) {
         y: rdY,
         font: customFont,
         size: 12,
-        color : rgb(0,0,0), // 텍스트 색상 (검은색)
+        color: rgb(0, 0, 0), // 텍스트 색상 (검은색)
     });
 
     // 청구권자
@@ -401,7 +405,7 @@ async function addTextAndImageToPDF(data) {
         y: rnY,
         font: customFont,
         size: 12,
-        color : rgb(0,0,0), // 텍스트 색상 (검은색)
+        color: rgb(0, 0, 0), // 텍스트 색상 (검은색)
     });
 
     // 청구권자 서명 이미지 위치
@@ -513,16 +517,16 @@ async function addTextAndImageToPDF(data) {
         y: agreeY,
         font: customFont,
         size: 12,
-        color : rgb(0,0,0), // 텍스트 색상 (검은색)
+        color: rgb(0, 0, 0), // 텍스트 색상 (검은색)
     });
 
     // 정보동의자
-    page4.drawText( agreeName, {
+    page4.drawText( data.name, {
         x: agree_nX,
         y: agree_nY,
         font: customFont,
         size: 12,
-        color : rgb(0,0,0), // 텍스트 색상 (검은색)
+        color: rgb(0, 0, 0), // 텍스트 색상 (검은색)
     });
 
     // 동의자 서명 이미지 위치
@@ -534,15 +538,13 @@ async function addTextAndImageToPDF(data) {
     });
 
     // 수정된 PDF 파일 저장
-    try {
-        const modifiedBytes = await pdfDoc.save();
-        fs.writeFileSync(outputFilePath, modifiedBytes);
-    }catch(error){
-        return error;
-    }
-
+    const modifiedBytes = await pdfDoc.save();
+    let outName = data.name+'_보험금청구서_DB_'+today+'.pdf';
+    let dirName = 'mycheckup'+_util.getTimeyymmddhhmmss('day').substring(0,6);
+    const outputFilePath = path.join(__dirname, '../../uploads/',dirName,outName);
+    fs.writeFileSync(outputFilePath, modifiedBytes);
 }
 
-// PDF 파일 경로와 출력 파일 경로를 지정하여 함수를 호출합니다.
+
 
 module.exports = { addTextAndImageToPDF };

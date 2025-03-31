@@ -52,6 +52,39 @@ module.exports = {
             });
         });
     },
+    mysql_proc_exec2: function(query, schema){
+
+        console.log("DB-ACCESS-INFO : ", schema);
+        var dbConnection = mysql.createPool(Con[schema]);
+
+        return new Promise(function (resolve, reject) {
+
+
+            dbConnection.getConnection(function (err, connection) {  //.getConnection 메소드 err와 connection 한경우 두가지 내부콜백함수
+
+                if (err) {
+                    console.log(err);
+                }
+
+                connection.query(query, function (err, result) {  //query를 던짐
+
+                    var error = false;  // 에러가 없다면 false
+                    if (err) {
+                        error = true;  // 에러가 있다면 true
+                        console.log(err);  //console창에 error값 출력
+                        //console.log(result);
+
+                    }
+                    resolve(result);
+                    // res.status(200).json(result);
+
+
+                    connection.release();
+
+                });
+            });
+        });
+    },
     makeQueryParameter : function(array){
         let returnValue = "(";
 

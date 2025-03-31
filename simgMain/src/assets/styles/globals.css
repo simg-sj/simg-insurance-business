@@ -1,0 +1,100 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* ---------------------------------------
+    Font 폰트 스타일
+   ---------------------------------------
+*/
+
+@font-face {
+  font-family: Pretendard;
+  font-weight: 400;
+  src: local("Pretendard Regular"),
+  url("fonts/Pretendard-Regular.woff") format('woff'),
+  url("fonts/Pretendard-Regular.woff2") format('woff2');
+}
+
+@font-face {
+  font-family: Pretendard;
+  font-weight: 500;
+  src: local("Pretendard Medium"),
+  url("fonts/Pretendard-Medium.woff") format('woff'),
+  url("fonts/Pretendard-Medium.woff2") format('woff2');
+}
+
+@font-face {
+  font-family: Pretendard;
+  font-weight: 700;
+  src: local("Pretendard Bold"),
+  url("fonts/Pretendard-Bold.woff") format('woff'),
+  url("fonts/Pretendard-Bold.woff2") format('woff2');
+}
+
+/* ---------------------------------------
+    layout 레이아웃
+   ---------------------------------------
+*/
+* {
+  font-family: 'pretendard';
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+header {
+  position: fixed;
+  z-index: 5;
+  top: 0;
+  left: 0;
+  background: #ffffff;
+  transition: box-shadow 0.5s ease;
+  width: 100%;
+}
+
+footer {
+  margin-top: 80px;
+  border-top: 1px solid #e5e5e5;
+  padding: 30px 50px;
+  color: #2f2f2f;
+}
+
+/* ---------------------------------------
+    기본세팅 - 입력창 input
+   ---------------------------------------
+*/
+
+input, textarea, select {
+  border: 1px solid #d0d0d0;
+  padding: 0 5px;
+  border-radius: 6px;
+  height: 30px;
+
+  &::placeholder {
+    color: #aaa;
+  }
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/*ios input 회색배경삭제*/
+select{
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  /*화살표 배경 넣기*/
+  background: url('../images/icon/arrow_down_icon.png') no-repeat 98% 50% #fff;
+  background-size: 12px;
+
+}
+/*화살표 삭제*/
+select::-ms-expand{
+  display:none;
+}
+
+

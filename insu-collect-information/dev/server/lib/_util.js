@@ -1,4 +1,3 @@
-
 /**
  * 작성자 : 유종태
  * 작성일 :2020.06.04
@@ -21,14 +20,18 @@
 
 var unirest = require('unirest');
 const crypto = require('crypto');
+const { PDFDocument, StandardFonts, rgb } = require('pdf-lib');
+const fontkit = require('@pdf-lib/fontkit');
 var pkcs7 = require('pkcs7-padding');
 var beautify = require("json-beautify");
 let fs = require('fs');
 /*var MCrypt = require('mcrypt').MCrypt;*/
 var Accesskey = require('./_accesskey');
+const path = require("path");
 var Access = new Accesskey();
+// var accArray = Access.acc_test;
 var accArray = Access.acc_test;
-// var accArray = Access.acc_prod;
+var dayjs = require('dayjs');
 
 module.exports = {
 
@@ -73,6 +76,9 @@ module.exports = {
         }
         if(format=='day'){
             currentTime = String(year)+String(month)+String(day);
+        }
+        if(format=='YYYYmm'){
+            currentTime = String(year)+String(month);
         }
 
         // console.log('DATE TIME CALL : ', currentTime);
@@ -428,7 +434,7 @@ module.exports = {
         return plaintext.toString();
     },
     promiEncModule: function(key, iv, secret_message){
-        secret_message = pkcs7.pad(secret_message, 16); //Use 32 = 256 bits block sizes
+        secret_message = pkcs7.pad(Buffer.from(secret_message), 16); //Use 32 = 256 bits block sizes
 
         let cipher = crypto.createCipheriv('aes-256-cbc', key, iv);
         cipher.setAutoPadding(false);  // pkcs7 default
@@ -438,6 +444,7 @@ module.exports = {
 
     },
     promiDecModule: function(key, iv, encrypted){
+        console.log(key, iv, encrypted);
         let decipher = crypto.createDecipheriv('aes-256-cbc', key, iv);
         // cipher.setAutoPadding(false);
         let decrypted = decipher.update(encrypted, 'base64', 'utf-8');
@@ -452,6 +459,39 @@ module.exports = {
     promiShaDec128: function(secret_message){
         return crypto.createHash('sha256').update(secret_message).digest('hex');
 
+    },
+    calculateInsAge : function(birth) {
+        if(Number(birth.substring(0,1)) >= 1){
+            birth = "19"+birth;
+        }else {
+            birth = '20'+birth;
+        }
+        const year = birth.substring(0, 4);
+        const mth = birth.substring(4, 6);
+        const dt = birth.substring(6, 8);
+        let today = new Date();
+
+        // 보험나이는 생일에 +1일 -6개월을 하고 계산한 만나이와 동일함
+        let birthday = new Date(`${year}-${mth}-${dt}`);
+        let insBirthday = birthday;
+        insBirthday.setDate(birthday.getDate()+1)
+        insBirthday.setMonth(birthday.getMonth()-6);
+        const insYr = insBirthday.getFullYear();
+        const insMth = insBirthday.getMonth()+1;
+        const insDt = insBirthday.getDate();
+
+        let insAge = today.getFullYear() - insYr;
+
+        // 월 비교
+        if(insMth > (today.getMonth() + 2)){
+            insAge--;
+        }
+        // 일 비교
+        else if(insMth === (today.getMonth() + 1) && insDt > today.getDate()){
+            insAge--;
+        }
+
+        return insAge.toString();
     },
     timeFilter: function(timetxt){
         // 2020-06-25 10:37:51
@@ -944,10 +984,442 @@ module.exports = {
         return returnValue
 
     },
+    pdfSet: async function(cmpk, clientName, insurGap, bpk){
+        console.log('pdfSetCheck : ', cmpk, clientName, insurGap, bpk);
+        /* 저장 경로 : ../uploads/YYYYmm/cmpk/YYYYmm_cmpk.pdf*/
 
-}
+        let basicPath = '../uploads/';
+        let infoPath = '';
+        let inputFilePath = '';
+        let saveDay = this.getTimeyymmddhhmmss('day');
+        let pathDay = this.getTimeyymmddhhmmss('YYYYmm');
+
+        /* 이름 위치 설정*/
+        let nameX = 0;
+        let nameY = 0;
+
+        /* 보험기간 위치 설정 */
+        let insurGapX = 0;
+        let insurGapY = 0;
+
+        if (bpk == '1'){
+            // infoPath = 'mycheckupInfo';
+            inputFilePath = "../uploads/mycheckupInfo/mycheckupPolicyInfo.pdf"; // 마이체크업 가입증명서 저장 경로
+            nameX = 220;
+            nameY = 472;
+
+            insurGapX = 220;
+            insurGapY = 528;
+
+        }
+
+        if (bpk == '2'){
+            // infoPath = 'valuemapInfo';
+            inputFilePath = "../uploads/valuemapInfo/valuemapPolicyInfo.pdf"; // 밸류맵 가입증명서 저장 경로
+            nameX = 200;
+            nameY = 407;
+
+            insurGapX = 200;
+            insurGapY = 462;
+        }
+
+        console.log('XY_check', nameX, nameY, insurGapX, insurGapY);
 
 
 
 
-;
+
+        // let ourputFileFullPath = basicPath+infoPath+'/'+cmpk+'/'+cmpk+'_joinInfo_'+saveDay+'.pdf';
+        let ourputFileFullPath = basicPath+pathDay+"/"+cmpk+"/"+pathDay+"_"+cmpk+".pdf";
+        console.log('파일 생성 경로 : ', ourputFileFullPath);
+        /* 디렉토리 생성 */
+        //  /uploads/[Info]  디렉토리가 없다면~ 생성
+        if(!fs.existsSync(basicPath+pathDay)){
+            fs.mkdirSync(basicPath+pathDay, {recursive:true}, (error)=>{
+                if(error){
+                    console.error('an error occurred : ', error);
+                }else{
+                    console.log('Directory is made : ', log);
+                }
+            })
+
+        }
+
+
+        // /uploads/valuemapInfo/[cmpk] 디렉토리가 없다면 ~ 생성
+        if(!fs.existsSync(basicPath+pathDay + '/' + cmpk)){
+            fs.mkdirSync(basicPath+pathDay + '/' + cmpk, {recursive:true}, (error)=>{
+                if(error){
+                    console.error('an error occurred : ', error);
+                }else{
+                    console.log('Directory is made : ', log);
+                }
+            })
+        }
+
+
+
+        const inputBytes = fs.readFileSync(inputFilePath);
+        const pdfDoc = await PDFDocument.load(inputBytes);
+        pdfDoc.registerFontkit(fontkit);
+
+        // 폰트 설정
+        // const fontBytes = fs.readFileSync(__dirname, './pdfFonts/KakaoBold.ttf');
+        // const customFont = await pdfDoc.embedFont(fontBytes);
+
+        const fontPath = path.join(__dirname, 'pdfFonts', 'KakaoBold.ttf');
+        const fontBytes = fs.readFileSync(fontPath);
+        const customFont = await pdfDoc.embedFont(fontBytes);
+
+
+
+        const page1 = pdfDoc.getPages()[0]; // 첫 페이지
+
+        // 피보험자 이름
+        page1.drawText( clientName, {
+            x: nameX,
+            y: nameY,
+            font: customFont,
+            size: 12,
+            color: rgb(0, 0, 0), // 텍스트 색상 (검은색)
+        });
+
+        // 피보험자 보험기간
+        page1.drawText( insurGap, {
+            x: insurGapX,
+            y: insurGapY,
+            font: customFont,
+            size: 12,
+            color: rgb(0, 0, 0), // 텍스트 색상 (검은색)
+        });
+
+        const modifiedBytes = await pdfDoc.save();
+        fs.writeFileSync(ourputFileFullPath, modifiedBytes);
+
+        // 파일 생성 후에 파일이 존재하는지 확인하여 성공 메시지 출력
+        if (fs.existsSync(ourputFileFullPath)) {
+            console.log('PDF 파일이 성공적으로 생성되었습니다.');
+        } else {
+            console.error('PDF 파일 생성에 실패했습니다.');
+        }
+    },
+
+    insuPdfSet: async function(data, rpk){
+        console.log('pdfSetCheck : ', data.name);
+        /* 저장 경로 : ../uploads/YYYYmm/cmpk/YYYYmm_cmpk.pdf*/
+
+        let basicPath = '../uploads/';
+        let inputFilePath = "../uploads/socarInfo/보험금청구서_쏘카.pdf";
+        let saveDay = this.getTimeyymmddhhmmss('day');
+        let pathDay = this.getTimeyymmddhhmmss('YYYYmm');
+        let relation = '';
+
+        if(data.type === '01') relation = '본인';
+        if(data.type === '02') relation = '배우자';
+        if(data.type === '03') relation = '자녀';
+
+        /* 이름 위치 설정*/
+        let nameX = 170;
+        let nameY = 730;
+
+
+        /* 주민등록번호 위치 설정 */
+        let juminX = 425;
+        let juminY = 730;
+
+        /* 전화번호 위치 설정*/
+        let cellX = 450;
+        let cellY = 580;
+
+        /* 사고일시 설정 */
+        let accidentDateX = 105;
+        let accidentDateY = 469;
+
+        /* 사고내용 위치 설정*/
+        let detailX = 115;
+        let detailY = 380;
+
+        /* 은행명 위치 설정*/
+        let bankX = 100;
+        let bankY = 266;
+
+        /* 계좌번호 위치 설정*/
+        let accountX = 250;
+        let accountY = 266;
+
+        /* 예금주 위치 설정*/
+        let bankOwnerX = 480;
+        let bankOwnerY = 266;
+
+        /* 작성일시 위치 설정*/
+        let createX = 108;
+        let createY = 155;
+
+        /* 청구인 위치 설정*/
+        let signNameX = 462;
+        let signNameY = 155;
+
+        /* 동의일자 위치 설정*/
+        let agreeDateX = 120;
+        let agreeDateY = 208;
+
+        /* 동의자 위치 설정*/
+        let signName2X = 280;
+        let signName2Y = 170
+
+
+        /* 확인일 위치 설정*/
+        let confirmDateX = 400;
+        let confirmDateY = 266;
+
+
+        /* 수익자 위치 설정*/
+        let beneficiaryX = 400;
+        let beneficiaryY = 240;
+
+        /* 주민등록번호 위치 설정*/
+        let jumin2X = 428;
+        let jumin2Y = 220;
+
+        /* 관계 위치 설정*/
+        let relationX = 428;
+        let relationY = 200;
+
+        /* 연락처 위치 설정*/
+        let cell2X = 428;
+        let cell2Y = 178;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // let ourputFileFullPath = basicPath+infoPath+'/'+cmpk+'/'+cmpk+'_joinInfo_'+saveDay+'.pdf';
+        let ourputFileFullPath = basicPath+pathDay+"/"+rpk+"/"+pathDay+"_"+rpk+".pdf";
+        console.log('파일 생성 경로 : ', ourputFileFullPath);
+        /* 디렉토리 생성 */
+        //  /uploads/[Info]  디렉토리가 없다면~ 생성
+        if(!fs.existsSync(basicPath+pathDay)){
+            fs.mkdirSync(basicPath+pathDay, {recursive:true}, (error)=>{
+                if(error){
+                    console.error('an error occurred : ', error);
+                }else{
+                    console.log('Directory is made : ', log);
+                }
+            })
+
+        }
+
+
+        // /uploads/valuemapInfo/[cmpk] 디렉토리가 없다면 ~ 생성
+        if(!fs.existsSync(basicPath+pathDay + '/' + rpk)){
+            fs.mkdirSync(basicPath+pathDay + '/' + rpk, {recursive:true}, (error)=>{
+                if(error){
+                    console.error('an error occurred : ', error);
+                }else{
+                    console.log('Directory is made : ', log);
+                }
+            })
+        }
+
+
+
+        const inputBytes = fs.readFileSync(inputFilePath);
+        const pdfDoc = await PDFDocument.load(inputBytes);
+        pdfDoc.registerFontkit(fontkit);
+
+        // 폰트 설정
+        // const fontBytes = fs.readFileSync(__dirname, './pdfFonts/KakaoBold.ttf');
+        // const customFont = await pdfDoc.embedFont(fontBytes);
+
+        const fontPath = path.join(__dirname, 'pdfFonts', 'KakaoBold.ttf');
+        const fontBytes = fs.readFileSync(fontPath);
+        const customFont = await pdfDoc.embedFont(fontBytes);
+
+
+
+        const page1 = pdfDoc.getPages()[0]; // 첫 페이지
+
+        // 피보험자 이름
+        page1.drawText( data.name, {
+            x: nameX,
+            y: nameY,
+            font: customFont,
+            size: 12,
+            color: rgb(0, 0, 0), // 텍스트 색상 (검은색)
+        });
+
+        // 피보험자 주민번호
+        page1.drawText( data.jumin, {
+            x: juminX,
+            y: juminY,
+            font: customFont,
+            size: 12,
+            color: rgb(0, 0, 0), // 텍스트 색상 (검은색)
+        });
+
+        // 피보험자 전화번호
+        page1.drawText( data.cell, {
+            x: cellX,
+            y: cellY,
+            font: customFont,
+            size: 12,
+            color: rgb(0, 0, 0), // 텍스트 색상 (검은색)
+        });
+
+        // 사고일시
+        page1.drawText( data.accidentDate.substring(0,4)+'       '+data.accidentDate.substring(4,6)+'            '+data.accidentDate.substring(6,8), {
+            x: accidentDateX,
+            y: accidentDateY,
+            font: customFont,
+            size: 10,
+            color: rgb(0, 0, 0), // 텍스트 색상 (검은색)
+        });
+
+        // 사고내용
+        page1.drawText( data.detail, {
+            x: detailX,
+            y: detailY,
+            font: customFont,
+            size: 10,
+            color: rgb(0, 0, 0), // 텍스트 색상 (검은색)
+        });
+
+        // 은행명
+        page1.drawText( data.bank, {
+            x: bankX,
+            y: bankY,
+            font: customFont,
+            size: 12,
+            color: rgb(0, 0, 0), // 텍스트 색상 (검은색)
+        })
+
+        // 계좌번호
+        page1.drawText( data.account, {
+            x: accountX,
+            y: accountY,
+            font: customFont,
+            size: 12,
+            color: rgb(0, 0, 0), // 텍스트 색상 (검은색)
+        });
+
+        // 예금주
+        page1.drawText( data.bankOwner, {
+            x: bankOwnerX,
+            y: bankOwnerY,
+            font: customFont,
+            size: 12,
+            color: rgb(0, 0, 0), // 텍스트 색상 (검은색)
+        });
+
+        // 작성일자
+        page1.drawText( saveDay.substring(2,4)+'            '+saveDay.substring(4,6)+'                  '+saveDay.substring(6,8), {
+            x: createX,
+            y: createY,
+            font: customFont,
+            size: 10,
+            color: rgb(0, 0, 0), // 텍스트 색상 (검은색)
+        });
+
+        // 청구인
+        page1.drawText( data.name + '                ' + data.name, {
+            x: signNameX,
+            y: signNameY,
+            font: customFont,
+            size: 12,
+            color: rgb(0, 0, 0), // 텍스트 색상 (검은색)
+        })
+
+        /**
+         * 다섯번째 페이지 가져오기
+         */
+        const page5 = pdfDoc.getPages()[4];
+        // 동의일자
+        page5.drawText( saveDay.substring(0,1)+'      '+saveDay.substring(1,2)+'      '+saveDay.substring(2,3)+'     '+saveDay.substring(3,4)+'             '+saveDay.substring(4,5)+'     '+saveDay.substring(5,6)+'            '+saveDay.substring(6,7)+'     '+saveDay.substring(7,8), {
+            x: agreeDateX,
+            y: agreeDateY,
+            font: customFont,
+            size: 22,
+            color: rgb(0, 0, 0), // 텍스트 색상 (검은색)
+        });
+
+        // 청구인
+        page5.drawText( data.name+'                                                 '+data.name, {
+            x: signName2X,
+            y: signName2Y,
+            font: customFont,
+            size: 16,
+            color: rgb(0, 0, 0), // 텍스트 색상 (검은색)
+        });
+
+        /**
+         * 여섯번째 페이지 가져오기
+         */
+        const page6 = pdfDoc.getPages()[5];
+        // 확인일
+        page6.drawText( saveDay.substring(0,4)+'            '+saveDay.substring(4,6)+'               '+saveDay.substring(6,8), {
+            x: confirmDateX,
+            y: confirmDateY,
+            font: customFont,
+            size: 12,
+            color: rgb(0, 0, 0), // 텍스트 색상 (검은색)
+        });
+
+        // 수익자
+        page6.drawText( data.name +'                               ' +data.name, {
+            x: beneficiaryX,
+            y: beneficiaryY,
+            font: customFont,
+            size: 12,
+            color: rgb(0, 0, 0), // 텍스트 색상 (검은색)
+        });
+
+        // 주민등록번호
+        page6.drawText( data.jumin, {
+            x: jumin2X,
+            y: jumin2Y,
+            font: customFont,
+            size: 12,
+            color: rgb(0, 0, 0), // 텍스트 색상 (검은색)
+        });
+
+        // 관계
+        page6.drawText( relation, {
+            x: relationX,
+            y: relationY,
+            font: customFont,
+            size: 12,
+            color: rgb(0, 0, 0), // 텍스트 색상 (검은색)
+        });
+
+        // 연락처
+        page6.drawText( data.cell, {
+            x: cell2X,
+            y: cell2Y,
+            font: customFont,
+            size: 12,
+            color: rgb(0, 0, 0), // 텍스트 색상 (검은색)
+        });
+
+
+
+        const modifiedBytes = await pdfDoc.save();
+        fs.writeFileSync(ourputFileFullPath, modifiedBytes);
+
+        // 파일 생성 후에 파일이 존재하는지 확인하여 성공 메시지 출력
+        if (fs.existsSync(ourputFileFullPath)) {
+            console.log('PDF 파일이 성공적으로 생성되었습니다.');
+        } else {
+            console.error('PDF 파일 생성에 실패했습니다.');
+        }
+    }
+
+};
