@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.8fef7884.css",
-    "main.js": "/static/js/main.cf504f41.js",
+    "main.css": "/static/css/main.6d61b1ea.css",
+    "main.js": "/static/js/main.81a07e85.js",
     "static/media/barico.png": "/static/media/barico.9dc12fafc6e45a494728.png",
     "static/media/simg_logo.png": "/static/media/simg_logo.6c0b08a72fa0d2b4508b.png",
     "static/media/onna.png": "/static/media/onna.d56f7e73b7e91bbe0b17.png",
@@ -13,11 +13,11 @@
     "static/media/icon_checkbox_14px_on.svg": "/static/media/icon_checkbox_14px_on.efa95e6da00d782e2691c49ca6db5245.svg",
     "static/media/icon_checkbox_16px_off.svg": "/static/media/icon_checkbox_16px_off.b103b7d05edc2fbff1e65b3d210f80eb.svg",
     "static/media/icon_more.svg": "/static/media/icon_more.e89bc8d212cba58874db71bd08e0f4aa.svg",
-    "main.8fef7884.css.map": "/static/css/main.8fef7884.css.map",
-    "main.cf504f41.js.map": "/static/js/main.cf504f41.js.map"
+    "main.6d61b1ea.css.map": "/static/css/main.6d61b1ea.css.map",
+    "main.81a07e85.js.map": "/static/js/main.81a07e85.js.map"
   },
   "entrypoints": [
-    "static/css/main.8fef7884.css",
-    "static/js/main.cf504f41.js"
+    "static/css/main.6d61b1ea.css",
+    "static/js/main.81a07e85.js"
   ]
 }

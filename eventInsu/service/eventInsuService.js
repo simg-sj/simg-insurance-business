@@ -124,7 +124,7 @@ module.exports = {
                     console.log('joinFIles Query ::: ', query);
 
                     let fileType = files[i].originalname.split('.');
-                    let fileName = today+'_'+irpk+'_사고접수 사진_'+(i+1)+'.'+fileType[1];
+                    let fileName = today+'_'+irpk+'_접수 자료_'+(i+1)+'.'+fileType[1];
                     insuFiles.push({'filename' : fileName, 'path' : files[i].location});
 
                     console.log(insuFiles);
