@@ -1,5 +1,6 @@
 var unirest = require('unirest');
-
+var axios = require('axios');
+const makeForm = require('./mailForm');
 
 module.exports = {
     BASE_URL: {
@@ -48,6 +49,24 @@ module.exports = {
                     resolve(response.body);
                 });
         });
+    },
+    googleSheetInsert : async function(data, bpk){
+        try{
+           let endpoint = 'https://script.google.com/macros/s/AKfycbybrmXXkSs6o1O02SLXn5Yme5GYyZBMcFHbQ3Vc9xYRgZ50U3M4Dz-8ByR3EDfEckGVxg/exec';
+            if(bpk === 1) {
+                endpoint= 'https://script.google.com/macros/s/AKfycbzSARA8UjpiFsam-gW_drdYd1dpJB8ZqEQ2Sjox-9PKlt3_TMvA00LTqJOAViZKb1Ymtw/exec';
+            }
+            console.log('bpk is :::', bpk);
+            console.log('endpoint is :: ', endpoint);
+            let result = await axios.post(endpoint, data)
+            if(result.code === '200'){
+                return 200;
+            }else {
+                return 401;
+            }
+        }catch(e){
+            console.log(e);
+        }
     },
     sendAligoSms: function(data){
         let _this = this;
@@ -352,7 +371,7 @@ module.exports = {
     },
     slackWebHook : function(data, url){
         if(!url){
-            var BASEURL = "https://hooks.slack.com/services/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";
+            var BASEURL = "https://hooks.slack.com/services/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";
             url = BASEURL;
         }
 
@@ -378,6 +397,49 @@ module.exports = {
                     resolve(d);
                 });
         });
-    }
+    },
+    mailHook : function(gubun, dataObject, sendEmail, receiveEmail, subject, cc, attachments){
+        let _this = this;
+        console.log('center api act ~!')
+        let endpoint = "https://center-api.simg.kr/v1/api/mail/mailRecv";  // 운영계
 
+        console.log('dataObject is :::: ', dataObject);
+        let msg = makeForm.getForms(gubun, dataObject);
+            console.log('msg is :::: ', msg);
+        let data = {
+            job: gubun,
+            data: dataObject,
+            sender: sendEmail,
+            receive : receiveEmail,
+            subject : subject,
+            msg : msg,
+            cc : cc,
+            attachments : attachments
+
+        }
+
+        // console.log(data);
+
+        return new Promise(function (resolve, reject) {
+
+            unirest.post(endpoint)
+                // .timeout(timeout)
+                .headers(
+                    {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    })
+                .type('json')
+                .json(data)
+                .end(function (response) {
+                    // console.log('from  : ', response.body);
+                    // console.log('send ', data);
+                    let d = {
+                        'receive':response.body,
+                        'send ':data
+
+                    }
+                    resolve(d);
+                });
+        });
+    },
 };

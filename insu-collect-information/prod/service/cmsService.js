@@ -56,7 +56,7 @@ module.exports = {
             const statusCode = request_data.statusCode;
             const remark = request_data.remark;
             const searchGbn = '';
-            const searchVal = '';
+            const searchVal = request_data.searchVal;
             let page = request_data.page;
             let npp = request_data.npp;
             let fromDay = request_data.fromDay;
@@ -75,7 +75,7 @@ module.exports = {
                 requesterCell = requesterCell.replace(/[\s-]/g, '');
             }
 
-            let query = `CALL spuGroupInsu('${job}', '${bpk}', '', '${cName}', '${cCell}', '${cEmail}', '${executivesName}', '${executivesCell}', '${requesterName}', '${requesterCell}', '${requesterEmail}', '${clsAmount}', '${estmAmount}', '${damageFee}', '${total}','${reason}','${submitNo}', '', '${remark}', '${page}', '${npp}', '${fromDay}', '${toDay}', '${rpk}', '${searchGbn}', '${searchVal}')`;
+            let query = `CALL spuGroupInsu('${job}', '${bpk}', '', '${cName}', '${cCell}', '${cEmail}', '${executivesName}', '${executivesCell}', '${requesterName}', '${requesterCell}', '${requesterEmail}','','','','','', '${clsAmount}', '${estmAmount}', '${damageFee}', '${total}','${reason}','${submitNo}', '', '${remark}', '${page}', '${npp}', '${fromDay}', '${toDay}', '${rpk}', '${searchGbn}', '${searchVal}')`;
 
 
 

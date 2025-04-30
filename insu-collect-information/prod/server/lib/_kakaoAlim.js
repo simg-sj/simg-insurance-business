@@ -33,7 +33,7 @@ module.exports = {
             "ALIGO_USER_ID":"yoojjtt",
             "ALIGO_SENDER_KEY":"0e8832a8a0a7e4573c7453c387480484e6c012fd",
             "token":"",
-            "templateCode":"tpl_code=TR_8194",
+            "templateCode":"tpl_code=TT_3848",
             "sender":"sender=18773006",
             "receiver":"receiver_1="+cell,
             "subject":"subject_1=밸류맵 보험가입정보 안내",

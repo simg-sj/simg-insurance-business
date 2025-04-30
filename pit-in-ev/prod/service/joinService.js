@@ -4,6 +4,8 @@ const _util = require('../server/lib/_util');
 const token = require('../server/lib/makeToken');
 const crypto = require('crypto');
 const { addTextAndImageToPDF } = require('../server/lib/pdf');
+const dayjs = require('dayjs');
+
 
 module.exports = {
     saveJoin: async function (param, cmpk) {
@@ -25,7 +27,6 @@ module.exports = {
     saveFiles: async function (param) {
         try {
             let signResult = await this.signFiles(param);
-            console.log(signResult)
             if(signResult[0].s3Key){
                 let apiKey =  param.get('X-API-SECRET');
                 let savedFileResult = await this.regiFiles(signResult[0], apiKey);
@@ -48,7 +49,6 @@ module.exports = {
         let encKey = keyInfo.enckey;
         let ivKey = keyInfo.iv;
         let bpk = _util.platformBpkCheck(apiKey);
-        console.log(param.body)
         let req_data = param.body;
         let requesterName = req_data.cName;
         let requesterCnsl = _util.getTimeyymmddhhmmss('day');
@@ -87,7 +87,7 @@ module.exports = {
         let inquiryYN = 'Y';
         let sharingYN = 'Y';
         let marketingYN = req_data.marketingYn;
-
+        let obuYn = 'N';
         // 결제 정보
         let requesterPayType = req_data.payType;
         let requesterBank = '';
@@ -115,18 +115,7 @@ module.exports = {
         }
 
 
-        /* 확인용 */
-        console.log('requesterName is : ', requesterName);
-        console.log('requesterCell is : ', requesterCell);
-        console.log('requesterJumin is : ', requesterJumin);
-        console.log('requesterCi is : ', requesterCi);
-        console.log('requesterCmpk is : ', requesterCmpk);
-        console.log('collectionYN is : ', collectionYN);
-        console.log('provisionYN is : ', provisionYN);
-        console.log('inquiryYN is : ', inquiryYN);
-        console.log('marketingYN is : ', marketingYN);
-        console.log('sharingYN is : ', sharingYN);
-        //console.log('rightsYN is : ', rightsYN);
+
 
 
         let job = 'S';
@@ -142,6 +131,7 @@ module.exports = {
             "'" + requesterCarNum + "'," +
             "'" + requesterCarType + "'," +
             "'" + requesterCarUse + "'," +
+            "'" + obuYn + "'," +
             "'" + requesterPayType + "'," +
             "'" + requesterBank + "'," +
             "'" + requesterCnsl + "'," +
@@ -179,13 +169,14 @@ module.exports = {
         let bpk = _util.platformBpkCheck(apiKey);
         console.log('param ::: ', param.body);
         let req_data = param.body;
-        let requesterName = req_data.dName;
+        let requesterName = req_data.cName;
         requesterName = _util.emptySpace(requesterName); // 공백제거
         requesterName = _util.specialCharEx(requesterName); // 특수문자제거
 
-        let requesterCell = req_data.dCell;
+        let requesterCell = req_data.cCell;
         requesterCell = requesterCell.replaceAll('-','');
-        let requesterJumin = req_data.dJumin;
+
+        let requesterJumin = '';
 
 
         // CI값 생성
@@ -193,17 +184,22 @@ module.exports = {
         let requestTime = created;
         let requesterCi = cryptoSha512(requesterJumin+created);
 
-        let requesterBusinessType = req_data.businessType;
-        let requesterCarUse = req_data.carUse;
-        let requesterCarType = req_data.carType;
-        let requesterCarNum = req_data.carNum;
+        let requesterBusinessType = '';
+        let requesterCarUse = '';
+        let requesterCarType = '';
+        let requesterCarNum = '';
         let requestDay = _util.getTimeyymmddhhmmss('day');
         let collectionYN = 'Y';
         let provisionYN = 'Y';
         let inquiryYN = 'Y';
         let sharingYN = 'Y';
         let marketingYN = req_data.marketingYn;
-        let requesterCnsl = req_data.date+' '+req_data.time;
+        let requesterCnsl = '';
+        if(req_data.time === '' || req_data.time === undefined){
+            requesterCnsl = req_data.appointDT1st;
+        }else {
+            requesterCnsl = req_data.date+' '+req_data.time;
+        }
         let requesterCmpk = '';
         // 결제 정보
         let requesterPayType = '';
@@ -245,6 +241,7 @@ module.exports = {
             "'" + requesterCarNum + "'," +
             "'" + requesterCarType + "'," +
             "'" + requesterCarUse + "'," +
+            "'" + '' + "'," +
             "'" + requesterPayType + "'," +
             "'" + requesterBank + "'," +
             "'" + requesterCnsl + "'," +
@@ -325,33 +322,55 @@ module.exports = {
         console.log('marketingYN is : ', marketingYN);
         console.log('sharingYN is : ', sharingYN);
         //console.log('rightsYN is : ', rightsYN);
-
-
-
-        let joinQuery = `UPDATE clientMaster SET 
-                            cName = '${requesterName}',
-                            age = CASE
+        let testQuery = `UPDATE clientMaster SET `;
+        let keys = Object.keys(param)
+        for(let key of keys){
+            switch (key) {
+                case 'cName' :
+                    if(requesterName !== '' ) testQuery += `cName = '${requesterName}',`;
+                    break;
+                case 'cCell' :
+                    if(requesterCell !== '' ) testQuery += `cCell = hex(aes_encrypt('${requesterCell}','cell23456@#$%^')),`;
+                    break;
+                case 'birth' : if(requesterJumin !== '' || requesterJumin !== '미입력') {
+                    testQuery += `birth = left('${requesterJumin}', 6),`;
+                }else {
+                    testQuery += `birth = ''`;
+                }
+                    break;
+                case 'cJumin' :
+                    if(requesterJumin !== '미입력' ) testQuery += `cJumin = hex(aes_encrypt('${requesterJumin}','jumin23456@#$%^')),`;
+                    break;
+                case 'carNum' :
+                    if(requesterCarNum !== '미입력' ) testQuery += `carNum = '${requesterCarNum}',`;
+                    break;
+                case 'businessType' :
+                    if(requesterBusinessType !== '00' ) testQuery += `businessType = '${requesterBusinessType}',`;
+                    break;
+                case 'carType' :
+                    if(requesterCarType !== '00' ) testQuery += `carType = '${requesterCarType}', `;
+                    break;
+                case 'carUse' :
+                    if(requesterCarUse !== '00' ) testQuery += `carUse = '${requesterCarUse}',`;
+                    break;
+            }
+        }
+        testQuery += `age = CASE
                         WHEN LEFT('${requesterJumin}', 1) = 0 THEN
                         LEFT((DATE_FORMAT(now(),'%Y%m%d') - CONCAT('20', LEFT('${requesterJumin}', 6))), 2)
                         ELSE
                         LEFT((DATE_FORMAT(now(),'%Y%m%d') - CONCAT('19', LEFT('${requesterJumin}', 6))), 2)
                         END,
-                            cCell = hex(aes_encrypt('${requesterCell}','cell23456@#$%^')), 
-                           cJumin = hex(aes_encrypt('${requesterJumin}','jumin23456@#$%^')),
-                           planCi = '${requesterCi}', 
-                           businessType = '${requesterBusinessType}',
-                           birth = left('${requesterJumin}', 6),
-                           carUse = '${requesterCarUse}', 
-                           carType = '${requesterCarType}', 
-                           carNum = '${requesterCarNum}', 
-                           updatedYMD = now() 
-                       WHERE bpk = '6'
+                        updatedYMD = now() 
+                        WHERE bpk = '6'
                            and cmpk = ${reqeusterCmpk}; 
                         UPDATE salesInsur set saleStatus = '${requesterStatus}' WHERE cmpk = ${reqeusterCmpk}`;
-        console.log("joinQuery : ", joinQuery);
+
+        console.log('testQuery is ::::', testQuery);
+
 
         try {
-            let res = await mysql_util.mysql_proc_exec(joinQuery, apiKey);
+            let res = await mysql_util.mysql_proc_exec(testQuery, apiKey);
             console.log('res ::: ', res);
             if(res[0].affectedRows > 0){
                 return {code : '200', 'msg' : '정상적으로 수정되었습니다.'};
@@ -398,8 +417,12 @@ module.exports = {
 
         let cmpk = param.cmpk;
         let job = param.type;
-        let joinQuery = `CALL memoService('${job}','${cmpk}','${bpk}')`;
+        let contents = param.contents;
+        let bopk = param.bopk;
+        let group_depth = param.group_depth;
 
+
+        let joinQuery = `CALL memoService('${job}','${cmpk}','${bpk}', '${contents}', ${bopk}, ${group_depth})`;
 
         console.log("joinQuery : ", joinQuery);
 
@@ -409,7 +432,7 @@ module.exports = {
             if(res[0].length > 0){
                 return res[0];
             }else {
-                return 401;
+                return [{status : 401}];
             }
         } catch (error) {
             console.log('MemoService ERROR : ', error)
@@ -432,7 +455,6 @@ module.exports = {
                                  VALUES ('${cmpk}', '${files[i].originalname}', '${files[i].mimetype}', '${files[i].fieldname}', '${files[i].contentType}', '${files[i].location}', '${files[i].key}', '${files[i].bucket}', '${today}');`
                     console.log('joinFIles Query ::: ', query)
                     let result = await mysql_util.mysql_proc_exec(query, apiKey)
-                    console.log(result);
                 }
 
             }else {
@@ -452,12 +474,13 @@ module.exports = {
         let today = _util.getTimeyymmddhhmmss('day');
         try {
                     let query = `INSERT INTO file (cmpk, originalname, mimetype, fieldname, contentType,location,type, s3Key, bucket, createdYMD)
-                                 VALUES ('${cmpk}', '${files[0].originalname}', '${files[0].mimetype}', '${files[0].fieldname}', '${files[0].contentType}', '${files[0].location}','sign', '${files[0].key}', '${files[0].bucket}', '${today}'); 
-                                 SELECT A.cmpk, A.cName, A.businessType, CAST(aes_decrypt(unhex(A.cCell),'cell23456@#$%^') as char) as cCell,B.s3Key  from clientMaster A, file B where A.cmpk = B.cmpk and A.cmpk = ${cmpk};`;
+                                 VALUES ('${cmpk}', '${files[0].originalname}', '${files[0].mimetype}', '${files[0].fieldname}', '${files[0].contentType}', '${files[0].location}','sign', '${files[0].key}', '${files[0].bucket}', '${today}');
+                    SELECT A.cmpk,B.filePk, A.cName,A.cPayDt, A.businessType, CAST(aes_decrypt(unhex(A.cCell),'cell23456@#$%^') as char) as cCell,B.s3Key,A.payType, A.carType, A.carNum, A.premiums   from clientMaster A, file B where A.cmpk = B.cmpk and A.cmpk = ${cmpk} order by filePk desc limit 1;`;
                     console.log('joinFIles Query ::: ', query)
                     let result = await mysql_util.mysql_proc_exec(query, apiKey);
-                    console.log("@@@@@@@@",result);
+                    console.log("joinFIles result is ::: ",result[1]);
                     if(result[0].affectedRows > 0) {
+
                         return result[1];
                     }else {
                         return {code : '400'}
@@ -473,12 +496,15 @@ module.exports = {
     regiFiles : async function (param, apiKey) {
         let today = _util.getTimeyymmddhhmmss('day');
         try {
+            param.contractDate = dayjs(today).format('YYYY-MM-DD');
+            param.contractYear = dayjs(today).add(1, 'day').format('YYYY-MM-DD')+'   00:00'+'~'+dayjs(today).add(366, 'day').format('YYYY-MM-DD')+'   00:00'+'(1년)';
             let saved = await addTextAndImageToPDF(param);
             console.log('saved :::' , saved)
             let query = `INSERT INTO file (cmpk, originalname, mimetype, fieldname, contentType,location,type, s3Key, bucket, createdYMD)
                                  VALUES ('${param.cmpk}', '${saved.originalname}', 'application/pdf', 'pdf', 'application/pdf', '${saved.Location}','contract', '${saved.key}', '${saved.Bucket}', '${today}');`
-            console.log('joinFIles Query ::: ', query)
+            console.log('regiFiles Query ::: ', query)
             let result = await mysql_util.mysql_proc_exec(query, apiKey)
+            console.log('regiFiles result is ::: ', query)
             if(result.affectedRows > 0){
                 return {code : '200', 'msg' : '가입이 완료 되었습니다..'};
             }else {
@@ -526,7 +552,6 @@ module.exports = {
     },
     regiInfo: async function (apiKey, cmpk) {
         try {
-            console.log(cmpk);
             let query = `select cmpk,
                 cName,
                 convert(aes_decrypt( unhex(cCell),'cell23456@#$%^') USING utf8) as cCell
@@ -591,13 +616,17 @@ module.exports = {
                                     WHEN '01' THEN '택시'
                                     WHEN '02' THEN '화물'
                                     END AS 'carUse',
+                                 CASE payType
+                                     WHEN '01' THEN '계좌이체'
+                                     WHEN '02' THEN '카드'
+                                     END AS 'payType',
                                 carType,
-                                premiums, 
-                                payType, 
+                                CONCAT(premiums,'원') as premiums, 
                                 cpayDt, 
                                 CONCAT(payPeriod, '/24') as payPeriod, 
                                 NonPaymentYn,
-                                fmsInfo 
+                                fmsInfo,
+                                (select location from file where cmpk = ${cmpk} order by filePk desc limit 1) as location
                             from clientMaster 
                             where cmpk = '${cmpk}';`
             console.log('userInfo Query ::: ', query);

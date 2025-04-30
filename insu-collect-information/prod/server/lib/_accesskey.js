@@ -9,7 +9,7 @@ function access_confing() {
                 iv          : "b6a8603a46e76d24",
                 bpk         : 2,
                 plfName     : "벨류맵",
-                dbKey       : "client_dev_db_config",
+                dbKey       : "client_prod_db_config",
                 url     : "https://insurance-open-api-dev.simg.kr/",
                 infoPage : "https://insurance-info-test.simg.kr/"
             },
@@ -19,9 +19,19 @@ function access_confing() {
                 iv          : "4bef31f208e93910",
                 bpk         :1,
                 plfName     : "마이체크업",
-                dbKey       : "client_dev_db_config",
+                dbKey       : "client_prod_db_config",
                 url     : "https://insurance-open-api-dev.simg.kr/",
                 infoPage : "https://test-mycheckup-insu.simg.kr/"
+            },
+            {
+                apikey      : "A721EAC4-289D-4E2E-B24E-00B16C885C8C",
+                enckey      : "B0E195E013C99D59E09B7817B0E7C2CB",
+                iv          : "72994385f5d9b9c5",
+                bpk         : 11,
+                plfName     : "쏘카",
+                dbKey       : "simgCms",
+                url     : "https://insurance-open-api-dev.simg.kr/",
+                infoPage : "https://socar-accident.simgbiz.net/"
             },
 
         ],
