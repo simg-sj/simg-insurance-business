@@ -32,7 +32,7 @@ let checkIp = function(req, res, next) {
     console.log("Client IP Address:", clientIP);
     let job = 'new'
     let apiKey = '40078030-F15D-11EE-8CAD-550F9CAFDA95';
-    let query = `CALL userStatistics('${job}','${clientIP}', 6)`;
+    let query = `CALL userStatistics('${job}','${clientIP}', 6, '')`;
 
     _mysqlUtil.mysql_proc_exec(query,apiKey).then(function(result){
         //     // console.log('mysql result is : ', result);

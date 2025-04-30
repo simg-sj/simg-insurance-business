@@ -4,7 +4,7 @@ const s3 = require('../config/awsS3Config'); // 확인 필요: s3 구성이 올�
 const { S3Client, GetObjectCommand } = require("@aws-sdk/client-s3");
 const fs = require('fs'); // 추가: 파일 시스템 모듈
 const { PNG } = require('pngjs');
- const client = require('../config/awsS3Client');
+const client = require('../config/awsS3Client');
 const path = require('path');
 
 
@@ -66,7 +66,6 @@ module.exports = {
 
 
     getS3File: async function(key) { // 수정: 인자 추가
-
         const getObjectParams = {
             Bucket: 'db-document-file',
             Key: key

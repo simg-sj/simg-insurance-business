@@ -8,6 +8,11 @@
         A.cmpk,
         B.cName,
         B.birth,
+        CASE B.productType
+            WHEN 'car' THEN '자동차'
+            WHEN 'saf' THEN '풍수해'
+                END
+                AS 'productType',
         CAST(aes_decrypt(unhex(B.cJumin),'jumin23456@#$%^') as char) as cJumin,
         CAST(aes_decrypt(unhex(B.cCell),'cell23456@#$%^') as char) as cCell,
         B.age,
@@ -33,15 +38,21 @@
         IFNULL(A.appointDT2nd,'미정') as appointDT2nd,
         A.saleStatus,
         B.marketingYN,
+        (SELECT COUNT(*) FROM board WHERE relativeKey = A.cmpk) as memoCount,
         (SELECT location from file where cmpk = A.cmpk and type = 'contract' ORDER BY filePk desc limit 1) as location
         FROM salesInsur A, clientMaster B
         WHERE A.cmpk = B.cmpk) C
         WHERE	1 = 1
         AND C.useYNull = 'Y'
         AND C.bpk = ${bpk}
-        AND DATE_FORMAT(C.createdYMD,'%Y-%m-%d') BETWEEN '${toDate}' AND '${fromDate}'
-        <if test="cmpk != null and cmpk !=''">
-            AND C.cmpk like '%${cmpk}%'
+        <if test="dateGbn != '02' and dateGbn !=''">
+            AND DATE_FORMAT(C.createdYMD,'%Y-%m-%d') BETWEEN '${toDate}' AND '${fromDate}'
+        </if>
+        <if test="dateGbn != '01' and dateGbn !=''">
+            AND DATE_FORMAT(C.appointDT1st,'%Y-%m-%d') BETWEEN '${toDate}' AND '${fromDate}'
+        </if>
+        <if test="status != '' and status !=''">
+            AND C.saleStatus = '${status}'
         </if>
         <if test="cCell != null and cCell !=''">
             AND C.cCell like '%${cCell}%'
@@ -52,7 +63,7 @@
         <if test="cName != null and cName !=''">
             AND C.cName like '%${cName}%'
         </if>
-        ORDER BY cmpk
+        ORDER BY  createdYMD desc
         ;
     </select>
 

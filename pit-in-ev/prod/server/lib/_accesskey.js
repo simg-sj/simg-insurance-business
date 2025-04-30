@@ -56,6 +56,16 @@ function access_confing() {
                 url     : "https://insurance-open-api-dev.simg.kr/",
                 infoPage : "https://pitin-ev.simg.kr/"
             },
+            {
+                apikey     : "9E5B88A0-E902-11EF-BCF2-D938A5A3430D",
+                enckey     : "06686BC429511BA7E962B770FCFA57BB",
+                iv     : "14c954477a6c9a1d",
+                bpk     : 8,
+                plfName : "별따러가자",
+                dbKey : "client_hana_dev_db_config",
+                url : "https://insurance-open-api-dev.simg.kr/",
+                infoPage : "https://insurance-info.simg.kr/"
+            },
         ]
     }
     return return_val;

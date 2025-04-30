@@ -26,6 +26,18 @@ function db_config() {
             },
             multipleStatements: true
         },
+        "client_hana_dev_db_config" : {
+            host     : 'hana-development.c73he84duiho.ap-northeast-2.rds.amazonaws.com',
+            port     : 3306,
+            user     : 'simg',
+            password : 'simg4*7^3',
+            database : 'linkdriverDev',
+            options: {
+                connectTimeout: 1000 * 480,
+                requestTimeout: 1000 * 480
+            },
+            multipleStatements: true
+        },
     }
 
     return return_val;

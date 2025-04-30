@@ -7,6 +7,7 @@
         (SELECT
         A.cmpk,
         B.cName,
+        B.productType,
         CAST(aes_decrypt(unhex(B.cJumin),'jumin23456@#$%^') as char) as cJumin,
         CAST(aes_decrypt(unhex(B.cCell),'cell23456@#$%^') as char) as cCell,
         B.age,
@@ -31,7 +32,12 @@
         WHERE	1 = 1
         AND C.useYNull = 'Y'
         AND C.bpk = ${bpk}
-        AND DATE_FORMAT(C.createdYMD,'%Y-%m-%d') BETWEEN '${toDate}' AND '${fromDate}'
+        <if test="dateGbn != '01'">
+            AND DATE_FORMAT(C.createdYMD,'%Y-%m-%d') BETWEEN '${toDate}' AND '${fromDate}'
+        </if>
+        <if test="dateGbn != '02'">
+            AND DATE_FORMAT(A.appointDT1st ,'%Y-%m-%d') BETWEEN '${toDate}' AND '${fromDate}'
+        </if>
         <if test="cmpk != null and cmpk !=''">
             AND C.cmpk like '%${cmpk}%'
         </if>
