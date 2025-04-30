@@ -103,7 +103,7 @@ module.exports = {
 
             // 메일 전송
             let subObject = `단체상해 보험 [ ${plfName} ]`
-            apiLib.mailHook('socar-accident', req_data, 'jt@simg.kr', 'im1p@simg.kr, rlarlejr3178@simg.kr', subObject);
+            //apiLib.mailHook('socar-accident', req_data, 'jt@simg.kr', 'im1p@simg.kr, rlarlejr3178@simg.kr', subObject);
 
             let messageSlack = '```\n';
             messageSlack += `[${plfName} 사고접수] - ${cName}\n`;
@@ -111,6 +111,7 @@ module.exports = {
             messageSlack += '```';
             let slackData = {
                 "channel": "#tf_socar단체상해",
+                //∂"channel": "#slackbottest",
                 "username": `${plfName} 단체상해 보험 접수 알림`,
                 "text": messageSlack,
                 //"icon_emoji": ":ghost:"

@@ -6,19 +6,19 @@ const { addTextAndImageToPDF } = require('./pdf');
 async function selfMakePdf() {
     try {
         let param = {
-           cmpk: 1000001204,
-           filePk: 322,
-           cName: '임동무',
+           cmpk: 1000001317,
+           filePk: 379,
+           cName: '이승재',
            businessType: '01',
-           cCell: '01032116203',
-           s3Key: 'GENERAL/PitIn/Join/1730880603090_1000001203_SIGN_20241106.png',
+           cCell: '01090365460',
+           s3Key: 'GENERAL/PitIn/Join/1744380028580_1000001317_SIGN_20250411.png',
            payType: '02',
            carType: '아이오닉 5 EV (롱레인지)',
-           carNum: '경기35바5885',
+           carNum: '경기53바4213',
            premiums: '39,000',
-           cPayDt : '매월 05일',
-            contractDate : '2024-11-07',
-            contractYear : '2024-11-08 00:00 ~ 2025-11-08 00:00 (1년)'
+           cPayDt : '매월 15일',
+            contractDate : '2025-04-11',
+            contractYear : '2025-04-12 00:00 ~ 2026-04-12 00:00 (1년)'
         }
         let today = _util.getTimeyymmddhhmmss('day');
         let apiKey = '40078030-F15D-11EE-8CAD-550F9CAFDA95';

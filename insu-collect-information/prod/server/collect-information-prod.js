@@ -30,7 +30,7 @@ var allowCORS = function (req, res, next) {
 app.use(allowCORS); // localhost 에서 개발할 때 이걸 열어주지 않으면 들어올 수 없다
 
 
-app.use(express.static(path.join(__dirname, '../client/build'))); // service
+app.use(express.static(path.join(__dirname, '../client/'))); // service
 
 
 app.get("/", (req, res) => {
@@ -39,7 +39,7 @@ app.get("/", (req, res) => {
     Pragma: "no-cache",
     Date: Date.now()
   });
-  res.sendFile(path.join(__dirname, "build", "/index.html"));
+  res.sendFile(path.join(__dirname, "/index.html"));
 });
 
 

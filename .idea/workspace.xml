@@ -5,23 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="00643c90-3147-4123-b892-b293470e0ed0" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../../../프로젝트/project/simg-insurance-business/.idea/material_theme_project_new.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../프로젝트/project/simg-insurance-business/.idea/material_theme_project_new.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../프로젝트/project/simg-insurance-business/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../프로젝트/project/simg-insurance-business/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../프로젝트/project/simg-insurance-business/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../프로젝트/project/simg-insurance-business/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../프로젝트/project/simg-insurance-business/bike-driver-insu/dev/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../../프로젝트/project/simg-insurance-business/bike-driver-insu/dev/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../프로젝트/project/simg-insurance-business/bike-driver-insu/prod/client/build/asset-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../../프로젝트/project/simg-insurance-business/bike-driver-insu/prod/client/build/asset-manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../프로젝트/project/simg-insurance-business/bike-driver-insu/prod/client/build/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../../프로젝트/project/simg-insurance-business/bike-driver-insu/prod/client/build/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../프로젝트/project/simg-insurance-business/bike-driver-insu/prod/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../../../프로젝트/project/simg-insurance-business/bike-driver-insu/prod/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../프로젝트/project/simg-insurance-business/douzone/prod/server/douzone.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../../프로젝트/project/simg-insurance-business/douzone/prod/server/douzone.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../프로젝트/project/simg-insurance-business/eventInsu/node_modules/void-elements/.gitattributes" beforeDir="false" afterPath="$PROJECT_DIR$/../../../프로젝트/project/simg-insurance-business/eventInsu/node_modules/void-elements/.gitattributes" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../프로젝트/project/simg-insurance-business/eventInsu/node_modules/void-elements/.npmignore" beforeDir="false" afterPath="$PROJECT_DIR$/../../../프로젝트/project/simg-insurance-business/eventInsu/node_modules/void-elements/.npmignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../프로젝트/project/simg-insurance-business/eventInsu/node_modules/void-elements/.travis.yml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../프로젝트/project/simg-insurance-business/eventInsu/node_modules/void-elements/.travis.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../프로젝트/project/simg-insurance-business/eventInsu/node_modules/void-elements/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/../../../프로젝트/project/simg-insurance-business/eventInsu/node_modules/void-elements/LICENSE" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../프로젝트/project/simg-insurance-business/eventInsu/node_modules/void-elements/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/../../../프로젝트/project/simg-insurance-business/eventInsu/node_modules/void-elements/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../프로젝트/project/simg-insurance-business/eventInsu/node_modules/void-elements/pre-publish.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../../프로젝트/project/simg-insurance-business/eventInsu/node_modules/void-elements/pre-publish.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../프로젝트/project/simg-insurance-business/eventInsu/node_modules/void-elements/test/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../../프로젝트/project/simg-insurance-business/eventInsu/node_modules/void-elements/test/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../프로젝트/project/simg-insurance-business/eventInsu/server/lib/_api_lib.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../../프로젝트/project/simg-insurance-business/eventInsu/server/lib/_api_lib.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../../프로젝트/project/simg-insurance-business/eventInsu/service/eventInsuService.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../../프로젝트/project/simg-insurance-business/eventInsu/service/eventInsuService.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../프로젝트/project/simg-insurance-business/hiparking/client/dist/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../../프로젝트/project/simg-insurance-business/hiparking/client/dist/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../프로젝트/project/simg-insurance-business/hiparking/server/lib/_api_lib.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../../프로젝트/project/simg-insurance-business/hiparking/server/lib/_api_lib.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../프로젝트/project/simg-insurance-business/hiparking/service/parkingService.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../../프로젝트/project/simg-insurance-business/hiparking/service/parkingService.js" afterDir="false" />
@@ -168,7 +154,7 @@
       <workItem from="1709101867269" duration="807000" />
       <workItem from="1709168848058" duration="1006000" />
       <workItem from="1743397100473" duration="4893000" />
-      <workItem from="1745906761766" duration="3533000" />
+      <workItem from="1745906761766" duration="4151000" />
     </task>
     <servers />
   </component>

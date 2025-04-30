@@ -806,6 +806,8 @@ router.post("/prod"+"/insuRequest",uploadS3Image, async (req, res) => {
         console.log("saveResult ::::::::",saveResult);
 
         let pdfResult = await _util.insuPdfSet(request_data ,saveResult[0].reqNumber);
+
+        
         if(saveResult !== ''){
             let msgText = '[SIMG] 쏘카 단체상해보험 접수 안내 \n';
                 msgText += `안녕하세요, ${name}님!\n현대해상화재보험 대리점 SIMG입니다.\n\n`;

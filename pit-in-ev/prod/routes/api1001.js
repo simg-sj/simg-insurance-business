@@ -337,7 +337,9 @@ router.post("/prod"+"/sendMsg", function(req, res){
     let request_data = req.body;
     console.log('SMS SEND!!');
     let receiver = request_data.cell;
-    let msg = request_data.msg;
+    let msg = encodeURIComponent(request_data.msg);
+
+    console.log('msg :::', msg);
     let mode = "N";
     let gubun = request_data.gubun; // 서비스 구분
     let upk = request_data.upk;

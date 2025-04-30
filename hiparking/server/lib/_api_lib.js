@@ -371,7 +371,7 @@ module.exports = {
     },
     slackWebHook : function(data, url){
         if(!url){
-            var BASEURL = "https://hooks.slack.com/services/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";
+            var BASEURL = "https://center-api.simg.kr/v1/api/simg/slackbot";
             url = BASEURL;
         }
 

@@ -9,7 +9,7 @@ module.exports = {
         let bpk = _util.platformBpkCheck(param.apiKey);
 
 
-        var query = `SELECT pklName, pklAddress FROM parkinglot WHERE bpk = ${bpk} and  (pklName like '%${param.pklName}%' or pklAddress like '%${param.pklName}%')`;
+        var query = `SELECT pklName, pklAddress, pNo FROM parkinglot WHERE bpk = ${bpk} and  (pklName like '%${param.pklName}%' or pklAddress like '%${param.pklName}%')`;
         console.log("searchQuery : ", query);
         console.log(param);
         try {
@@ -33,13 +33,36 @@ module.exports = {
             let slackFile = [];
             let statusCode;
             let videoUrl = [];
-            if(insuResult.statusCode === '200'){
-                statusCode = insuResult.statusCode;
+
+            let gubun = 'mailtest';
+            let dataObject = param;
+            let subject = '[하이파킹] 사고 접수 메일';
+            let cc = '';
+
+
+            let slackMessage = `[하이파킹 사고 접수]\n`;
+            slackMessage += `하이파킹 결재 여부 : ${param.approvalYN}\n`;
+            slackMessage += `피해자이름 : ${param.name}\n`;
+            slackMessage += `피해자연락처 : ${param.phone}\n`;
+            slackMessage += `담당자이름 : ${param.inCargeName}\n`;
+            slackMessage += `담당자연락처 : ${param.inCargePhone}\n`;
+            slackMessage += `주차장명 : ${param.parking}\n`;
+            slackMessage += `차종 : ${param.car}\n`;
+            slackMessage += `차량번호 : ${param.carNum}\n`;
+            slackMessage += `차량색상 : ${param.color}\n`;
+            slackMessage += `사고내용 : ${param.contents}\n`;
+            slackMessage += `사고일시 : ${param.datetime}\n`;
+            slackMessage += `기타내용 : ${param.etc}\n`;
+
+            //파일 결과값
+            statusCode = insuResult.statusCode;
+
+
+            if(statusCode === '200'){
                     let files = req.files;
                     if(files){
                         let savedFileResult = await this.insuFile(req, insuResult.irPk);
                         if(savedFileResult.statusCode === '200'){
-                            statusCode = savedFileResult.statusCode;
                             if(savedFileResult.insuFiles){
                                 videoUrl = savedFileResult.insuVideo;
                                 attachments = savedFileResult.insuFiles;
@@ -51,40 +74,25 @@ module.exports = {
 
                     param.videoUrl = videoUrl;
                     param.type = 'insuMail';
-                    let gubun = 'mailtest';
-                    let dataObject = param;
-                    let subject = '[하이파킹] 사고 접수 메일';
-                    let cc = '';
-                    let mailResult = await apiLib.mailHook(gubun, dataObject, 'jt@simg.kr' , 'rlarlejr3178@simg.kr, im1p@simg.kr', subject, cc, attachments);
-                    //let mailResult = await apiLib.mailHook(gubun, dataObject, 'jt@simg.kr' , 'rlarlejr3178@simg.kr', subject, cc, attachments);
-                    console.log("mail Result is ::: ",mailResult);
-
-                    let slackMessage = `[하이파킹 사고 접수]\n`;
-                    slackMessage += `하이파킹 결재 여부 : ${param.approvalYN}\n`;
-                    slackMessage += `피해자이름 : ${param.name}\n`;
-                    slackMessage += `피해자연락처 : ${param.phone}\n`;
-                    slackMessage += `담당자이름 : ${param.inCargeName}\n`;
-                    slackMessage += `담당자연락처 : ${param.inCargePhone}\n`;
-                    slackMessage += `주차장명 : ${param.parking}\n`;
-                    slackMessage += `차종 : ${param.car}\n`;
-                    slackMessage += `차량번호 : ${param.carNum}\n`;
-                    slackMessage += `차량색상 : ${param.color}\n`;
-                    slackMessage += `사고내용 : ${param.contents}\n`;
-                    slackMessage += `사고일시 : ${param.datetime}\n`;
-                    slackMessage += `기타내용 : ${param.etc}\n`;
-
-                    //"channel": "#simg_운영팀_단체방",
-                    let slackData = {
-                        "channel": "#simg_운영팀_단체방",
-                        "username": `[하이파킹] 사고 접수 알림`,
-                        "text": slackMessage,
-                    };
-
-                    let slackResult = await apiLib.slackWebHook(slackData);
-                    return {statusCode : statusCode};
                 }else {
-                return {statusCode : insuResult.statusCode};
+                slackMessage += `업로드 오류 : 사고 파일을 다시 요청해주세요.`;
             }
+
+            //"channel": "#simg_운영팀_단체방",
+            let slackData = {
+                "channel": "#simg_운영팀_단체방",
+                "username": `[하이파킹] 사고 접수 알림`,
+                "text": slackMessage,
+            };
+
+            let mailResult = await apiLib.mailHook(gubun, dataObject, 'jt@simg.kr' , 'rlarlejr3178@simg.kr, im1p@simg.kr', subject, cc, attachments);
+            //let mailResult = await apiLib.mailHook(gubun, dataObject, 'jt@simg.kr' , 'rlarlejr3178@simg.kr', subject, cc, attachments);
+            console.log("mail Result is ::: ",mailResult);
+
+            let slackResult = await apiLib.slackWebHook(slackData);
+            return {statusCode : '200'};
+
+
         } catch (error) {
 
             throw error;
@@ -95,11 +103,11 @@ module.exports = {
         let bpk = _util.platformBpkCheck(param.apiKey);
 
         let accidentDetail = param.contents.replace(/'/g, "''");
-        var query = `INSERT INTO claimRequest (bpk, cpk, wName, wCell, inCargeName, inCargePhone, PJTcode, pklName, pklAddress,
+        var query = `INSERT INTO claimRequest (bpk, cpk, pNo, wName, wCell, inCargeName, inCargePhone, PJTcode, pklName, pklAddress,
                                                                    vCarType, vCarColor, vCarNum, accidentDetail,
                                                                    accidentDate, accidentDateTime, wOpinion,approvalYN,
                                                                    infoUseAgree, infoOfferAgree, useYNull, createdYMD)
-                     VALUES (${bpk}, '13', '${param.name}', '${param.phone}', '${param.inCargeName}', '${param.inCargePhone}', '', '${param.parking}','${param.address}',
+                     VALUES (${bpk}, '13','${param.pNo}', '${param.name}', '${param.phone}', '${param.inCargeName}', '${param.inCargePhone}', '', '${param.parking}','${param.address}',
                              '${param.car}', '${param.color}', '${param.carNum}', '${accidentDetail}', '${param.date}',
                              '${param.datetime}', '${param.etc}','${param.approvalYN}', 'Y', 'Y', 'Y', now())`;
         console.log("insuQuery : ", query);

@@ -21,7 +21,7 @@ const nameX = 230;
 const nameY = 670;
 
 //const contractDate = '2024-08-29';
-const contractDate = '2024-11-05';
+//const contractDate = '2025-04-11';
 const contractDateX = 270;
 const contractDateY = 568;
 
@@ -29,7 +29,7 @@ const contractDateY = 568;
 const nameX2 = 270;
 const nameY2 = 500;
 //const contractYear = '2024-08-30 00:00 ~ 2025-08-30 00:00 (1년)';
-const contractYear = '2024-11-06 00:00 ~ 2025-11-06 00:00 (1년)';
+//const contractYear = '2025-04-11 00:00 ~ 2026-04-11 00:00 (1년)';
 const contractYearX = 270;
 const contractYearY = 545;
 
