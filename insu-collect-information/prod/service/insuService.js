@@ -105,10 +105,9 @@ module.exports = {
             let subObject = `단체상해 보험 [ ${plfName} ]`
             //apiLib.mailHook('socar-accident', req_data, 'jt@simg.kr', 'im1p@simg.kr, rlarlejr3178@simg.kr', subObject);
 
-            let messageSlack = '```\n';
-            messageSlack += `[${plfName} 사고접수] - ${cName}\n`;
-            messageSlack += '<!subteam^S04JN51FW6Q><@U025L0ZSGTY><@U06P6BFFKED><@U06TL0DM0VC><@U0718R7U0TU><@U04HSF4557Y>';
-            messageSlack += '```';
+            let messageSlack = `:bell: 단체상해 보험 [ ${plfName} ] - ${cName} :bell:\n`;
+            messageSlack += '<!subteam^S04JN51FW6Q><@U025L0ZSGTY><@U06P6BFFKED><@U0718R7U0TU><@U04HSF4557Y>';
+
             let slackData = {
                 "channel": "#tf_socar단체상해",
                 //∂"channel": "#slackbottest",

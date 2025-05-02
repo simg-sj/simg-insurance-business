@@ -41,24 +41,25 @@ module.exports = {
 
 
 
-                    let slackMessage = `[행사주최자 견적 의뢰]\n`;
-                    slackMessage += `구분 : ${param.cTravel}\n`;
-                    slackMessage += `담당자성명 : ${param.cName}\n`;
-                    slackMessage += `담당자휴대전화 : ${param.cCell}\n`;
-                    slackMessage += `담당자이메일 : ${param.cMail}\n`;
-                    slackMessage += `사업자 번호 : ${param.bNo}\n`;
-                    slackMessage += `업체명 : ${param.bName}\n`;
-                    slackMessage += `행사일자 : ${param.eventFrom} ~ ${param.eventTo}\n`;
-                    slackMessage += `행사인원 : ${param.personnel}명\n`;
-                    slackMessage += `행사횟수 : ${param.eventCount}번\n`;
+                    let slackMessage = `:bell:[행사주최자 견적 의뢰]:bell:\n`;
+                    slackMessage += `- 담당자 : <U06U8AKG6R1><U07AESDU0V9>\n`;
+                    slackMessage += `- 구분 : ${param.cTravel}\n`;
+                    slackMessage += `- 담당자성명 : ${param.cName}\n`;
+                    slackMessage += `- 담당자휴대전화 : ${param.cCell}\n`;
+                    slackMessage += `- 담당자이메일 : ${param.cMail}\n`;
+                    slackMessage += `- 사업자 번호 : ${param.bNo}\n`;
+                    slackMessage += `- 업체명 : ${param.bName}\n`;
+                    slackMessage += `- 행사일자 : ${param.eventFrom} ~ ${param.eventTo}\n`;
+                    slackMessage += `- 행사인원 : ${param.personnel}명\n`;
+                    slackMessage += `- 행사횟수 : ${param.eventCount}번\n`;
                     if(param.cTravel === '해외'){
-                        slackMessage += `행사국가명 : ${param.countryName}\n`;
-                        slackMessage += `행사횟수 : ${param.eventHost}번\n`;
+                        slackMessage += `- 행사국가명 : ${param.countryName}\n`;
+                        slackMessage += `- 행사횟수 : ${param.eventHost}번\n`;
                     }
-                    slackMessage += `특이사항 : ${param.etc}\n`;
+                    slackMessage += `- 특이사항 : ${param.etc}\n`;
 
                     let slackData = {
-                        "channel": "#simg_운영업무전달",
+                        "channel": "#simg-업무체크",
                         "username": `[행사주최자 견적 의뢰] 접수 알림`,
                         "text": slackMessage,
                         "attachments" : slackFile
