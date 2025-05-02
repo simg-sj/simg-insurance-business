@@ -107,6 +107,7 @@ module.exports = {
 
             let messageSlack = `:bell: 단체상해 보험 [ ${plfName} ] - ${cName} :bell:\n`;
             messageSlack += '<!subteam^S04JN51FW6Q><@U025L0ZSGTY><@U06P6BFFKED><@U0718R7U0TU><@U04HSF4557Y>';
+
             let slackData = {
                 "channel": "#tf_socar단체상해",
                 //∂"channel": "#slackbottest",
