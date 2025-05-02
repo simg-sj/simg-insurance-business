@@ -1,4 +1,8 @@
 {
   "/_not-found/page": "app/_not-found/page.js",
-  "/hyundai/page": "app/hyundai/page.js"
+  "/(Navigation-Group)/bike/page": "app/(Navigation-Group)/bike/page.js",
+  "/(Navigation-Group)/bike/form/page": "app/(Navigation-Group)/bike/form/page.js",
+  "/(Navigation-Group)/bike/agree/page": "app/(Navigation-Group)/bike/agree/page.js",
+  "/(Navigation-Group)/bike/certification/page": "app/(Navigation-Group)/bike/certification/page.js",
+  "/(Navigation-Group)/bike/success/page": "app/(Navigation-Group)/bike/success/page.js"
 }

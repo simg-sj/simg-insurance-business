@@ -13,16 +13,22 @@
         --color-main: #5c7dee;
         --color-main-light: #92aaf5;
         --color-main-lighter: #dce3f7;
+        --color-main-lighter1: rgba(220, 227, 247, 0.65);
+        --color-main-lighter2: rgba(220, 227, 247, 0.29);
     }
-    html[data-theme='hyundai-baemin']{
+    body.hyundai{
         --color-main: #F18D00;
         --color-main-light: #FFB957;
         --color-main-lighter: #FFE9CA;
+        --color-main-lighter1: rgba(255, 233, 202, 0.6);
+        --color-main-lighter2: rgba(255, 233, 202, 0.15);
     }
-    html[data-theme='db-baemin']{
+    body.db{
         --color-main: #1f9e49;
-        --color-main-light: #b9d4c4;
+        --color-main-light: #42b066;
         --color-main-lighter: #e0eee6;
+        --color-main-lighter1: rgba(224, 238, 230, 0.61);
+        --color-main-lighter2: rgba(224, 238, 230, 0.14);
     }
 }
 

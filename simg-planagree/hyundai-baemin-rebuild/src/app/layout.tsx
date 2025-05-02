@@ -22,16 +22,17 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 
-  return (
-      <html lang="kr" className={`${pretendard.variable}`}>
-      <head>
-        <title>simg-mobile</title>
-      </head>
-      <body className={pretendard.className}>
-          {children}
-      </body>
-      </html>
-  );
+
+      return (
+          <html lang="kr" className={`${pretendard.variable}`}>
+          <head>
+            <title>simg-mobile</title>
+          </head>
+          <body className={pretendard.className}>
+              {children}
+          </body>
+          </html>
+      );
 }
 
 

@@ -1,13 +1,13 @@
 import React from "react";
 
-export default function Inquiry() {
+export default function Inquiry({platformName} : {platformName: string}) {
     return (
         <div>
             <div className={'text-lg font-medium mb-3'}>개인(신용)정보의 조회에 관한 사항</div>
             <div className={'break-keep text-base'}>
                 <div>
                     {/*당사 및 당사 업무수탁자는 「개인정보보호법」 및 「신용정보의 이용 및 보호에 관한 법률」에 따라 귀하의 개인(신용)정보를 다음과 같이 조회하고자 합니다*/}
-                    당사(현대해상) 및 당사 업무수탁자는 「개인정보보호법」 및 「신용정보의 이용 및 보호에 관한 법률」에 따라 귀하의 개인(신용)정보를 다음과 같이 조회하고자 합니다
+                    당사({platformName}) 및 당사 업무수탁자는 「개인정보보호법」 및 「신용정보의 이용 및 보호에 관한 법률」에 따라 귀하의 개인(신용)정보를 다음과 같이 조회하고자 합니다
                 </div><br/>
                 <div>1. 개인(신용)정보의 조회 목적</div>
                 <div className={'text-gray-700'}>
