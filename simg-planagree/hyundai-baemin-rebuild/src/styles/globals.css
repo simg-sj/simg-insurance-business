@@ -1,0 +1,135 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* ---------------------------------------
+    레이아웃 Layout
+   ---------------------------------------
+*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+main {
+    height: 100vh;
+}
+
+[type="number"] {
+    -moz-appearance: textfield;
+}
+
+/* 그 외(Chrome, Safari, Edge...)의 브라우저용 사용자 정의 스타일 */
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.input-box .text-xl, textarea.text-xl {
+    font-size: 17px !important; /* iOS에서 16px 미만일 경우 확대됨 */
+    -webkit-text-size-adjust: 100% !important; /* iOS에서 텍스트 크기 자동 조정 방지 */
+    touch-action: manipulation !important; /* 더블탭으로 확대 방지 */
+}
+
+/* ---------------------------------------
+    스크롤 커스텀
+   ---------------------------------------
+*/
+
+::-webkit-scrollbar {
+    width: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #d7d7d7;
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 2px solid transparent;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #efefef;
+    border-radius: 12px;
+}
+
+/* ---------------------------------------
+    달력 datePicker
+   ---------------------------------------
+*/
+.rdp-root {
+    --rdp-accent-color: var(--color-main) !important;  /*메인색상변경*/
+}
+.rdp-months {
+    max-width: 100% !important;
+    justify-content: center;
+}
+.rdp-root .rdp-month, .rdp-root{
+    width: 100% !important;
+}
+
+.rdp-root table {
+    height: 300px !important;
+    margin: 15px auto !important;
+    width: 80% !important;
+}
+.rdp-day_button {
+    margin: 0 auto !important;
+}
+.rdp-month_caption {
+    justify-content: center !important;
+    margin-bottom: 25px !important;
+}
+.rdp-dropdowns{
+    font-size: 22px;
+}
+
+.rdp-dropdown_root{
+    padding: 0 10px !important;
+}
+
+.rdp-nav{
+    justify-content: space-between;
+    width: 100%;
+}
+
+/* ---------------------------------------
+    로딩화면
+   ---------------------------------------
+*/
+
+@layer components {
+    @-webkit-keyframes spin {
+        to {
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg); } }
+
+    @keyframes spin {
+        to {
+            -webkit-transform: rotate(360deg);
+            transform: rotate(360deg); } }
+
+    .half-ring {
+        max-width: 100%!important;
+    }
+
+    .half-ring:before {
+        -webkit-animation: spin 1s infinite linear;
+        animation: spin 1s infinite linear;
+        border-radius: 10px;
+        -webkit-box-shadow: 25px 0px 0 0 rgba(255, 255, 255, 0.2), 20.22542px 14.69463px 0 0 rgba(255, 255, 255, 0.4), 7.72542px 23.77641px 0 0 rgba(255, 255, 255, 0.6), -7.72542px 23.77641px 0 0 rgba(255, 255, 255, 0.8), -20.22542px 14.69463px 0 0 white;
+        box-shadow: 25px 0px 0 0 var(--color-main-lighter2), 20.22542px 14.69463px 0 0 var(--color-main-lighter1), 7.72542px 23.77641px 0 0 var(--color-main-lighter), -7.72542px 23.77641px 0 0 var(--color-main-light), -20.22542px 14.69463px 0 0 var(--color-main);
+        height: 10px;
+        width: 10px;
+        display: block;
+        margin: 45vh auto;
+        content: ''; }
+}
+
+
+
+
+
