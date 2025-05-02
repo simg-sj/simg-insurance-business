@@ -11,6 +11,9 @@ export default {
         'main': 'var(--color-main)',
         'main-light' : 'var(--color-main-light)',
         'main-lighter' : 'var(--color-main-lighter)',
+        'main-lighter1' : 'var(--color-main-lighter1)',
+        'main-lighter2' : 'var(--color-main-lighter2)',
+
       },
     },
   },
