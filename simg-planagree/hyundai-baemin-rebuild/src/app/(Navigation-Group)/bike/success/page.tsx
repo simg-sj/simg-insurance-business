@@ -20,7 +20,7 @@ export default function Page({ searchParams }: { searchParams: { [key: string]: 
             <div>
                 <header className="header">
                     <Image src={Back} alt="뒤로가기" width={20} height={20} className="icon-back" onClick={() => {router.back()}}/>
-                    <Image src={Hyundai} alt="현대해상로고" width={200} height={100} className={'logo-main'}/>
+                    <Image src={theme.logo} alt={`${theme.platform} 로고`} width={200} height={100} className={'logo-main'}/>
                 </header>
                 <section className="section mb-28">
                     <div className={'flex-center mb-12'}>

@@ -4,12 +4,20 @@ import Hyundai from "@/assets/images/logo/logo-hyundai.png";
 import Back from "@/assets/images/icon-arrow-white.png";
 import React, {useState, useMemo} from "react";
 import PopupSlide from "@/components/ui/popup-slide";
-import {useRouter} from "next/navigation";
+import {usePathname, useRouter} from "next/navigation";
 import {CheckItem} from "@/@types/common";
 import PhoneVerification from "@/features/contents/phone-certification"
+import {config} from "@/config";
 
-export default function Page() {
+export default function Page({ searchParams }: { searchParams: { [key: string]: string } }) {
+
+    //링크이동
     const router = useRouter();
+    const pathname = usePathname();
+
+    //테마불러오기
+    const platform = searchParams.platform;
+    const theme = config[platform || 'hyundai'];
 
     //임의 휴대폰번호 일치여부확인
     const mockData = useMemo(
@@ -116,7 +124,7 @@ export default function Page() {
         <div>
             <header className="header">
                 <Image src={Back} alt="뒤로가기" width={20} height={20} className="icon-back" onClick={() => router.back()}/>
-                <Image src={Hyundai} alt="현대해상로고" width={200} height={100} className={'logo-main'}/>
+                <Image src={theme.logo} alt={`${theme.platform} 로고`} width={200} height={100} className={'logo-main'}/>
             </header>
 
             <section className="section mb-28">
