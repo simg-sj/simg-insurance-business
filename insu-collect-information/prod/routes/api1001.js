@@ -399,7 +399,7 @@ router.post("/prod"+"/api1001", function(req, res){
                 let userInfo = requesterJumin.substring(0,6)+'-'+requesterJumin.substring(6,7);
 
                 let messageSlack = `:bell:${name}가입자안내:bell:\n`;
-                messageSlack += `- 담당자 : <U025L0ZSGTY>\n`
+                messageSlack += `- 담당자 : <@U025L0ZSGTY>\n`
                 messageSlack += `- 이름 : ${requesterName}\n`
                 messageSlack += `- 고객정보 : ${userInfo}\n`
                 messageSlack += `- 전화번호 : ${requesterCell}\n`

@@ -1,12 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="95fd147a-7b43-45af-914e-2eec6def9493" name="변경" comment="" />
+    <list default="true" id="95fd147a-7b43-45af-914e-2eec6def9493" name="변경" comment="">
+      <change beforePath="$PROJECT_DIR$/../../../프로젝트/project/simg-insurance-business/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../프로젝트/project/simg-insurance-business/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../프로젝트/project/simg-insurance-business/bike-driver-insu/prod/routes/join.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../../프로젝트/project/simg-insurance-business/bike-driver-insu/prod/routes/join.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../프로젝트/project/simg-insurance-business/eventInsu/service/eventInsuService.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../../프로젝트/project/simg-insurance-business/eventInsu/service/eventInsuService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../프로젝트/project/simg-insurance-business/insu-collect-information/prod/routes/api1001.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../../프로젝트/project/simg-insurance-business/insu-collect-information/prod/routes/api1001.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../프로젝트/project/simg-insurance-business" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "rlarlejrwl56"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/simg-sj/simg-insurance-business.git",
+    "accountId": "1b4b3bae-eee0-414a-8352-1557158b589a"
+  }
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 4
 }</component>
@@ -18,9 +38,17 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "WebServerToolWindowPanel.toolwindow.highlight.mappings": "true",
+    "WebServerToolWindowPanel.toolwindow.highlight.symlinks": "true",
+    "WebServerToolWindowPanel.toolwindow.show.date": "false",
+    "WebServerToolWindowPanel.toolwindow.show.permissions": "false",
+    "WebServerToolWindowPanel.toolwindow.show.size": "false",
+    "git-widget-placeholder": "kkd",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "/Users/simg/Desktop/프로젝트/project/simg-insurance-business",
     "nodejs_package_manager_path": "npm",
+    "ts.external.directory.path": "/Applications/IntelliJ IDEA.app/Contents/plugins/javascript-plugin/jsLanguageServicesImpl/external",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -42,6 +70,8 @@
       <updated>1746163225950</updated>
       <workItem from="1746163227364" duration="53000" />
       <workItem from="1746163287614" duration="48000" />
+      <workItem from="1746163432983" duration="189000" />
+      <workItem from="1746170434220" duration="300000" />
     </task>
     <servers />
   </component>
