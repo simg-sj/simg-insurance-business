@@ -42,7 +42,7 @@ module.exports = {
 
 
                     let slackMessage = `:bell:[행사주최자 견적 의뢰]:bell:\n`;
-                    slackMessage += `- 담당자 : <U06U8AKG6R1><U07AESDU0V9>\n`;
+                    slackMessage += `- 담당자 : <@U06U8AKG6R1><@U07AESDU0V9>\n`;
                     slackMessage += `- 구분 : ${param.cTravel}\n`;
                     slackMessage += `- 담당자성명 : ${param.cName}\n`;
                     slackMessage += `- 담당자휴대전화 : ${param.cCell}\n`;
