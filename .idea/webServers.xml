@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="de559a41-b4d1-49e9-a01e-1a00c57574ef" name="43.201.51.204">
+        <fileTransfer rootFolder="/home/simg" accessType="SFTP" host="43.201.51.204" port="22" sshConfigId="f1d61903-9cb5-43ef-b078-896f1fa674dd" sshConfig="simg@43.201.51.204:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
