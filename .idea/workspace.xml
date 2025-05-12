@@ -1,155 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="AutoImportSettings">
-    <option name="autoReloadType" value="SELECTIVE" />
-  </component>
+
   <component name="ChangeListManager">
-    <list default="true" id="00643c90-3147-4123-b892-b293470e0ed0" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/scheduler/naverNewsGpt/newsCrawler.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hiparking/server/lib/_dateUtils.js" beforeDir="false" afterPath="$PROJECT_DIR$/hiparking/server/lib/_dateUtils.js" afterDir="false" />
+    <list default="true" id="95fd147a-7b43-45af-914e-2eec6def9493" name="변경" comment="">
+      <change beforePath="$PROJECT_DIR$/../../../프로젝트/project/simg-insurance-business/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../프로젝트/project/simg-insurance-business/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../프로젝트/project/simg-insurance-business/bike-driver-insu/prod/routes/join.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../../프로젝트/project/simg-insurance-business/bike-driver-insu/prod/routes/join.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../프로젝트/project/simg-insurance-business/eventInsu/service/eventInsuService.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../../프로젝트/project/simg-insurance-business/eventInsu/service/eventInsuService.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../프로젝트/project/simg-insurance-business/insu-collect-information/prod/routes/api1001.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../../프로젝트/project/simg-insurance-business/insu-collect-information/prod/routes/api1001.js" afterDir="false" />
+
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings">
-    <execution />
-  </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="JavaScript File" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../프로젝트/project/simg-insurance-business" />
   </component>
-  <component name="MarkdownSettingsMigration">
-    <option name="stateVersion" value="1" />
-  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "rlarlejrwl56"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/simg-sj/simg-insurance-business.git",
+    "accountId": "1b4b3bae-eee0-414a-8352-1557158b589a"
+  }
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 4
 }</component>
-  <component name="ProjectId" id="2XvKZO36TaL3eyQszI5TxTGAF2R" />
+  <component name="ProjectId" id="2wWhR5k3ZjuNMJvvMhKRFY3lMMg" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowPanel.toolwindow.highlight.mappings&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowPanel.toolwindow.highlight.symlinks&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowPanel.toolwindow.show.date&quot;: &quot;false&quot;,
-    &quot;WebServerToolWindowPanel.toolwindow.show.permissions&quot;: &quot;false&quot;,
-    &quot;WebServerToolWindowPanel.toolwindow.show.size&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;jh&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/IdeaProjects/simg-insurance-business/insu-collect-information/prod/server&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "WebServerToolWindowPanel.toolwindow.highlight.mappings": "true",
+    "WebServerToolWindowPanel.toolwindow.highlight.symlinks": "true",
+    "WebServerToolWindowPanel.toolwindow.show.date": "false",
+    "WebServerToolWindowPanel.toolwindow.show.permissions": "false",
+    "WebServerToolWindowPanel.toolwindow.show.size": "false",
+    "git-widget-placeholder": "kkd",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/simg/Desktop/프로젝트/project/simg-insurance-business",
+    "nodejs_package_manager_path": "npm",
+    "ts.external.directory.path": "/Applications/IntelliJ IDEA.app/Contents/plugins/javascript-plugin/jsLanguageServicesImpl/external",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
-  <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\IdeaProjects\simg-insurance-business\insu-collect-information\prod\server" />
-      <recent name="D:\IdeaProjects\simg-insurance-business\insu-collect-information" />
-      <recent name="D:\IdeaProjects\simg-insurance-business\insu-collect-information\dev\server\template\images" />
-      <recent name="D:\IdeaProjects\simg-insurance-business\insu-collect-information\dev\server\template\fonts" />
-      <recent name="D:\IdeaProjects\simg-insurance-business\insu-collect-information\dev\server\template" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/insu-collect-information" />
-      <recent name="$PROJECT_DIR$/simg-insu-" />
-      <recent name="$PROJECT_DIR$/dev/server/config" />
-      <recent name="$PROJECT_DIR$/dev/server" />
-    </key>
-  </component>
-  <component name="RunManager">
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="simg-insurance-business" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="simg-insurance-business" />
-      <option name="filePath" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-  </component>
+}]]></component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-WS-243.25659.40" />
+        <option value="bundled-jdk-9823dce3aa75-a94e463ab2e7-intellij.indexing.shared.core-IU-243.26053.27" />
+        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-IU-243.26053.27" />
       </set>
     </attachedChunks>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="애플리케이션 수준" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
-    <task active="true" id="Default" summary="Default task">
-      <changelist id="00643c90-3147-4123-b892-b293470e0ed0" name="Changes" comment="" />
-      <created>1699504167180</created>
+    <task active="true" id="Default" summary="디폴트 작업">
+      <changelist id="95fd147a-7b43-45af-914e-2eec6def9493" name="변경" comment="" />
+      <created>1746163225950</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1699504167180</updated>
-      <workItem from="1699504168248" duration="3523000" />
-      <workItem from="1699521711222" duration="588000" />
-      <workItem from="1699949289142" duration="7762000" />
-      <workItem from="1700124303541" duration="1519000" />
-      <workItem from="1700439644871" duration="4416000" />
-      <workItem from="1700540530574" duration="10000" />
-      <workItem from="1700549449859" duration="3394000" />
-      <workItem from="1700554843361" duration="3330000" />
-      <workItem from="1700631616244" duration="11610000" />
-      <workItem from="1701016803125" duration="3414000" />
-      <workItem from="1706054727102" duration="5471000" />
-      <workItem from="1706487427283" duration="552000" />
-      <workItem from="1706488305036" duration="5391000" />
-      <workItem from="1707896061821" duration="3317000" />
-      <workItem from="1707962283140" duration="1272000" />
-      <workItem from="1708042929334" duration="4667000" />
-      <workItem from="1708585299784" duration="776000" />
-      <workItem from="1708646089559" duration="9691000" />
-      <workItem from="1708906970372" duration="608000" />
-      <workItem from="1708992254155" duration="3229000" />
-      <workItem from="1709101867269" duration="807000" />
-      <workItem from="1709168848058" duration="1006000" />
-      <workItem from="1709799708531" duration="2314000" />
-      <workItem from="1709877896673" duration="781000" />
-      <workItem from="1718699164641" duration="710000" />
-      <workItem from="1718700717313" duration="97000" />
-      <workItem from="1718700818401" duration="143000" />
-      <workItem from="1730167452215" duration="926000" />
-      <workItem from="1745992215106" duration="1605000" />
-      <workItem from="1746598414893" duration="5492000" />
-      <workItem from="1746781163718" duration="3997000" />
+      <updated>1746163225950</updated>
+      <workItem from="1746163227364" duration="53000" />
+      <workItem from="1746163287614" duration="48000" />
+      <workItem from="1746163432983" duration="189000" />
+      <workItem from="1746170434220" duration="300000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
   </component>
 </project>

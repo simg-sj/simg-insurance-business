@@ -1,0 +1,62 @@
+{
+  "pages": {
+    "/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/page.js"
+    ],
+    "/layout": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/layout.css",
+      "static/chunks/app/layout.js"
+    ],
+    "/loading": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/loading.js"
+    ],
+    "/(Navigation-Group)/layout": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/(Navigation-Group)/layout.css",
+      "static/chunks/app/(Navigation-Group)/layout.js"
+    ],
+    "/(Navigation-Group)/bike/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(Navigation-Group)/bike/page.js"
+    ],
+    "/(Navigation-Group)/bike/agree/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(Navigation-Group)/bike/agree/page.js"
+    ],
+    "/(Navigation-Group)/bike/certification/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(Navigation-Group)/bike/certification/page.js"
+    ],
+    "/(Navigation-Group)/bike/form/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/(Navigation-Group)/bike/form/page.css",
+      "static/chunks/app/(Navigation-Group)/bike/form/page.js"
+    ],
+    "/(Navigation-Group)/bike/success/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(Navigation-Group)/bike/success/page.js"
+    ],
+    "/(Navigation-Group)/bike/inquiry/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(Navigation-Group)/bike/inquiry/page.js"
+    ],
+    "/_not-found/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/_not-found/page.js"
+    ]
+  }
+}

@@ -338,15 +338,15 @@ router.post('/join', function(req,res){
 
             let sendJuminData = cJumin.replace(/(\d{6})(\d).*/, '$1-$2');
             let slackBotData = {};
-            let msg = "";
-            msg += "바이크보험가입자 안내" + "\n";
-            msg += "이름 : " + cName + "\n";
-            msg += "고객정보 : " + sendJuminData + "\n";
-            msg += "전화번호 : " + cCell + "\n";
-            msg += "소속플랫폼 : " + platformName + "\n";
+            let msg = ":bell:바이크보험가입자 안내:bell:\n";
+            msg += "- 담당자 : " + "<@U06TDFSKG58>" + "\n";
+            msg += "- 이름 : " + cName + "\n";
+            msg += "- 고객정보 : " + sendJuminData + "\n";
+            msg += "- 전화번호 : " + cCell + "\n";
+            msg += "- 소속플랫폼 : " + platformName + "\n";
 
             slackBotData = {
-                "channel" : "#이륜차-운전자보험-접수",
+                "channel" : "#simg-업무체크",
                 "username" : "바이크보험가입알림봇",
                 "text" : msg,
                 // "icon_emoji": ":ghost:"
