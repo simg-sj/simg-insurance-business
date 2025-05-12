@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+
   <component name="ChangeListManager">
     <list default="true" id="95fd147a-7b43-45af-914e-2eec6def9493" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/../../../프로젝트/project/simg-insurance-business/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../../프로젝트/project/simg-insurance-business/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../프로젝트/project/simg-insurance-business/bike-driver-insu/prod/routes/join.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../../프로젝트/project/simg-insurance-business/bike-driver-insu/prod/routes/join.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../프로젝트/project/simg-insurance-business/eventInsu/service/eventInsuService.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../../프로젝트/project/simg-insurance-business/eventInsu/service/eventInsuService.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../프로젝트/project/simg-insurance-business/insu-collect-information/prod/routes/api1001.js" beforeDir="false" afterPath="$PROJECT_DIR$/../../../프로젝트/project/simg-insurance-business/insu-collect-information/prod/routes/api1001.js" afterDir="false" />
+
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

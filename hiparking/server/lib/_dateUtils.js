@@ -58,6 +58,7 @@ module.exports = {
             case "MM":RETURNVAL = String(month); break;
             case "DD":RETURNVAL = String(day); break;
             case "DC":RETURNVAL = String(year) + "-" +String(month)  + "-" +String(day) + "T" + String(hours)+ ":" + String(minutes) + ":" +String(seconds) + "+0900";
+            case "YYYYMMDD" : RETURNVAL = String(year) + "-" + String(month) + "-"  + String(day); break;
         }
 
 
@@ -77,6 +78,41 @@ module.exports = {
 
     },
 
+    zero_pad(num){
+        return num < 10 ? "0" + num : String(num);
+    },
+
+    /**
+     * 기준 시간에서 TYPE 단위로 GAB만큼 이동 후 ISO 8601 문자열로 반환
+     * @param {string} baseTime - 기준 시간 (예: "2025-05-06T00:00:00+09:00")
+     * @param {string} type - 조정 단위 ("YEAR", "MONTH", "DAY", "HOUR", "MIN", "SEC")
+     * @param {number} gab - 증감 수치 (정수)
+     * @returns {string} ISO 형식 문자열 (예: "2025-05-06T23:00:00+09:00")
+     */
+    GET_DATE_BY_BASE(baseTime, type, gab){
+        const date = new Date(baseTime);
+
+        switch (type) {
+            case "YEAR":  date.setFullYear(date.getFullYear() + gab); break;
+            case "MONTH": date.setMonth(date.getMonth() + gab); break;
+            case "DAY":   date.setDate(date.getDate() + gab); break;
+            case "HOUR":  date.setHours(date.getHours() + gab); break;
+            case "MIN":   date.setMinutes(date.getMinutes() + gab); break;
+            case "SEC":   date.setSeconds(date.getSeconds() + gab); break;
+            case "NONE":  break;
+            default: throw new Error("Invalid TYPE");
+        }
+
+        const year = date.getFullYear();
+        const month = this.zero_pad(date.getMonth() + 1);
+        const day = this.zero_pad(date.getDate());
+        const hour = this.zero_pad(date.getHours());
+        const min = this.zero_pad(date.getMinutes());
+        const sec = this.zero_pad(date.getSeconds());
+
+        // 한국 표준시 (KST) 고정 반환
+        return `${year}-${month}-${day}T${hour}:${min}:${sec}+09:00`;
+    }
 
 }
 
