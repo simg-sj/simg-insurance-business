@@ -10,6 +10,13 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 #### 2. index.css 테마별 색상에서 body.platform(업체명영어) 입력 후 업체 색상 입력
 * 해당 레이아웃 이외 사용은 Navigation-Group 에서 따로 만들어 사용해야함
 
+## 경로 설정
+
+#### /bike : 기본 이륜차 경로
+
+#### /bike?platform=플랫폼명 : 플랫폼별 이륜차 경로
+ex) /bike?patform=hyundai
+
 ### 파일구조
 
 ```bash
