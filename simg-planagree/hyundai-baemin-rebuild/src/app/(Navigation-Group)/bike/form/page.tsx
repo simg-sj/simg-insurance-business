@@ -20,9 +20,14 @@ export default function Page({ searchParams }: { searchParams: { [key: string]: 
     const router = useRouter();
     const pathname = usePathname();
 
-    //테마불러오기
-    const platform = searchParams.platform;
-    const theme = config[platform || 'hyundai'];
+    //파라미터불러오기
+    const params = useSearchParams();
+    const insuCompany = params.get('insuCompany');
+    const plfNumber = params.get('plfNumber');
+    const theme = config[insuCompany || 'hyundai'];
+    const selectedPlfNumber = plfNumber;
+    // console.log('selectedPlfNumber :', selectedPlfNumber);
+    const plfNumberData = theme?.plfNumber?.[selectedPlfNumber];
 
     //사용자 입력 휴대폰번호 불러오기
     const phoneParam = useSearchParams();
@@ -60,9 +65,44 @@ export default function Page({ searchParams }: { searchParams: { [key: string]: 
     // 포커스 관리
     const [focusedField, setFocusedField] = useState<string | null>(null);
 
+    /* // 전문 예시 ::
+       {
+           "gubun":"planagree",
+           "name":"박정기",
+           "cell1":"010",
+           "cell2":"2918",
+           "cell3":"9126",
+           "jumin1":"830308",
+           "jumin2":"1095919",
+           "carType":"402",
+           "carNum":"경남거제타1702",
+           "dambo":"",
+           "jachaMangi":"2023-04-30",
+           "soyuja":"bonin",
+           "relation":"101",
+           "soyujaName":"",
+           "soyujaCell1":"",
+           "soyujaCell2":"",
+           "soyujaCell3":"",
+           "soyujaJumin1":"",
+           "soyujaJumin2":"",
+           "checkKey":"93604C5065704BDF815A2ECE825F55B5" // 사용안함
+         }
+         *본인 외 선택시 관계 선택하지 않은 경우 alert 필요
+         relation 코드
+           - 본인 : 00
+           - 배우자 : 01
+           - 배우자부모 : 02
+           - 부모 : 03
+           - 자녀 : 04
+           - 형제자매 : 05
+           - 사위/며느리 : 06
+           - 기타가족or타인 : 99
+        */
     // 필드 값 관리
     const [formValues, setFormValues] = useState({
         name: "",
+        cell: verifiedPhone,
         residentFront: "",
         residentBack: "",
         region: "",
@@ -137,6 +177,9 @@ export default function Page({ searchParams }: { searchParams: { [key: string]: 
     // 폼 제출 처리
     const handleSubmit = () => {
         setFormSubmitted(true);
+        // 현재 폼 데이터 콘솔 출력 (제출된 데이터)
+        console.log("폼 제출 데이터: ", formValues);
+
         if (validateForm()) {
             // 폼이 유효하 정보확인 팝업
             handleOpenPopup();
@@ -148,6 +191,14 @@ export default function Page({ searchParams }: { searchParams: { [key: string]: 
             }
         }
     };
+
+    const handleRequest = (data:any) =>{
+        console.log('handleRequest : ', data);
+        console.log('handleRequest.name : ', data.name);
+
+
+        //..하다말았음
+    }
 
     // 입력 값 업데이트 핸들러
     const updateFormValue = (field: string, value: any) => {
@@ -435,7 +486,7 @@ export default function Page({ searchParams }: { searchParams: { [key: string]: 
                 <header className="header">
 
                     <Image src={Back} alt="뒤로가기" width={20} height={20} className="icon-back" onClick={() => router.back()}/>
-                    <Image src={theme.logo} alt={`${theme.platform} 로고`} width={200} height={100} className={'logo-main'}/>
+                    <Image src={theme.logo} alt={`${theme.insuCompany} 로고`} width={200} height={100} className={'logo-main'}/>
                 </header>
                 <section className="section mb-28">
                     <div className="text-style1 mb-2">보험심사 신청을 위한</div>
@@ -576,7 +627,7 @@ export default function Page({ searchParams }: { searchParams: { [key: string]: 
                         )}
 
                         {/* 소유자 라디오 그룹 */}
-                        {theme.flag.showOwnershipField && renderRadioGroup(
+                        {plfNumberData.flag.showOwnershipField && renderRadioGroup(
                             '가입신청 오토바이의 소유자',
                             '* 신청하시려는 운전자의 가정용 책임보험의 "기명 피보험자"가 운전자와 같다면 본인, 다르면 본인외를 선택해주시기 바랍니다.',
                             formValues.ownership,
@@ -615,9 +666,10 @@ export default function Page({ searchParams }: { searchParams: { [key: string]: 
                             label: "네, 맞아요",
                             className: "bg-main text-white",
                             onClick: () => {
-                                console.log("폼 제출 성공:", formValues);
-                                handleClosePopup();
-                                router.push(`/${pathname.split("/")[1]}/success?platform=${platform}`);
+                                // console.log("폼 제출 성공:", formValues);
+                                // handleClosePopup();
+                                // router.push(`/${pathname.split("/")[1]}/success?insuCompany=${insuCompany}&plfNumber=${plfNumber}`);
+                                handleRequest(formValues);
                             },
                         },
                     ]}

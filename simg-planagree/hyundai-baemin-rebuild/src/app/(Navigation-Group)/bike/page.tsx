@@ -5,7 +5,7 @@ import Delivery from "@/assets/images/icon-delivery.png"
 import Accordion from "@/components/ui/accordion";
 import PopupSlide from "@/components/ui/popup-slide";
 import classNames from "classnames";
-import {usePathname, useRouter} from "next/navigation";
+import {usePathname, useRouter, useSearchParams} from "next/navigation";
 import { config } from "@/config";
 
 export default function Home({ searchParams }: { searchParams: { [key: string]: string } }) {
@@ -15,8 +15,17 @@ export default function Home({ searchParams }: { searchParams: { [key: string]: 
     const pathname = usePathname();
 
     //테마불러오기
-    const platform = searchParams.platform;
-    const theme = config[platform || 'hyundai'];
+    const insuCompany = searchParams.insuCompany;
+    const theme = config[insuCompany || 'hyundai'];
+
+    // 선택한 plfNumber에 따라 데이터 가져오기
+    const params = useSearchParams();
+    const plfNumber = params.get("plfNumber"); // SIMG에서 관리하는 플랫폼번호를 파라미터로 받아 세팅
+    const selectedPlfNumber = plfNumber;
+    // console.log('selectedPlfNumber :', selectedPlfNumber);
+    const plfNumberData = theme?.plfNumber?.[selectedPlfNumber];
+    console.log(plfNumberData?.title?.main);
+
 
     //심사신청 동의여부 팝업
     const [popupOpen, setPopupOpen] = useState(false);
@@ -49,19 +58,19 @@ export default function Home({ searchParams }: { searchParams: { [key: string]: 
     return (
         <div>
             <header className={'bg-main-light px-20 py-16 text-white'}>
-                <Image src={theme.logo} alt={`${theme.platform} 로고`} width={200} height={100} className={'logo-main'}/>
-                <div className={'text-3xl mt-10'}>{theme.title.main}</div>
-                <div className={'text-4xl font-semibold mt-3 break-keep'}>{theme.title.sub}</div>
+                <Image src={theme.logo} alt={`${theme.insuCompany} 로고`} width={200} height={100} className={'logo-main'}/>
+                <div className={'text-3xl mt-10'}>{theme?.plfNumber?.[selectedPlfNumber]?.title?.main}</div>
+                <div className={'text-4xl font-semibold mt-3 break-keep'}>{theme?.plfNumber?.[selectedPlfNumber]?.title.sub}</div>
             </header>
             <section className={'section'}>
                 <div className={'icon-img'}>
-                    <Image src={theme.motorcycle} alt={`${theme.platform} 오토바이`} width={150} height={100} className={'mr-10'}/>
+                    <Image src={theme.motorcycle} alt={`${theme.insuCompany} 오토바이`} width={150} height={100} className={'mr-10'}/>
                     <div className={'bg-gray-100 h-28 w-1'}></div>
                     <div className={'ml-5 w-1/2 ml-5 flex flex-col items-end'}>
-                        <div className={'mb-2'}><span className={'text-style1'}>{theme.contents.time}</span> 초과
+                        <div className={'mb-2'}><span className={'text-style1'}>{theme?.plfNumber?.[selectedPlfNumber]?.contents.time}</span> 초과
                             배달해도
                         </div>
-                        <div className={'break-keep'}>하루 <span className={'text-style1'}>{theme.contents.priceDay}</span> 고정</div>
+                        <div className={'break-keep'}>하루 <span className={'text-style1'}>{theme?.plfNumber?.[selectedPlfNumber]?.contents.priceDay}</span> 고정</div>
                     </div>
                 </div>
                 <div className={'icon-img mt-10'}>
@@ -76,7 +85,7 @@ export default function Home({ searchParams }: { searchParams: { [key: string]: 
             <section className={'section'}>
                 <div className={'text-3xl font-semibold text-gray-700'}>가입안내</div>
                 <div className={'my-6'}>
-                    <div className={'text-4xl font-semibold py-1'}>만 <span className={'text-main'}>{theme.contents.age}</span> 까지,
+                    <div className={'text-4xl font-semibold py-1'}>만 <span className={'text-main'}>{theme?.plfNumber?.[selectedPlfNumber]?.contents.age}</span> 까지,
                     </div>
                     <div className={'text-4xl font-semibold py-1'}>가정용 또는 비운상운송 책임보험</div>
                     <div className={'text-4xl font-semibold py-1'}>가입된 오토바이 대상</div>
@@ -93,16 +102,16 @@ export default function Home({ searchParams }: { searchParams: { [key: string]: 
             <section className={'section'}>
                 <div className={'text-3xl font-semibold text-gray-700'}>보험료</div>
                 <div className={'my-6'}>
-                    <div className={'text-4xl font-semibold py-1'}>1분당 약 <span className={'text-main'}>{theme.contents.priceMinute}원</span> 씩
+                    <div className={'text-4xl font-semibold py-1'}>1분당 약 <span className={'text-main'}>{theme?.plfNumber?.[selectedPlfNumber]?.contents.priceMinute}원</span> 씩
                         과금
                     </div>
                     <div className={'text-4xl font-semibold py-1'}>일 5시간 초과시 <span
-                        className={'text-main'}>{theme.contents.priceDay}원</span> 고정
+                        className={'text-main'}>{theme?.plfNumber?.[selectedPlfNumber]?.contents.priceDay}원</span> 고정
                     </div>
                 </div>
                 <div>
-                    <div className={'text-style2'}>* 예시 : 일 4시간 운행시 {theme.contents.priceDay2}원 과금 / 일 8시간 운행시
-                        {theme.contents.priceDay}원 과금
+                    <div className={'text-style2'}>* 예시 : 일 4시간 운행시 {theme?.plfNumber?.[selectedPlfNumber]?.contents.priceDay2}원 과금 / 일 8시간 운행시
+                        {theme?.plfNumber?.[selectedPlfNumber]?.contents.priceDay}원 과금
                     </div>
                 </div>
             </section>
@@ -140,7 +149,7 @@ export default function Home({ searchParams }: { searchParams: { [key: string]: 
                         containerClassName="space-y-4"
                     >
                         <div>
-                            - 가입 가능 연령 : 만 {theme.contents.age}<br/>
+                            - 가입 가능 연령 : 만 {theme?.plfNumber?.[selectedPlfNumber]?.contents.age}<br/>
                             - 렌트카, 화물차, 법인용 차량 : 인수 제한<br/>
                             - 음주 운전, 무면허 운전 경력 : 인수 제한<br/>
                             - 보험 가입 경력과 사고 이력<br/>
@@ -196,7 +205,7 @@ export default function Home({ searchParams }: { searchParams: { [key: string]: 
                 })}
             >
                 <button className={'btn-base btn-gray w-1/3'}
-                        onClick = {() => {router.push(`${pathname}/inquiry?platform=${platform}`)}}>결과조회</button>
+                        onClick = {() => {router.push(`${pathname}/inquiry?insuCompany=${insuCompany}&plfNumber=${plfNumber}`)}}>결과조회</button>
                 <button className={'btn-base btn-main w-2/3'}
                         onClick={handleOpenPopup}>보험심사신청
                 </button>
@@ -219,7 +228,7 @@ export default function Home({ searchParams }: { searchParams: { [key: string]: 
                         className: "bg-main text-white",
                         onClick: () => {
                             handleClosePopup();
-                            router.push(`${pathname}/agree?platform=${platform}`)
+                            router.push(`${pathname}/agree?insuCompany=${insuCompany}&plfNumber=${plfNumber}`)
                         },
                     },
                 ]}

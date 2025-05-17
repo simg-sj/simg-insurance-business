@@ -13,21 +13,22 @@ export default function Page({ searchParams }: { searchParams: { [key: string]: 
     const pathname = usePathname();
 
     //테마불러오기
-    const platform = searchParams.platform;
-    const theme = config[platform || 'hyundai'];
+    const insuCompany = searchParams.insuCompany;
+    const plfNumber = searchParams.plfNumber;
+    const theme = config[insuCompany || 'hyundai'];
 
     // 인증 성공 시 호출될 함수
     const handleVerificationSuccess = (phoneNumber: string) => {
         console.log("인증 성공: " + phoneNumber);
         // 보험심사 신청 페이지로 이동
-        router.push(`/${pathname.split("/")[1]}/form?platform=${platform}&phone=${phoneNumber}`);
+        router.push(`/${pathname.split("/")[1]}/form?insuCompany=${insuCompany}&plfNumber=${plfNumber}&phone=${phoneNumber}`);
     };
 
     return (
         <div>
             <header className="header">
                 <Image src={Back} alt="뒤로가기" width={20} height={20} className="icon-back" onClick={() => router.back()}/>
-                <Image src={theme.logo} alt={`${theme.platform} 로고`} width={200} height={100} className={'logo-main'}/>
+                <Image src={theme.logo} alt={`${theme.insuCompany} 로고`} width={200} height={100} className={'logo-main'}/>
             </header>
 
             <section className="section mb-28">

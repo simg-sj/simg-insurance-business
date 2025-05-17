@@ -3,7 +3,7 @@ import Image from "next/image";
 import React from 'react';
 import Back from "@/assets/images/icon-arrow-white.png";
 import Hyundai from "@/assets/images/logo/logo-hyundai.png";
-import {usePathname, useRouter} from "next/navigation";
+import {usePathname, useRouter, useSearchParams} from "next/navigation";
 import {config} from "@/config";
 
 export default function Page({ searchParams }: { searchParams: { [key: string]: string } }) {
@@ -12,15 +12,17 @@ export default function Page({ searchParams }: { searchParams: { [key: string]: 
     const pathname = usePathname();
 
     //테마불러오기
-    const platform = searchParams.platform;
-    const theme = config[platform || 'hyundai'];
+    const params = useSearchParams();
+    const insuCompany = params.get('insuCompany');
+    const plfNumber = params.get('plfNumber');
+    const theme = config[insuCompany || 'hyundai'];
 
     return (
         <>
             <div>
                 <header className="header">
                     <Image src={Back} alt="뒤로가기" width={20} height={20} className="icon-back" onClick={() => {router.back()}}/>
-                    <Image src={theme.logo} alt={`${theme.platform} 로고`} width={200} height={100} className={'logo-main'}/>
+                    <Image src={theme.logo} alt={`${theme.insuCompany} 로고`} width={200} height={100} className={'logo-main'}/>
                 </header>
                 <section className="section mb-28">
                     <div className={'flex-center mb-12'}>
@@ -49,9 +51,9 @@ export default function Page({ searchParams }: { searchParams: { [key: string]: 
                 <footer
                     className=" footer-container">
                     <button className={'btn-base bg-gray-100 text-gray-700 w-1/3'}
-                            onClick = {() => {router.push(`/${pathname.split("/")[1]}/inquiry?platform=${platform}`);}}>결과조회</button>
+                            onClick = {() => {router.push(`/${pathname.split("/")[1]}/inquiry?insuCompany=${insuCompany}`);}}>결과조회</button>
                     <button className={'btn-base bg-main text-white w-2/3'}
-                            onClick = {() => {router.push(`/${pathname.split("/")[1]}?platform=${platform}`);}}>확인</button>
+                            onClick = {() => {router.push(`/${pathname.split("/")[1]}?insuCompany=${insuCompany}`);}}>확인</button>
                 </footer>
             </div>
         </>
