@@ -16,8 +16,8 @@ export default function Page({ searchParams }: { searchParams: { [key: string]: 
     const pathname = usePathname();
 
     //테마불러오기
-    const platform = searchParams.platform;
-    const theme = config[platform || 'hyundai'];
+    const insuCompany = searchParams.insuCompany;
+    const theme = config[insuCompany || 'hyundai'];
 
     //임의 휴대폰번호 일치여부확인
     const mockData = useMemo(
@@ -124,7 +124,7 @@ export default function Page({ searchParams }: { searchParams: { [key: string]: 
         <div>
             <header className="header">
                 <Image src={Back} alt="뒤로가기" width={20} height={20} className="icon-back" onClick={() => router.back()}/>
-                <Image src={theme.logo} alt={`${theme.platform} 로고`} width={200} height={100} className={'logo-main'}/>
+                <Image src={theme.logo} alt={`${theme.insuCompany} 로고`} width={200} height={100} className={'logo-main'}/>
             </header>
 
             <section className="section mb-28">

@@ -16,47 +16,32 @@
       "static/chunks/main-app.js",
       "static/chunks/app/loading.js"
     ],
-    "/(Navigation-Group)/layout": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/css/app/(Navigation-Group)/layout.css",
-      "static/chunks/app/(Navigation-Group)/layout.js"
-    ],
-    "/(Navigation-Group)/bike/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(Navigation-Group)/bike/page.js"
-    ],
-    "/(Navigation-Group)/bike/agree/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(Navigation-Group)/bike/agree/page.js"
-    ],
-    "/(Navigation-Group)/bike/certification/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/(Navigation-Group)/bike/certification/page.js"
-    ],
     "/(Navigation-Group)/bike/form/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
       "static/css/app/(Navigation-Group)/bike/form/page.css",
       "static/chunks/app/(Navigation-Group)/bike/form/page.js"
     ],
-    "/(Navigation-Group)/bike/success/page": [
+    "/(Navigation-Group)/layout": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/(Navigation-Group)/bike/success/page.js"
+      "static/css/app/(Navigation-Group)/layout.css",
+      "static/chunks/app/(Navigation-Group)/layout.js"
     ],
-    "/(Navigation-Group)/bike/inquiry/page": [
+    "/(Navigation-Group)/bike/certification/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/(Navigation-Group)/bike/inquiry/page.js"
+      "static/chunks/app/(Navigation-Group)/bike/certification/page.js"
     ],
-    "/_not-found/page": [
+    "/(Navigation-Group)/bike/agree/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/_not-found/page.js"
+      "static/chunks/app/(Navigation-Group)/bike/agree/page.js"
+    ],
+    "/(Navigation-Group)/bike/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(Navigation-Group)/bike/page.js"
     ]
   }
 }

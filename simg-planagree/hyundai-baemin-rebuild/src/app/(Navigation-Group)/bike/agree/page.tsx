@@ -20,8 +20,10 @@ export default function Page({ searchParams }: { searchParams: { [key: string]: 
     const pathname = usePathname();
 
     //테마불러오기
-    const platform = searchParams.platform;
-    const theme = config[platform || 'hyundai'];
+    const insuCompany = searchParams.insuCompany;
+    const theme = config[insuCompany || 'hyundai'];
+    const plfNumber = searchParams.plfNumber;
+    console.log('plfNumber : ', plfNumber);
 
     // 체크박스 항목 정의
     const agreementItems: AgreementItem[] = useMemo(() => [
@@ -91,7 +93,7 @@ export default function Page({ searchParams }: { searchParams: { [key: string]: 
     const handleConfirmClick = () => {
         if (areAllChecked) {
             console.log("필수개인정보동의여부 : " + areAllChecked);
-            router.push(`/${pathname.split("/")[1]}/certification?platform=${platform}`);
+            router.push(`/${pathname.split("/")[1]}/certification?insuCompany=${insuCompany}&plfNumber=${plfNumber}`);
         } else {
             setShowAlert(true);
             console.log("필수개인정보동의여부 : " + areAllChecked);
@@ -136,7 +138,7 @@ export default function Page({ searchParams }: { searchParams: { [key: string]: 
                     className="icon-back"
                     onClick={() => router.back()}
                 />
-                <Image src={theme.logo} alt={`${theme.platform} 로고`} width={200} height={100} className={'logo-main'}/>
+                <Image src={theme.logo} alt={`${theme.insuCompany} 로고`} width={200} height={100} className={'logo-main'}/>
             </header>
 
             {/* 본문 */}

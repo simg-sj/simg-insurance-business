@@ -4,10 +4,18 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ### npm run dev 실행 - NextJS Typescript Tailwind
 
+-> 기본 파라미터 형식(bike/?insuCompany=보험사명&plfNumber=1)
+
+- 테스트 접근 : http://localhost:3000/bike?insuCompany=hyundai&plfNumber=1
+
 ### 보험사 추가 (테마추가)
 
 #### 1. config.ts 파일에서 업체명,로고,내용 등 입력
+
+- 테마 결정하는 파라미터는 layout.tsx 에서 설정됨
+
 #### 2. index.css 테마별 색상에서 body.platform(업체명영어) 입력 후 업체 색상 입력
+
 * 해당 레이아웃 이외 사용은 Navigation-Group 에서 따로 만들어 사용해야함
 
 ## 경로 설정
