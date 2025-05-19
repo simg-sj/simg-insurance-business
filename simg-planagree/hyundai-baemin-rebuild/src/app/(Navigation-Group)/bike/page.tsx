@@ -7,6 +7,7 @@ import PopupSlide from "@/components/ui/popup-slide";
 import classNames from "classnames";
 import {usePathname, useRouter, useSearchParams} from "next/navigation";
 import { config } from "@/config";
+import { handleRedirectWithParams } from "@/urils/pageRouterUtil"; /* 페이지 router 처리 유틸 */
 
 export default function Home({ searchParams }: { searchParams: { [key: string]: string } }) {
 
@@ -22,9 +23,24 @@ export default function Home({ searchParams }: { searchParams: { [key: string]: 
     const params = useSearchParams();
     const plfNumber = params.get("plfNumber"); // SIMG에서 관리하는 플랫폼번호를 파라미터로 받아 세팅
     const selectedPlfNumber = plfNumber;
-    // console.log('selectedPlfNumber :', selectedPlfNumber);
     const plfNumberData = theme?.plfNumber?.[selectedPlfNumber];
-    console.log(plfNumberData?.title?.main);
+    const plfParCnt = plfNumberData.parameters.parmeterCount; // 파라미터 갯수 확인
+    const plfParNames = plfNumberData.parameters.parmeterNames; // 파라미터들 가져오기
+
+    // 파라미터여부에 따라 동적으로 처리
+    // 사용 방법 예시: handlerRedirect('agree');
+    const handlerRedirect = (dynamicPath:string) => handleRedirectWithParams({
+        pathname : pathname,
+        dynamicPath: dynamicPath, // 동적 경로 전달
+        insuCompany : insuCompany,
+        plfNumber : plfNumber,
+        plfParCnt : plfParCnt,
+        plfParNames : plfParNames,
+        searchParams : searchParams,
+        router : router, // AppRouterInstance 전달
+    });
+
+
 
 
     //심사신청 동의여부 팝업
@@ -63,16 +79,18 @@ export default function Home({ searchParams }: { searchParams: { [key: string]: 
                 <div className={'text-4xl font-semibold mt-3 break-keep'}>{theme?.plfNumber?.[selectedPlfNumber]?.title.sub}</div>
             </header>
             <section className={'section'}>
-                <div className={'icon-img'}>
-                    <Image src={theme.motorcycle} alt={`${theme.insuCompany} 오토바이`} width={150} height={100} className={'mr-10'}/>
-                    <div className={'bg-gray-100 h-28 w-1'}></div>
-                    <div className={'ml-5 w-1/2 ml-5 flex flex-col items-end'}>
-                        <div className={'mb-2'}><span className={'text-style1'}>{theme?.plfNumber?.[selectedPlfNumber]?.contents.time}</span> 초과
-                            배달해도
+                {plfNumberData?.flag.showDeilyPremiumsField &&( // showDailyPremiumsFeild (하루 고정 보험료 유무에 따라 ~ )
+                    <div className={'icon-img'}>
+                        <Image src={theme.motorcycle} alt={`${theme.insuCompany} 오토바이`} width={150} height={100} className={'mr-10'}/>
+                        <div className={'bg-gray-100 h-28 w-1'}></div>
+                        <div className={'ml-5 w-1/2 ml-5 flex flex-col items-end'}>
+                            <div className={'mb-2'}><span className={'text-style1'}>{theme?.plfNumber?.[selectedPlfNumber]?.contents.time}</span> 초과
+                                배달해도
+                            </div>
+                            <div className={'break-keep'}>하루 <span className={'text-style1'}>{theme?.plfNumber?.[selectedPlfNumber]?.contents.priceDay} 원</span> 고정</div>
                         </div>
-                        <div className={'break-keep'}>하루 <span className={'text-style1'}>{theme?.plfNumber?.[selectedPlfNumber]?.contents.priceDay}</span> 고정</div>
                     </div>
-                </div>
+                )}
                 <div className={'icon-img mt-10'}>
                     <Image src={Delivery} alt={'배달가방'} width={150} height={100} className={'mr-10'}/>
                     <div className={'bg-gray-100 h-28 w-1'}></div>
@@ -105,15 +123,20 @@ export default function Home({ searchParams }: { searchParams: { [key: string]: 
                     <div className={'text-4xl font-semibold py-1'}>1분당 약 <span className={'text-main'}>{theme?.plfNumber?.[selectedPlfNumber]?.contents.priceMinute}원</span> 씩
                         과금
                     </div>
-                    <div className={'text-4xl font-semibold py-1'}>일 5시간 초과시 <span
-                        className={'text-main'}>{theme?.plfNumber?.[selectedPlfNumber]?.contents.priceDay}원</span> 고정
-                    </div>
+                    {plfNumberData?.flag.showDeilyPremiumsField &&( // showDailyPremiumsFeild (하루 고정 보험료 유무에 따라 ~ )
+                        <div className={'text-4xl font-semibold py-1'}>일 5시간 초과시 <span
+                            className={'text-main'}>{theme?.plfNumber?.[selectedPlfNumber]?.contents.priceDay}원</span> 고정
+                        </div>
+                    )}
+
                 </div>
-                <div>
-                    <div className={'text-style2'}>* 예시 : 일 4시간 운행시 {theme?.plfNumber?.[selectedPlfNumber]?.contents.priceDay2}원 과금 / 일 8시간 운행시
-                        {theme?.plfNumber?.[selectedPlfNumber]?.contents.priceDay}원 과금
+                {plfNumberData?.flag.showDeilyPremiumsField &&( // showDailyPremiumsFeild (하루 고정 보험료 유무에 따라 ~ )
+                    <div>
+                        <div className={'text-style2'}>* 예시 : 일 4시간 운행시 {theme?.plfNumber?.[selectedPlfNumber]?.contents.priceDay2}원 과금 / 일 8시간 운행시
+                            {theme?.plfNumber?.[selectedPlfNumber]?.contents.priceDay}원 과금
+                        </div>
                     </div>
-                </div>
+                )}
             </section>
             <section className={'section'}>
                 <div className={'text-3xl font-semibold text-gray-700'}>보장내용</div>
@@ -205,7 +228,8 @@ export default function Home({ searchParams }: { searchParams: { [key: string]: 
                 })}
             >
                 <button className={'btn-base btn-gray w-1/3'}
-                        onClick = {() => {router.push(`${pathname}/inquiry?insuCompany=${insuCompany}&plfNumber=${plfNumber}`)}}>결과조회</button>
+                        // onClick = {() => {router.push(`${pathname}/inquiry?insuCompany=${insuCompany}&plfNumber=${plfNumber}`)}}>결과조회</button>
+                        onClick={() => handlerRedirect('inquiry')}>결과조회</button>
                 <button className={'btn-base btn-main w-2/3'}
                         onClick={handleOpenPopup}>보험심사신청
                 </button>
@@ -228,7 +252,8 @@ export default function Home({ searchParams }: { searchParams: { [key: string]: 
                         className: "bg-main text-white",
                         onClick: () => {
                             handleClosePopup();
-                            router.push(`${pathname}/agree?insuCompany=${insuCompany}&plfNumber=${plfNumber}`)
+                            // router.push(`${pathname}/agree?insuCompany=${insuCompany}&plfNumber=${plfNumber}`)
+                            handlerRedirect('agree');
                         },
                     },
                 ]}
