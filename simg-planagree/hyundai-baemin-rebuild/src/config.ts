@@ -43,6 +43,7 @@ interface Theme {
             },
             apiKey: string; // apiKey urls에 던질때는 항상 헤더에 apiKey를 포함해야한다.
             flag: {
+                showDeilyPremiumsField: boolean; // bikePage - 하루 고정 보험료
                 showOwnershipField: boolean; // form - 오토바이 소유자 필드 화면에 보이는 여부
             };
         }
@@ -87,35 +88,37 @@ export const config: ThemeConfig =
                     },
                     apiKey : "67E86360-DEFC-11EB-9003-8F90302A9C99",
                     flag: {
+                        showDeilyPremiumsField: true,
                         showOwnershipField: true,
                     }
                 },
-                3: { // 딜버 시간제보험
+                10: { // 바로고
                     title: {
                         main: 'Hicar 플랫폼배달업자 보험',
-                        sub: '배민커넥트 오토바이 시간제보험',
+                        sub: '바로고 오토바이 시간제보험',
                     },
                     contents: {
                         time: '5시간',
-                        priceDay: '5,500',
+                        priceDay: '8,000',
                         priceDay2: '2.841',
-                        priceMinute: '11.84',
-                        age: '21세 부터 69세'
+                        priceMinute: '20',
+                        age: '24세 부터 65세'
                     },
                     urls:{
                         insuRequestUrl: "https://connect-bike-hyundai-dev.simginsu.net/api/v1/hyundai/planagree",
                         sendSmsUrl: "https://connect-bike-hyundai-dev.simginsu.net/api/v1/flex/sms",
                     },
-                    parameters: { // 배민은 특별히 파라미터 받지 않음
-                        parmeterCount : 0,
-                        parmeterNames : [],
+                    parameters: { // 바로고는 5개의 파라미터를 받아온다.
+                        parmeterCount : 5,
+                        parmeterNames : ['riderName', 'clientCell', 'birth', 'carNumber', 'bi'],
                     },
                     encryption : {
-                        key: "BDAD115A53DACAD3E6C93D515396DF76",
-                        iv: "30d1a85cd25da460"
+                        key: "B59AF5619C709B708DE7D07CA8EF6359",
+                        iv: "24fd6008eb256184"
                     },
                     apiKey : "67E86360-DEFC-11EB-9003-8F90302A9C99",
                     flag: {
+                        showDeilyPremiumsField: false,
                         showOwnershipField: false,
                     }
                 },

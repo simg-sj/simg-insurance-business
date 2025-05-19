@@ -10,9 +10,10 @@ import InquiryDetail from "@/features/privacy/inquiry";
 import ProvideDetail from "@/features/privacy/provide";
 import ProcessingDetail from "@/features/privacy/processing";
 import GuideDetail from "@/features/privacy/guide";
-import {usePathname, useRouter} from "next/navigation";
+import {usePathname, useRouter, useSearchParams} from "next/navigation";
 import { AgreementItem } from "@/@types/common";
 import {config} from "@/config";
+import { handleRedirectWithParams } from "@/urils/pageRouterUtil"; /* 페이지 router 처리 유틸 */
 
 export default function Page({ searchParams }: { searchParams: { [key: string]: string } }) {
     //링크이동
@@ -23,7 +24,23 @@ export default function Page({ searchParams }: { searchParams: { [key: string]: 
     const insuCompany = searchParams.insuCompany;
     const theme = config[insuCompany || 'hyundai'];
     const plfNumber = searchParams.plfNumber;
-    console.log('plfNumber : ', plfNumber);
+
+    const params = useSearchParams();
+    const plfNumberData = theme?.plfNumber?.[plfNumber];
+    const plfParCnt = plfNumberData.parameters.parmeterCount; // 파라미터 갯수 확인
+    const plfParNames = plfNumberData.parameters.parmeterNames; // 파라미터들 가져오기
+    // 파라미터여부에 따라 동적으로 처리
+    // 사용 방법 예시: handlerRedirect('agree');
+    const handlerRedirect = (dynamicPath:string) => handleRedirectWithParams({
+        pathname : pathname,
+        dynamicPath: dynamicPath, // 동적 경로 전달
+        insuCompany : insuCompany,
+        plfNumber : plfNumber,
+        plfParCnt : plfParCnt,
+        plfParNames : plfParNames,
+        searchParams : searchParams,
+        router : router, // AppRouterInstance 전달
+    });
 
     // 체크박스 항목 정의
     const agreementItems: AgreementItem[] = useMemo(() => [
@@ -93,7 +110,10 @@ export default function Page({ searchParams }: { searchParams: { [key: string]: 
     const handleConfirmClick = () => {
         if (areAllChecked) {
             console.log("필수개인정보동의여부 : " + areAllChecked);
-            router.push(`/${pathname.split("/")[1]}/certification?insuCompany=${insuCompany}&plfNumber=${plfNumber}`);
+            // router.push(`/${pathname.split("/")[1]}/certification?insuCompany=${insuCompany}&plfNumber=${plfNumber}`);
+            // http://localhost:3000/bike/certification?insuCompany=hyundai&plfNumber=10
+            handlerRedirect('certification');
+            // http://localhost:3000/bike/agree/certification?insuCompany=hyundai&plfNumber=10&riderName=%EC%98%A4%EC%A0%95%ED%98%84&clientCell=01082077529&birth=950225&carNumber=%EC%84%9C%EC%9A%B8%EA%B0%95%EB%82%A8%EA%B0%801234&bi=test
         } else {
             setShowAlert(true);
             console.log("필수개인정보동의여부 : " + areAllChecked);

@@ -1,8 +1,7 @@
 'use client';
 import Image from "next/image";
-import Hyundai from "@/assets/images/logo/logo-hyundai.png";
 import Back from "@/assets/images/icon-arrow-white.png";
-import React, { useState, useEffect, useRef } from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import DeleteIcon from "@/assets/images/icon-delete.png";
 import CustomSelect from "@/components/ui/select";
 import clsx from "clsx";
@@ -12,6 +11,7 @@ import {usePathname, useRouter, useSearchParams} from "next/navigation";
 import PopupSlide from "@/components/ui/popup-slide";
 import InputField from "@/components/ui/input-field";
 import {config} from "@/config";
+import { handleRedirectWithParams } from "@/urils/pageRouterUtil"; /* 페이지 router 처리 유틸 */
 
 export default function Page({ searchParams }: { searchParams: { [key: string]: string } }) {
 
@@ -25,9 +25,21 @@ export default function Page({ searchParams }: { searchParams: { [key: string]: 
     const insuCompany = params.get('insuCompany');
     const plfNumber = params.get('plfNumber');
     const theme = config[insuCompany || 'hyundai'];
-    const selectedPlfNumber = plfNumber;
-    // console.log('selectedPlfNumber :', selectedPlfNumber);
-    const plfNumberData = theme?.plfNumber?.[selectedPlfNumber];
+    const plfNumberData = theme?.plfNumber?.[plfNumber];
+    const plfParCnt = plfNumberData.parameters.parmeterCount; // 파라미터 갯수 확인
+    const plfParNames = plfNumberData.parameters.parmeterNames; // 파라미터들 가져오기
+    // 파라미터여부에 따라 동적으로 처리
+    // 사용 방법 예시: handlerRedirect('agree');
+    const handlerRedirect = (dynamicPath:string) => handleRedirectWithParams({
+        pathname : pathname,
+        dynamicPath: dynamicPath, // 동적 경로 전달
+        insuCompany : insuCompany,
+        plfNumber : plfNumber,
+        plfParCnt : plfParCnt,
+        plfParNames : plfParNames,
+        searchParams : searchParams,
+        router : router, // AppRouterInstance 전달
+    });
 
     //사용자 입력 휴대폰번호 불러오기
     const phoneParam = useSearchParams();
@@ -198,6 +210,8 @@ export default function Page({ searchParams }: { searchParams: { [key: string]: 
 
 
         //..하다말았음
+        // 요청성공하면 화면 이동 ~
+        // handlerRedirect('success');
     }
 
     // 입력 값 업데이트 핸들러
@@ -669,6 +683,7 @@ export default function Page({ searchParams }: { searchParams: { [key: string]: 
                                 // console.log("폼 제출 성공:", formValues);
                                 // handleClosePopup();
                                 // router.push(`/${pathname.split("/")[1]}/success?insuCompany=${insuCompany}&plfNumber=${plfNumber}`);
+
                                 handleRequest(formValues);
                             },
                         },
