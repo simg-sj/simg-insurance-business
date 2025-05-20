@@ -7,7 +7,7 @@ import PopupSlide from "@/components/ui/popup-slide";
 import classNames from "classnames";
 import {usePathname, useRouter, useSearchParams} from "next/navigation";
 import { config } from "@/config";
-import { handleRedirectWithParams } from "@/urils/pageRouterUtil"; /* 페이지 router 처리 유틸 */
+import { handleRedirectWithParams } from "@/utils/pageRouterUtil"; /* 페이지 router 처리 유틸 */
 
 export default function Home({ searchParams }: { searchParams: { [key: string]: string } }) {
 
