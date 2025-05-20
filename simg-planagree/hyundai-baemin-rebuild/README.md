@@ -6,7 +6,8 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 -> 기본 파라미터 형식(bike/?insuCompany=보험사명&plfNumber=1)
 
-- 테스트 접근 : http://localhost:3000/bike?insuCompany=hyundai&plfNumber=1
+- 테스트 접근(파라미터 없는 플랫폼) : http://localhost:3000/bike?insuCompany=hyundai&plfNumber=1
+- 테스트 접근(파라미터 있는 플랫폼) : http://localhost:3000/bike?insuCompany=hyundai&plfNumber=1&riderName=오정현&clientCell=01082077529&birth=950225&carNumber=서울강남가1234&bi=test
 
 ### 보험사 추가 (테마추가)
 
@@ -64,6 +65,8 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
       ├── common.css                                      //전체 css 불러오기
       ├── globals.css                                     //레이아웃, 기본세팅              
       └── index.css                                       //테마별색상, 공통css tailwind설정, 반응형
+  ├── 📁utils
+      ├── pageRouterUtil.ts                               //페이지 이동처리 유틸
   └── config.ts                                           //parma 별 설정값            
 └── tailwind.config.ts                                    //테마별색상지정          
   
