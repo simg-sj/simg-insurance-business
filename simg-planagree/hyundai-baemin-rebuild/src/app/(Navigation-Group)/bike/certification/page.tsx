@@ -6,7 +6,7 @@ import Back from "@/assets/images/icon-arrow-white.png";
 import React from "react";
 import PhoneVerification from "@/features/contents/phone-certification"
 import {config} from "@/config";
-import { handleRedirectWithParams } from "@/urils/pageRouterUtil"; /* 페이지 router 처리 유틸 */
+import { handleRedirectWithParams } from "@/utils/pageRouterUtil"; /* 페이지 router 처리 유틸 */
 
 export default function Page({ searchParams }: { searchParams: { [key: string]: string } }) {
     //링크이동

@@ -11,7 +11,7 @@ import {usePathname, useRouter, useSearchParams} from "next/navigation";
 import PopupSlide from "@/components/ui/popup-slide";
 import InputField from "@/components/ui/input-field";
 import {config} from "@/config";
-import { handleRedirectWithParams } from "@/urils/pageRouterUtil"; /* 페이지 router 처리 유틸 */
+import { handleRedirectWithParams } from "@/utils/pageRouterUtil"; /* 페이지 router 처리 유틸 */
 
 export default function Page({ searchParams }: { searchParams: { [key: string]: string } }) {
 

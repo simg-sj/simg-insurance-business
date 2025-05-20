@@ -118,7 +118,7 @@ export const config: ThemeConfig =
                     },
                     apiKey : "67E86360-DEFC-11EB-9003-8F90302A9C99",
                     flag: {
-                        showDeilyPremiumsField: false,
+                        showDeilyPremiumsField: true,
                         showOwnershipField: false,
                     }
                 },

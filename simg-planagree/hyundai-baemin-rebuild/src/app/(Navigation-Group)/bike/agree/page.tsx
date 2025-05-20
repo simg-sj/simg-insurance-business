@@ -13,7 +13,7 @@ import GuideDetail from "@/features/privacy/guide";
 import {usePathname, useRouter, useSearchParams} from "next/navigation";
 import { AgreementItem } from "@/@types/common";
 import {config} from "@/config";
-import { handleRedirectWithParams } from "@/urils/pageRouterUtil"; /* 페이지 router 처리 유틸 */
+import { handleRedirectWithParams } from "@/utils/pageRouterUtil"; /* 페이지 router 처리 유틸 */
 
 export default function Page({ searchParams }: { searchParams: { [key: string]: string } }) {
     //링크이동
@@ -111,9 +111,7 @@ export default function Page({ searchParams }: { searchParams: { [key: string]: 
         if (areAllChecked) {
             console.log("필수개인정보동의여부 : " + areAllChecked);
             // router.push(`/${pathname.split("/")[1]}/certification?insuCompany=${insuCompany}&plfNumber=${plfNumber}`);
-            // http://localhost:3000/bike/certification?insuCompany=hyundai&plfNumber=10
             handlerRedirect('certification');
-            // http://localhost:3000/bike/agree/certification?insuCompany=hyundai&plfNumber=10&riderName=%EC%98%A4%EC%A0%95%ED%98%84&clientCell=01082077529&birth=950225&carNumber=%EC%84%9C%EC%9A%B8%EA%B0%95%EB%82%A8%EA%B0%801234&bi=test
         } else {
             setShowAlert(true);
             console.log("필수개인정보동의여부 : " + areAllChecked);
